@@ -1,4 +1,0 @@
-[ 25%] [32mBuilding CXX object CMakeFiles/calibration.dir/src/calibration.cpp.o[0m
-[ 50%] [32mBuilding CXX object CMakeFiles/poseestimation.dir/src/PoseEstimation.cpp.o[0m
-[ 75%] [32m[1mLinking CXX executable calibration[0m
-[ 75%] Built target calibration

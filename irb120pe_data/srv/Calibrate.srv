@@ -1,0 +1,5 @@
+sensor_msgs/Image frame             # Input to CALIBRATION -> Frame of camera (live) recording.
+---
+sensor_msgs/Image perspective       # Output of CALIBRATION -> Transformed image with calibrated parameters.
+bool success                        # CALIBRATION -> Successful? True/False.
+string message                      # Result MESSAGE -> Information about calibration.

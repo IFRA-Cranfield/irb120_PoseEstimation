@@ -1,7 +1,0 @@
-sensor_msgs/Image roi               # Input to PoseEstimation -> ROI (Region Of Interest) where object is located.
----
-float64 x                           # Output of PoseEstimation -> (x)COORDINATE of CENTRE OF OBJECT.
-float64 y                           # Output of PoseEstimation -> (y)COORDINATE of CENTRE OF OBJECT.
-float64 rotation                    # Output of PoseEstimation -> ROTATION of object on top of the xy plane (workspace).
-bool success                        # PoseEstimation -> Successful? True/False.
-string message                      # Result MESSAGE -> Information about PoseEstimation.

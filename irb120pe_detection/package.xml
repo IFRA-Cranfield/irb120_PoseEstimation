@@ -22,6 +22,9 @@
   <depend>std_msgs</depend>
 
   <depend>OpenCV</depend>
+  <depend>irb120pe_data</depend>
+  <depend>cv_bridge</depend>
+  <depend>sensor_msgs</depend>
 
   <depend>ros2srrc_data</depend>
   <build_depend>linkattacher_msgs</build_depend>

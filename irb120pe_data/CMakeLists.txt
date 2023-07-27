@@ -35,7 +35,6 @@ endif()
 install(
   DIRECTORY 
     action 
-    srv
   DESTINATION 
     share/${PROJECT_NAME}
 )
@@ -44,14 +43,9 @@ install(
 
 # ADD ROS 2 .msg, .srv and .action files:
 find_package(rosidl_default_generators REQUIRED)
-find_package(sensor_msgs REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "action/Move.action"
-  "srv/Calibrate.srv"
-  "srv/Estimate.srv"
-  DEPENDENCIES  
-  sensor_msgs
+  "action/Robmove.action"
 )
 
 ament_package()

@@ -37,41 +37,33 @@ install(
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
-# REQUIRED -> OpenCV:
-find_package(OpenCV REQUIRED)
+# REQUIRED -> irb120pe_data:
+find_package(irb120pe_data REQUIRED)
+
+# REQUIRED -> RobMove ACTION:
+find_package(rclcpp_action REQUIRED)
+find_package(moveit_ros_planning_interface REQUIRED)
 
 # Add executable:
 add_executable(
-  calibration
-  src/calibration.cpp
-)
-add_executable(
-  poseestimation
-  src/PoseEstimation.cpp
+  robmove
+  src/RobMove.cpp
 )
 
 # Install executable:
 install(TARGETS
-  calibration
-  DESTINATION lib/${PROJECT_NAME}
-)
-install(TARGETS
-  poseestimation
+  robmove
   DESTINATION lib/${PROJECT_NAME}
 )
 
 # Add ament dependencies:
 ament_target_dependencies(
-  calibration
+  robmove
+  irb120pe_data
   rclcpp
   std_msgs
-  OpenCV
-)
-ament_target_dependencies(
-  poseestimation
-  rclcpp
-  std_msgs
-  OpenCV
+  rclcpp_action
+  moveit_ros_planning_interface
 )
 
 # =========================================================== #
@@ -83,8 +75,7 @@ install(
     share/${PROJECT_NAME}
 )
 install(PROGRAMS
-  python/yolo1.py
-  python/yolo2.py
+  python/yolo.py
   DESTINATION lib/${PROJECT_NAME} 
 )
 

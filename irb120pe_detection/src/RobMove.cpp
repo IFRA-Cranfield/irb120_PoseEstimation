@@ -125,6 +125,9 @@ private:
         TARGET_POSE.orientation.z = GOAL->qz;
         TARGET_POSE.orientation.w = GOAL->qw;
 
+        move_group_interface_ROB.setPoseTarget(TARGET_POSE);
+        move_group_interface_ROB.setMaxVelocityScalingFactor(GOAL->speed);
+
         MyPlan = plan_ROB();
 
         if (RES == "PLANNING: OK"){

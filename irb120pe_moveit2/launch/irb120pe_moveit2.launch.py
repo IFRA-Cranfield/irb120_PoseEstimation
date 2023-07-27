@@ -303,6 +303,13 @@ def generate_launch_description():
         output="screen",
         parameters=[robot_description, robot_description_semantic, kinematics_yaml, {"use_sim_time": True}, {"ROB_PARAM": "irb120"}, {"EE_PARAM": "egp64"}, {"ENV_PARAM": "gazebo"}],
     )
+    DetectionMove = Node(
+        name="DETECTION_MOVE",
+        package="irb120pe_detection",
+        executable="robmove",
+        output="screen",
+        parameters=[robot_description, robot_description_semantic, kinematics_yaml, {"use_sim_time": True}],
+    )
     
     return LaunchDescription(
         [
@@ -368,6 +375,7 @@ def generate_launch_description():
                             actions=[
                                 MoveInterface,
                                 SequenceInterface,
+                                DetectionMove,
                             ]
                         ),
 

@@ -229,6 +229,19 @@
       </xacro:unless>
       <!-- === SCHUNK EGP-64 GRIPPER === -->
 
+      <joint name="BASE_TF_joint">
+        <command_interface name="position"/>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="TCP_joint">
+        <command_interface name="position"/>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="EE_egp64_joint">
+        <command_interface name="position"/>
+        <state_interface name="position"/>
+      </joint>
+
     </ros2_control>
 
     <xacro:unless value="${bringup}">

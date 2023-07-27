@@ -13,7 +13,7 @@ from ultralytics import YOLO
 
 def main():
     rclpy.init()
-    camera = cv2.VideoCapture(0) #Define the camera and its port
+    camera = cv2.VideoCapture(0) # Define the camera and its port.
 
     while True:
         ret, inputImg = camera.read()

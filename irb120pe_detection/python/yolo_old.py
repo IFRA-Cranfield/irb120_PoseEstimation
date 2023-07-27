@@ -14,21 +14,22 @@ from rclpy.node import Node
 # Import ROS2 MSG, SRV and ACTION (s):
 from std_msgs.msg import String
 from geometry_msgs.msg import Pose
-from irb120pe_data.srv import Calibrate
-from irb120pe_data.srv import Estimate
-from irb120pe_data.action import Move
-from sensor_msgs.msg import Image
+from irb120pe_data.action import Robmove
 
 # Required to use OpenCV:
 import cv2
+from cv2 import aruco
+import numpy as np
+
+# Extra-required libraries:
 import os
-from cv_bridge import CvBridge
+import time
 
 # Data classes:
 from dataclasses import dataclass
 
-# Define GLOBAL VARIABLE:
-PERSPECTIVE = Image()
+# Required to include YOLOv8 module:
+from ultralytics import YOLO
 
 # Define GLOBAL VARIABLE -> RES:
 @dataclass
@@ -36,17 +37,6 @@ class feedback:
     MESSAGE: String
     SUCCESS: bool
 RES = feedback("null", False)
-
-# Define GLOBAL VARIABLE -> RES_PE:
-@dataclass
-class PE_Result:
-    x: float
-    y: float
-    rotation: float
-RES_PE = PE_Result(0.0, 0.0, 0.0)
-
-# Required to include YOLOv8 module:
-# TBD.
 
 # =============================================================================== #
 # ROS2 ActionClient for RobMove:
@@ -56,16 +46,16 @@ class MoveClient(Node):
     def __init__(self):
 
         super().__init__('irb120pe_RobMove_Client')
-        self._action_client = ActionClient(self, Move, 'Move')
+        self._action_client = ActionClient(self, Robmove, 'Robmove')
 
-        print ("Waiting for /Move ROS2 ActionServer to be available...")
+        print ("Waiting for /Robove ROS2 ActionServer to be available...")
         self._action_client.wait_for_server()
-        print ("/Move ACTION SERVER detected.")
+        print ("/Robmove ACTION SERVER detected.")
 
     def send_goal(self, TYPE, SPEED, TARGET_POSE):
         
         # 1. Assign variables:
-        goal_msg = Move.Goal()
+        goal_msg = Robmove.Goal()
         goal_msg.type = TYPE
         goal_msg.speed = SPEED
         goal_msg.x = TARGET_POSE.position.x
@@ -77,7 +67,7 @@ class MoveClient(Node):
         goal_msg.qw = TARGET_POSE.orientation.w
         
         # 2. ACTION CALL:
-        self._send_goal_future = self._action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
+        self._send_goal_future = self._action_client.send_goal_async(goal_msg)
         self._send_goal_future.add_done_callback(self.goal_response_callback)
 
     def goal_response_callback(self, future):
@@ -97,83 +87,13 @@ class MoveClient(Node):
         
         # 1. Assign RESULT variable:
         RESULT = future.result().result
-        RES.MESSAGE = result.message
-        RES.SUCCESS = result.success
+        RES.MESSAGE = RESULT.message
+        RES.SUCCESS = RESULT.success
         
         # 2. Print RESULT:
         print ("RobMove ACTION CALL finished.") 
         print ("MESSAGE: " + RES.MESSAGE)
         print ("SUCCESS: " + str(RES.SUCCESS))
-
-# =============================================================================== #
-# ROS2 ServiceClient for Calibration:
-
-class CalibrateClient(Node):
-
-    def __init__(self):
-
-        super().__init__('irb120pe_Calibration_Client')                                                  
-        self.cli = self.create_client(Calibrate, "CALIBRATE")     
-
-        while not self.cli.wait_for_service(timeout_sec=1.0):                                      
-            print ("Waiting for /CALIBRATE ROS2 ServiceServer to be available...")                                                                                                             
-        print ("/CALIBRATE SERVICE SERVER detected.")
-
-        self.req = Calibrate.Request() 
-
-    def CALIBRATE_request(self, FRAME):
-
-        global RES
-        global PERSPECTIVE
-
-        # Assign values to the variables in the .srv -> request:
-        self.req.frame = FRAME
-
-        # Call ROS2 Service ONCE, and wait until it is finished:
-        self.future = self.cli.call_async(self.req)
-        rclpy.spin_until_future_complete(self, self.future)  
-
-        # Assign RESULT:
-        RESULT = self.future.result() 
-        RES.MESSAGE = RESULT.message
-        RES.SUCCESS = RESULT.success  
-        PERSPECTIVE = RESULT.perspective
-
-# =============================================================================== #
-# ROS2 ServiceClient for PoseEstimation:
-
-class EstimateClient(Node):
-
-    def __init__(self):
-
-        super().__init__('irb120pe_PoseEstimation_Client')                                                  
-        self.cli = self.create_client(Estimate, "ESTIMATE")     
-
-        while not self.cli.wait_for_service(timeout_sec=1.0):                                      
-            print ("Waiting for /ESTIMATE ROS2 ServiceServer to be available...")                                                                                                             
-        print ("/ESTIMATE SERVICE SERVER detected.")
-
-        self.req = Estimate.Request() 
-
-    def ESTIMATE_request(self, ROI):
-
-        global RES
-        global RES_PE
-
-        # Assign values to the variables in the .srv -> request:
-        self.req.roi = ROI
-
-        # Call ROS2 Service ONCE, and wait until it is finished:
-        self.future = self.cli.call_async(self.req)
-        rclpy.spin_until_future_complete(self, self.future)  
-        
-        # Assign RES + RES_PE:
-        RESULT = self.future.result() 
-        RES_PE.x = RESULT.x
-        RES_PE.y = RESULT.y
-        RES_PE.rotation = RESULT.rotation
-        RES.MESSAGE = RESULT.message
-        RES.SUCCESS = RESULT.success 
 
 # ===================================================================================== #
 # ======================================= MAIN ======================================== #
@@ -192,90 +112,214 @@ def main(args=None):
     
     # Import GLOBAL VARIABLES -> RES, RES_PE:
     global RES
-    global RES_PE
-    global PERSPECTIVE
 
     # 1. INITIALISE ROS NODE:
     rclpy.init(args=args)
 
-    # 2. INITIALISE ACTION/SERVICE CLIENTS:
-    #RobMove_CLIENT = MoveClient()
-    Calibration_CLIENT = CalibrateClient()
-    #PoseEstimation_CLIENT = EstimateClient()
+    # 2. INITIALISE RobMove ACTION CLIENT:
+    RobMove_CLIENT = MoveClient()
 
-    # 3. TAKE FRAME FROM CAMERA:
-    camera = cv2.VideoCapture(0) #Define the camera and its port
-    ret, image = camera.read()
-    if not ret:
-        print("Error! Failed at capturing the image")
-    camera.release()
+    # MOVE TO HOME POSITION:
+    TYPE = "PTP"
+    SPEED = 0.5
+    TARGET_POSE = Pose()
+    TARGET_POSE.position.x = 0.275
+    TARGET_POSE.position.y = 0.876
+    TARGET_POSE.position.z = 1.438
+    TARGET_POSE.orientation.x = 0.658
+    TARGET_POSE.orientation.y = -0.658
+    TARGET_POSE.orientation.z = -0.259
+    TARGET_POSE.orientation.w = -0.259
 
-    # 4. CONVERT FRAME img (in OpenCV format) to sensor_msgs/Image:
-    bridge = CvBridge()
-
-    # === Call Calibration SERVICE === #
-
-    FRAME = bridge.cv2_to_imgmsg(image, 'bgr8')
-    Calibration_CLIENT.CALIBRATE_request(FRAME)
-
-    print("RESULT of Calibration SERVICE CALL: " + RES.MESSAGE)
-    print("SERVICE CALL successful? -> " + str(RES.SUCCESS))
-    print("")
+    RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
     
+    while rclpy.ok():
+        rclpy.spin_once(RobMove_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
     RES.MESSAGE = "null"
     RES.SUCCESS = False
 
-    PERSPECTIVE_cv = bridge.imgmsg_to_cv2(PERSPECTIVE, 'bgr8')
-    cv2.imshow("Perspective Image", PERSPECTIVE_cv)
+    # ============================ CALIBRATION + POSE ESTIMATION ============================ #
+
+    camera = cv2.VideoCapture(0) # Define the camera and its port.
+
+    while True:
+        ret, inputImg = camera.read()
+        cv2.imshow("Input Image", inputImg)
+        key = cv2.waitKey(1)
+        if key == ord('q') or inputImg is None:
+            break    
+    
+    if not ret:
+        print("Error! Failed at capturing the image")
+        rclpy.shutdown()
+
+    if inputImg is None:
+        # Error!
+        print("Error! Image empty")
+        rclpy.shutdown()
+
+    # Values of the calibration x and y in mm:
+    w = 1050
+    h = 750
+
+    # Detection of the Aruco Markers in the input image:
+    param = cv2.aruco.DetectorParameters()
+    aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_5X5_1000)
+    detector = aruco.ArucoDetector(aruco_dict, param)
+    markerCorners, markerIds, rejectedCandidates =detector.detectMarkers(inputImg)
+        
+    # Visualize detection of the Aruco markers:
+    outputImage = inputImg.copy()
+    cv2.aruco.drawDetectedMarkers(outputImage, markerCorners, markerIds)
+
+    # Calibration process:
+    src = np.zeros((4, 2), dtype=np.float32)  # Points of the corners from the input image.
+    dst = np.array([[0.0, 0.0], [w, 0.0], [0.0, h], [w, h]], dtype=np.float32)  # Points calibrated with w and h.
+    
+    poly_corner = np.zeros((4, 3), dtype=np.int32)
+
+    # Get the first corner & ID of the markers:
+    for i in range(4):
+        poly_corner[i][0] = int(markerIds[i][0])
+        poly_corner[i][1] = int(markerCorners[i][0][0][0])
+        poly_corner[i][2] = int(markerCorners[i][0][0][1])
+    
+    # Arrange by ID: 
+    for i in range(3):
+        for j in range(i + 1, 4):
+            if poly_corner[i][0] > poly_corner[j][0]:
+                for k in range(3):
+                    aux = poly_corner[i][k]
+                    poly_corner[i][k] = poly_corner[j][k]
+                    poly_corner[j][k] = aux
+    
+    # Get the source vector:
+    for i in range(4):
+        src[i] = np.array([poly_corner[i][1], poly_corner[i][2]], dtype=np.float32)
+    
+    # Get the transform matrix:
+    perspTransMatrix = cv2.getPerspectiveTransform(src, dst)
+
+    # Get image of the perspective:
+    perspectiveImg = cv2.warpPerspective(outputImage, perspTransMatrix, (int(w), int(h)))
+    cv2.imshow("Perspective Image", perspectiveImg)
+    modelpath = os.path.join(os.path.expanduser('~'), 'dev_ws', 'src', 'irb120_PoseEstimation', 'irb120pe_detection', 'yolov8')
+
+    # Load a model:
+    model = YOLO(modelpath + '/best.pt')  # Pretrained YOLOv8n model.
+    names = model.names
+
+    # Get the results:
+    results = model(perspectiveImg)  # Return a list of Results objects.
+    annotated_frame =results[0].plot()
+
+    # Process results list:
+    boxes = results[0].boxes
+    ids = []
+    for box in boxes:
+        box = boxes.xyxy
+        print("Box cordinates: ", boxes.xyxy)
+        for c in boxes.cls:
+            ids = names[int(c)]
+    
+    print("The ids detected: ", ids)
+
+    x1, y1, x2, y2 = boxes[0].xyxy[0]
+
+    x = int(x1)-5
+    y = int(y1)-5
+    w = int(x2)+5
+    h = int(y2)+5
+
+    classif = boxes[0].cls
+
+    ROI = perspectiveImg[y:h, x:w]
+
+    # Pose estimation:
+    ROI = cv2.GaussianBlur(ROI,(5,5),0)
+    imgHSV = cv2.cvtColor(ROI, cv2.COLOR_BGR2HSV)
+    lowLimit = (0, 10, 10)
+    upLimit = (70, 255, 255)
+    mask = cv2.inRange(imgHSV, lowLimit, upLimit)
+
+    # find the contours in the dilated image
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    poly_contour = []
+    for contour in contours:
+        area = cv2.contourArea(contour)
+        if area < 300:
+            poly_contour.append(contour)
+    # Get the polygonal approximation of the contour.
+
+    if not poly_contour:
+        print("Contour not detected.")
+        rclpy.shutdown()
+    
+    cv2.drawContours(ROI, poly_contour, -1, (0, 255, 0), 1)
+    
+    for cnt in poly_contour:
+        rect = cv2.minAreaRect(cnt)
+        (xo, yo), (wo, ho), angle = rect
+        xo = xo + x
+        yo = yo + y
+        box = cv2.boxPoints(rect)
+        box = np.int0(box)
+        cv2.polylines(ROI, [box], True, (255,0,0), 2)
+    
+    print(xo)
+    print(yo)
+
+    rotation = False
+
+    if (angle < 70 and angle > 20) or (angle > -70 and angle < -20):
+        rotation = True 
+
+    print("Angle: ", angle)
+    if rotation:
+        print("Rotated")
+    else:
+        print("Horizontal")
+
+    cv2.imshow("Edges", mask)
+    cv2.imshow("Contours", ROI)
     cv2.waitKey(0)
 
-    # === Call Calibration SERVICE === #
+    cv2.destroyAllWindows()
+    time.sleep(1)
 
-    # === Call PoseEstimation SERVICE === #
-
-    #ROI = ()
-    #PoseEstimation_CLIENT.ESTIMATE_request(ROI)
-
-    #PoseEstimation_RESULT = RES_PE
-    
-    #print("RESULT of PoseEstimation SERVICE CALL: " + RES.MESSAGE)
-    #print("SERVICE CALL successful? -> " + RES.SUCCESS)
-    #print("")
-    
-    #RES_PE.x = 0.0
-    #RES_PE.y = 0.0
-    #RES_PE.rotation = 0.0
-    #RES.MESSAGE = "null"
-    #RES.SUCCESS = False
-
-    # === Call PoseEstimation SERVICE === #
+    # ============================ CALIBRATION + POSE ESTIMATION ============================ #
     
     # === Call RobMove ACTION === #
     
-    #TYPE = "PTP" // "LIN"
-    #SPEED = 0.0
-    #TARGET_POSE = Pose()
-    #TARGET_POSE.position.x = 0.0
-    #TARGET_POSE.position.y = 0.0
-    #TARGET_POSE.position.z = 0.0
-    #TARGET_POSE.orientation.x = 0.0
-    #TARGET_POSE.orientation.y = 0.0
-    #TARGET_POSE.orientation.z = 0.0
-    #TARGET_POSE.orientation.w = 0.0
+    TYPE = "PTP"
+    SPEED = 0.5
+    TARGET_POSE = Pose()
+    TARGET_POSE.position.x = yo/1000
+    TARGET_POSE.position.y = xo/1000
+    TARGET_POSE.position.z = 1.10
+    TARGET_POSE.orientation.x = 0.0
+    TARGET_POSE.orientation.y = 1.0
+    TARGET_POSE.orientation.z = 0.0
+    TARGET_POSE.orientation.w = 0.0
 
-    #RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+    RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
     
-    #while rclpy.ok():
-    #    rclpy.spin_once(RobMove_CLIENT)
-    #    if (RES != "null"):
-    #        break
+    while rclpy.ok():
+        rclpy.spin_once(RobMove_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
     
-    #print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
-    #print("ACTION CALL successful? -> " + RES.SUCCESS)
-    #print("")
-
-    #RES.MESSAGE = "null"
-    #RES.SUCCESS = False
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
 
     # === Call RobMove ACTION === #
 

@@ -76,6 +76,7 @@ install(
 )
 install(PROGRAMS
   python/yolo.py
+  python/yolo_old.py
   DESTINATION lib/${PROJECT_NAME} 
 )
 

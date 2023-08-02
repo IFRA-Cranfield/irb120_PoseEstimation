@@ -15,6 +15,7 @@ from rclpy.node import Node
 from std_msgs.msg import String
 from geometry_msgs.msg import Pose
 from irb120pe_data.action import Robmove
+from abb_robot_msgs.srv import SetIOSignal
 
 # Required to use OpenCV:
 import cv2
@@ -24,6 +25,7 @@ import numpy as np
 # Extra-required libraries:
 import os
 import time
+import math
 
 # Data classes:
 from dataclasses import dataclass
@@ -37,6 +39,11 @@ class feedback:
     MESSAGE: String
     SUCCESS: bool
 RES = feedback("null", False)
+RES_ABB = "null"
+
+#Declaration of GLOBAL VARIABLES --> CONSTANT VALUES for angle transformation (DEG->RAD):
+pi = 3.14159265358979
+k = pi/180.0
 
 # =============================================================================== #
 # ROS2 ActionClient for RobMove:
@@ -95,6 +102,27 @@ class MoveClient(Node):
         print ("MESSAGE: " + RES.MESSAGE)
         print ("SUCCESS: " + str(RES.SUCCESS))
 
+# =============================================================================== #
+# ABB Robot I/O - ROS2 Service Client:
+
+class abbRWS_IO(Node):
+
+    def __init__(self):
+        super().__init__('abbRWS_IO_client')
+        self.cli = self.create_client(SetIOSignal, '/rws_client/set_io_signal')
+        while not self.cli.wait_for_service(timeout_sec=1.0):
+            print('Waiting for ABB-RWS I/O Service Server to be available...')
+        print('ABB-RWS I/O Service Server detected.')
+        self.req = SetIOSignal.Request()
+
+    def send_request(self, signal, value):
+        global RES_ABB
+        self.req.signal = signal
+        self.req.value = value
+        self.future = self.cli.call_async(self.req)
+        rclpy.spin_until_future_complete(self, self.future)
+        RES_ABB = self.future.result() 
+
 # ===================================================================================== #
 # ======================================= MAIN ======================================== #
 # ===================================================================================== #
@@ -112,6 +140,7 @@ def main(args=None):
     
     # Import GLOBAL VARIABLES -> RES, RES_PE:
     global RES
+    global RES_ABB
 
     # 1. INITIALISE ROS NODE:
     rclpy.init(args=args)
@@ -119,7 +148,20 @@ def main(args=None):
     # 2. INITIALISE RobMove ACTION CLIENT:
     RobMove_CLIENT = MoveClient()
 
-    # MOVE TO HOME POSITION:
+    # 3. INITIALISE ABB I/O Client:
+    abbIO_CLIENT = abbRWS_IO()
+
+    # MOVE TO HOME POSITION + OpenGripper:
+
+    signal = "CloseGripper"
+    value = "0"
+    abbIO_CLIENT.send_request(signal,value)
+    signal = "OpenGripper"
+    value = "1"
+    abbIO_CLIENT.send_request(signal,value)
+    print ("Result -> Gripper Opened.")
+    RES_ABB = "null"
+
     TYPE = "PTP"
     SPEED = 0.5
     TARGET_POSE = Pose()
@@ -165,8 +207,8 @@ def main(args=None):
         rclpy.shutdown()
 
     # Values of the calibration x and y in mm:
-    w = 1050
-    h = 750
+    w = 700
+    h = 400
 
     # Detection of the Aruco Markers in the input image:
     param = cv2.aruco.DetectorParameters()
@@ -229,7 +271,6 @@ def main(args=None):
             ids = names[int(c)]
     
     print("The ids detected: ", ids)
-
     x1, y1, x2, y2 = boxes[0].xyxy[0]
 
     x = int(x1)-5
@@ -242,7 +283,7 @@ def main(args=None):
     ROI = perspectiveImg[y:h, x:w]
 
     # Pose estimation:
-    ROI = cv2.GaussianBlur(ROI,(5,5),0)
+    ROI = cv2.GaussianBlur(ROI,(3,3),0)
     imgHSV = cv2.cvtColor(ROI, cv2.COLOR_BGR2HSV)
     lowLimit = (0, 10, 10)
     upLimit = (70, 255, 255)
@@ -253,7 +294,7 @@ def main(args=None):
     poly_contour = []
     for contour in contours:
         area = cv2.contourArea(contour)
-        if area < 300:
+        if area > 700:
             poly_contour.append(contour)
     # Get the polygonal approximation of the contour.
 
@@ -283,8 +324,40 @@ def main(args=None):
     print("Angle: ", angle)
     if rotation:
         print("Rotated")
+
+        # QUATERNION CONVERSION:
+        # 1. Initial pose:
+        Ax = 0.0
+        Ay = 1.0
+        Az = 0.0
+        Aw = 0.0
+        # 2. Get desired RELATIVE ROTATION:
+        yaw = angle*k
+        pitch = 0.0
+        roll = 0.0
+        cy = math.cos(k*yaw * 0.5)
+        sy = math.sin(k*yaw * 0.5)
+        cp = math.cos(k*pitch * 0.5)
+        sp = math.sin(k*pitch * 0.5)
+        cr = math.cos(k*roll * 0.5)
+        sr = math.sin(k*roll * 0.5)
+        Bx = sr * cp * cy - cr * sp * sy
+        By = cr * sp * cy + sr * cp * sy
+        Bz = cr * cp * sy - sr * sp * cy
+        Bw = cr * cp * cy + sr * sp * sy
+        # 3. Quaternion MULTIPLICATION:
+        ROTw = Aw*Bw - Ax*Bx - Ay*By - Az*Bz
+        ROTx = Aw*Bx + Ax*Bw + Ay*Bz - Az*By
+        ROTy = Aw*By - Ax*Bz + Ay*Bw + Az*Bx
+        ROTz = Aw*Bz + Ax*By - Ay*Bx + Az*Bw
+
     else:
         print("Horizontal")
+
+        ROTw = 0.0
+        ROTx = 0.0
+        ROTy = 1.0
+        ROTz = 0.0
 
     cv2.imshow("Edges", mask)
     cv2.imshow("Contours", ROI)
@@ -294,19 +367,43 @@ def main(args=None):
     time.sleep(1)
 
     # ============================ CALIBRATION + POSE ESTIMATION ============================ #
-    
+
     # === Call RobMove ACTION === #
-    
+
     TYPE = "PTP"
     SPEED = 0.5
     TARGET_POSE = Pose()
-    TARGET_POSE.position.x = yo/1000
-    TARGET_POSE.position.y = xo/1000
+    TARGET_POSE.position.x = yo/1000 +0.35
+    TARGET_POSE.position.y = xo/1000 + 0.2
     TARGET_POSE.position.z = 1.10
-    TARGET_POSE.orientation.x = 0.0
-    TARGET_POSE.orientation.y = 1.0
-    TARGET_POSE.orientation.z = 0.0
-    TARGET_POSE.orientation.w = 0.0
+    TARGET_POSE.orientation.x = ROTx
+    TARGET_POSE.orientation.y = ROTy
+    TARGET_POSE.orientation.z = ROTz
+    TARGET_POSE.orientation.w = ROTw
+
+    RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+    
+    while rclpy.ok():
+        rclpy.spin_once(RobMove_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    TYPE = "LIN"
+    SPEED = 0.1
+    TARGET_POSE = Pose()
+    TARGET_POSE.position.x = yo/1000 +0.35
+    TARGET_POSE.position.y = xo/1000 + 0.2
+    TARGET_POSE.position.z = 1.07
+    TARGET_POSE.orientation.x = ROTx
+    TARGET_POSE.orientation.y = ROTy
+    TARGET_POSE.orientation.z = ROTz
+    TARGET_POSE.orientation.w = ROTw
 
     RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
     
@@ -322,6 +419,47 @@ def main(args=None):
     RES.SUCCESS = False
 
     # === Call RobMove ACTION === #
+
+    # === Close GRIPPER === #
+
+    time.sleep(0.01)
+
+    signal = "OpenGripper"
+    value = "0"
+    abbIO_CLIENT.send_request(signal,value)
+    signal = "CloseGripper"
+    value = "1"
+    abbIO_CLIENT.send_request(signal,value)
+    print ("Result -> Gripper Closed.")
+    RES_ABB = "null"
+
+    # === Close GRIPPER === #
+
+    time.sleep(0.5)
+
+    TYPE = "LIN"
+    SPEED = 0.1
+    TARGET_POSE = Pose()
+    TARGET_POSE.position.x = yo/1000 +0.35
+    TARGET_POSE.position.y = xo/1000 + 0.2
+    TARGET_POSE.position.z = 1.15
+    TARGET_POSE.orientation.x = ROTx
+    TARGET_POSE.orientation.y = ROTy
+    TARGET_POSE.orientation.z = ROTz
+    TARGET_POSE.orientation.w = ROTw
+
+    RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+    
+    while rclpy.ok():
+        rclpy.spin_once(RobMove_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
 
     rclpy.shutdown()
 

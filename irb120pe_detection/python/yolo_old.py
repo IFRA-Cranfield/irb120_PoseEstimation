@@ -52,8 +52,8 @@ k = pi/180.0
 
 PlacePose_1 = Pose()
 PlacePose_1.position.x = 0.0
-PlacePose_1.position.x = 0.0
-PlacePose_1.position.x = 0.0
+PlacePose_1.position.y = 0.0
+PlacePose_1.position.z = 0.0
 PlacePose_1.orientation.x = 0.0
 PlacePose_1.orientation.y = 0.0
 PlacePose_1.orientation.z = 0.0
@@ -62,8 +62,8 @@ PlacePose_1_TYPE = "PTP"
 PlacePose_1_SPEED = 0.5
 PlaceAppPose_1 = Pose()
 PlaceAppPose_1.position.x = 0.0
-PlaceAppPose_1.position.x = 0.0
-PlaceAppPose_1.position.x = 0.0
+PlaceAppPose_1.position.y = 0.0
+PlaceAppPose_1.position.z = 0.0
 PlaceAppPose_1.orientation.x = 0.0
 PlaceAppPose_1.orientation.y = 0.0
 PlaceAppPose_1.orientation.z = 0.0
@@ -73,8 +73,8 @@ PlaceAppPose_1_SPEED = 0.5
 
 PlacePose_2 = Pose()
 PlacePose_2.position.x = 0.0
-PlacePose_2.position.x = 0.0
-PlacePose_2.position.x = 0.0
+PlacePose_2.position.y = 0.0
+PlacePose_2.position.z = 0.0
 PlacePose_2.orientation.x = 0.0
 PlacePose_2.orientation.y = 0.0
 PlacePose_2.orientation.z = 0.0
@@ -83,8 +83,8 @@ PlacePose_2_TYPE = "PTP"
 PlacePose_2_SPEED = 0.5
 PlaceAppPose_2 = Pose()
 PlaceAppPose_2.position.x = 0.0
-PlaceAppPose_2.position.x = 0.0
-PlaceAppPose_2.position.x = 0.0
+PlaceAppPose_2.position.y = 0.0
+PlaceAppPose_2.position.z = 0.0
 PlaceAppPose_2.orientation.x = 0.0
 PlaceAppPose_2.orientation.y = 0.0
 PlaceAppPose_2.orientation.z = 0.0
@@ -94,8 +94,8 @@ PlaceAppPose_2_SPEED = 0.5
 
 PlacePose_3 = Pose()
 PlacePose_3.position.x = 0.0
-PlacePose_3.position.x = 0.0
-PlacePose_3.position.x = 0.0
+PlacePose_3.position.y = 0.0
+PlacePose_3.position.z = 0.0
 PlacePose_3.orientation.x = 0.0
 PlacePose_3.orientation.y = 0.0
 PlacePose_3.orientation.z = 0.0
@@ -104,8 +104,8 @@ PlacePose_3_TYPE = "PTP"
 PlacePose_3_SPEED = 0.5
 PlaceAppPose_3 = Pose()
 PlaceAppPose_3.position.x = 0.0
-PlaceAppPose_3.position.x = 0.0
-PlaceAppPose_3.position.x = 0.0
+PlaceAppPose_3.position.y = 0.0
+PlaceAppPose_3.position.z = 0.0
 PlaceAppPose_3.orientation.x = 0.0
 PlaceAppPose_3.orientation.y = 0.0
 PlaceAppPose_3.orientation.z = 0.0
@@ -115,13 +115,13 @@ PlaceAppPose_3_SPEED = 0.5
 
 # Check FRONTAL FACE:
 FacePose_1 = Pose()
-FacePose_1.position.x = 0.0
-FacePose_1.position.x = 0.0
-FacePose_1.position.x = 0.0
+FacePose_1.position.x = 0.501
+FacePose_1.position.y = 0.525
+FacePose_1.position.z = 1.435
 FacePose_1.orientation.x = 0.0
-FacePose_1.orientation.y = 0.0
+FacePose_1.orientation.y = 0.708
 FacePose_1.orientation.z = 0.0
-FacePose_1.orientation.w = 0.0
+FacePose_1.orientation.w = 0.707
 # Check BACK FACE:
 FacePose_2 = Action()
 FacePose_2.action = "MoveR"
@@ -129,40 +129,39 @@ FacePose_2.speed = 1.0
 FacePose_2.mover.joint = "Joint6"
 FacePose_2.mover.value = 180.0
 # Check BOTTOM FACE:
-FacePose_3 = Action()
-FacePose_3.action = "MoveRP"
-FacePose_3.speed = 0.1
-FacePose_3.moverp.x = 0.0
-FacePose_3.moverp.y = 0.0
-FacePose_3.moverp.z = 0.0
-FacePose_3.moverp.yaw = 0.0
-FacePose_3.moverp.pitch = 0.0
-FacePose_3.moverp.roll = 0.0
+FacePose_3 = Pose()
+FacePose_3.position.x = 0.62
+FacePose_3.position.y = 0.525
+FacePose_3.position.z = 1.353
+FacePose_3.orientation.x = 0.001
+FacePose_3.orientation.y = 0.147
+FacePose_3.orientation.z = -0.003
+FacePose_3.orientation.w = 0.989
 # Check TOP FACE:
 FacePose_4 = Pose()
-FacePose_4.position.x = 0.0
-FacePose_4.position.x = 0.0
-FacePose_4.position.x = 0.0
-FacePose_4.orientation.x = 0.0
-FacePose_4.orientation.y = 0.0
-FacePose_4.orientation.z = 0.0
-FacePose_4.orientation.w = 0.0
+FacePose_4.position.x = 0.525
+FacePose_4.position.y = 0.527
+FacePose_4.position.z = 1.58
+FacePose_4.orientation.x = -0.004
+FacePose_4.orientation.y = 0.940
+FacePose_4.orientation.z = 0.002
+FacePose_4.orientation.w = 0.342
 
 # PLACE OBJECT for DIFFERENT GRASP:
-PlaceMidApp = Pose
-PlaceMidApp.position.x = 0.0
-PlaceMidApp.position.x = 0.0
-PlaceMidApp.position.x = 0.0
+PlaceMidApp = Pose()
+PlaceMidApp.position.x = 0.65
+PlaceMidApp.position.y = 0.53
+PlaceMidApp.position.z = 1.1
 PlaceMidApp.orientation.x = 0.0
-PlaceMidApp.orientation.y = 0.0
+PlaceMidApp.orientation.y = 1.0
 PlaceMidApp.orientation.z = 0.0
 PlaceMidApp.orientation.w = 0.0
-PlaceMid = Pose
-PlaceMid.position.x = 0.0
-PlaceMid.position.x = 0.0
-PlaceMid.position.x = 0.0
+PlaceMid = Pose()
+PlaceMid.position.x = 0.65
+PlaceMid.position.y = 0.53
+PlaceMid.position.z = 1.07
 PlaceMid.orientation.x = 0.0
-PlaceMid.orientation.y = 0.0
+PlaceMid.orientation.y = 1.0
 PlaceMid.orientation.z = 0.0
 PlaceMid.orientation.w = 0.0
 
@@ -177,13 +176,13 @@ PickSideApp_2.action = "MoveL"
 PickSideApp_2.speed = 0.1
 PickSideApp_2.movel.x = 0.0
 PickSideApp_2.movel.y = 0.0
-PickSideApp_2.movel.z = +{}
+PickSideApp_2.movel.z = 0.0 #+{}
 PickSide = Action()
 PickSide.action = "MoveL"
 PickSide.speed = 0.1
 PickSide.movel.x = 0.0
 PickSide.movel.y = 0.0
-PickSide.movel.z = -{}
+PickSide.movel.z = 0.0 #-{}
 
 # Pick cube to CHECK TOP FACE:
 PickTopApp = Action()
@@ -191,15 +190,15 @@ PickTopApp.action = "MoveL"
 PickTopApp.speed = 0.1
 PickTopApp.movel.x = 0.0
 PickTopApp.movel.y = 0.0
-PickTopApp.movel.z = +{}
+PickTopApp.movel.z = 0.0 #+{}
 PickTop = Action()
 PickTop.action = "MoveRP"
 PickTop.speed = 0.1
 PickTop.moverp.x = 0.0
 PickTop.moverp.y = 0.0
-PickTop.moverp.z = 0.0
+PickTop.moverp.z = 0.19
 PickTop.moverp.yaw = 0.0
-PickTop.moverp.pitch = 0.0
+PickTop.moverp.pitch = -20.0
 PickTop.moverp.roll = 0.0
 
 # =============================================================================== #
@@ -388,7 +387,7 @@ def main(args=None):
     CALIB = Action()
     CALIB.action = "MoveR"
     CALIB.speed = 0.1
-    CALIB.mover.joint = "Joint1"
+    CALIB.mover.joint = "joint1"
     CALIB.mover.value = 15.0
     Move_CLIENT.send_goal(CALIB)
     while rclpy.ok():
@@ -411,40 +410,16 @@ def main(args=None):
     RES.MESSAGE = "null"
     RES.SUCCESS = False
 
-    CALIB.speed = 1.0
-    CALIB.mover.joint = "Joint6"
-    CALIB.mover.value = 45.0
-    Move_CLIENT.send_goal(CALIB)
-    while rclpy.ok():
-        rclpy.spin_once(Move_CLIENT)
-        if (RES.MESSAGE != "null"):
-            break
-    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
-    print("")
-    RES.MESSAGE = "null"
-    RES.SUCCESS = False
-
-    CALIB.mover.value = -45.0
-    Move_CLIENT.send_goal(CALIB)
-    while rclpy.ok():
-        rclpy.spin_once(Move_CLIENT)
-        if (RES.MESSAGE != "null"):
-            break
-    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
-    print("")
-    RES.MESSAGE = "null"
-    RES.SUCCESS = False
-
     # MOVE TO HOMEPOSE:
     ACTION = Action()
     ACTION.action = "MoveJ"
-    ACTION.speed = 0.5
-    ACTION.movej.joint1 = 90.0
+    ACTION.speed = 1.0
     ACTION.movej.joint1 = 0.0
-    ACTION.movej.joint1 = 0.0
-    ACTION.movej.joint1 = 0.0
-    ACTION.movej.joint1 = 90.0
-    ACTION.movej.joint1 = 0.0
+    ACTION.movej.joint2 = -30.0
+    ACTION.movej.joint3 = 30.0
+    ACTION.movej.joint4 = 0.0
+    ACTION.movej.joint5 = 90.0
+    ACTION.movej.joint6 = 0.0
     Move_CLIENT.send_goal(ACTION)
     while rclpy.ok():
         rclpy.spin_once(Move_CLIENT)
@@ -631,12 +606,12 @@ def main(args=None):
         ROTy = 1.0
         ROTz = 0.0
 
-    cv2.imshow("Edges", mask)
-    cv2.imshow("Contours", ROI)
-    cv2.waitKey(0)
+    #cv2.imshow("Edges", mask)
+    #cv2.imshow("Contours", ROI)
+    #cv2.waitKey(0)
 
-    cv2.destroyAllWindows()
-    time.sleep(1)
+    #cv2.destroyAllWindows()
+    #time.sleep(1)
 
     # ===================================================================================== #
 
@@ -647,7 +622,7 @@ def main(args=None):
     # 1. Move to -> PickApproach:
 
     TYPE = "PTP"
-    SPEED = 0.5
+    SPEED = 0.3
     TARGET_POSE = Pose()
     TARGET_POSE.position.x = yo/1000 + 0.35
     TARGET_POSE.position.y = xo/1000 + 0.2
@@ -676,9 +651,9 @@ def main(args=None):
     TYPE = "LIN"
     SPEED = 0.1
     TARGET_POSE = Pose()
-    TARGET_POSE.position.x = yo/1000 +0.35
+    TARGET_POSE.position.x = yo/1000 + 0.35
     TARGET_POSE.position.y = xo/1000 + 0.2
-    TARGET_POSE.position.z = 1.07
+    TARGET_POSE.position.z = 1.10 - 0.03
     TARGET_POSE.orientation.x = ROTx
     TARGET_POSE.orientation.y = ROTy
     TARGET_POSE.orientation.z = ROTz
@@ -697,7 +672,7 @@ def main(args=None):
     RES.MESSAGE = "null"
     RES.SUCCESS = False
 
-    time.sleep(0.5)
+    time.sleep(0.2)
 
     # ========================== #
     # 3. Close GRIPPER:
@@ -716,12 +691,12 @@ def main(args=None):
     # ========================== #
     # 4. Back to PickApproach:
 
-    TYPE = "LIN"
+    TYPE = "PTP"
     SPEED = 0.1
     TARGET_POSE = Pose()
     TARGET_POSE.position.x = yo/1000 + 0.35
     TARGET_POSE.position.y = xo/1000 + 0.2
-    TARGET_POSE.position.z = 1.15
+    TARGET_POSE.position.z = 1.10
     TARGET_POSE.orientation.x = ROTx
     TARGET_POSE.orientation.y = ROTy
     TARGET_POSE.orientation.z = ROTz

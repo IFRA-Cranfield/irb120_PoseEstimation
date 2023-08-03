@@ -165,8 +165,8 @@
       <!-- irb120_joint5 -->
       <joint name="${prefix}joint_5">
         <command_interface name="position">
-          <param name="min">-2.094395</param>
-          <param name="max">2.094395</param>
+          <param name="min">-2.00</param>
+          <param name="max">2.00</param>  <!-- Joint5 limits lowered to +-2rad -->
         </command_interface>
         <command_interface name="velocity">
           <param name="min">-5.58505</param>

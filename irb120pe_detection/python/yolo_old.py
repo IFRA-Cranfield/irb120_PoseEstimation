@@ -15,6 +15,8 @@ from rclpy.node import Node
 from std_msgs.msg import String
 from geometry_msgs.msg import Pose
 from irb120pe_data.action import Robmove
+from ros2srrc_data.action import Move
+from ros2srrc_data.msg import Action
 from abb_robot_msgs.srv import SetIOSignal
 
 # Required to use OpenCV:
@@ -41,14 +43,169 @@ class feedback:
 RES = feedback("null", False)
 RES_ABB = "null"
 
-#Declaration of GLOBAL VARIABLES --> CONSTANT VALUES for angle transformation (DEG->RAD):
+# Declaration of GLOBAL VARIABLES --> CONSTANT VALUES for angle transformation (DEG->RAD):
 pi = 3.14159265358979
 k = pi/180.0
 
 # =============================================================================== #
+# PRE-DEFINED ROBOT POSES:
+
+PlacePose_1 = Pose()
+PlacePose_1.position.x = 0.0
+PlacePose_1.position.x = 0.0
+PlacePose_1.position.x = 0.0
+PlacePose_1.orientation.x = 0.0
+PlacePose_1.orientation.y = 0.0
+PlacePose_1.orientation.z = 0.0
+PlacePose_1.orientation.w = 0.0
+PlacePose_1_TYPE = "PTP"
+PlacePose_1_SPEED = 0.5
+PlaceAppPose_1 = Pose()
+PlaceAppPose_1.position.x = 0.0
+PlaceAppPose_1.position.x = 0.0
+PlaceAppPose_1.position.x = 0.0
+PlaceAppPose_1.orientation.x = 0.0
+PlaceAppPose_1.orientation.y = 0.0
+PlaceAppPose_1.orientation.z = 0.0
+PlaceAppPose_1.orientation.w = 0.0
+PlaceAppPose_1_TYPE = "PTP"
+PlaceAppPose_1_SPEED = 0.5
+
+PlacePose_2 = Pose()
+PlacePose_2.position.x = 0.0
+PlacePose_2.position.x = 0.0
+PlacePose_2.position.x = 0.0
+PlacePose_2.orientation.x = 0.0
+PlacePose_2.orientation.y = 0.0
+PlacePose_2.orientation.z = 0.0
+PlacePose_2.orientation.w = 0.0
+PlacePose_2_TYPE = "PTP"
+PlacePose_2_SPEED = 0.5
+PlaceAppPose_2 = Pose()
+PlaceAppPose_2.position.x = 0.0
+PlaceAppPose_2.position.x = 0.0
+PlaceAppPose_2.position.x = 0.0
+PlaceAppPose_2.orientation.x = 0.0
+PlaceAppPose_2.orientation.y = 0.0
+PlaceAppPose_2.orientation.z = 0.0
+PlaceAppPose_2.orientation.w = 0.0
+PlaceAppPose_2_TYPE = "PTP"
+PlaceAppPose_2_SPEED = 0.5
+
+PlacePose_3 = Pose()
+PlacePose_3.position.x = 0.0
+PlacePose_3.position.x = 0.0
+PlacePose_3.position.x = 0.0
+PlacePose_3.orientation.x = 0.0
+PlacePose_3.orientation.y = 0.0
+PlacePose_3.orientation.z = 0.0
+PlacePose_3.orientation.w = 0.0
+PlacePose_3_TYPE = "PTP"
+PlacePose_3_SPEED = 0.5
+PlaceAppPose_3 = Pose()
+PlaceAppPose_3.position.x = 0.0
+PlaceAppPose_3.position.x = 0.0
+PlaceAppPose_3.position.x = 0.0
+PlaceAppPose_3.orientation.x = 0.0
+PlaceAppPose_3.orientation.y = 0.0
+PlaceAppPose_3.orientation.z = 0.0
+PlaceAppPose_3.orientation.w = 0.0
+PlaceAppPose_3_TYPE = "PTP"
+PlaceAppPose_3_SPEED = 0.5
+
+# Check FRONTAL FACE:
+FacePose_1 = Pose()
+FacePose_1.position.x = 0.0
+FacePose_1.position.x = 0.0
+FacePose_1.position.x = 0.0
+FacePose_1.orientation.x = 0.0
+FacePose_1.orientation.y = 0.0
+FacePose_1.orientation.z = 0.0
+FacePose_1.orientation.w = 0.0
+# Check BACK FACE:
+FacePose_2 = Action()
+FacePose_2.action = "MoveR"
+FacePose_2.speed = 1.0
+FacePose_2.mover.joint = "Joint6"
+FacePose_2.mover.value = 180.0
+# Check BOTTOM FACE:
+FacePose_3 = Action()
+FacePose_3.action = "MoveRP"
+FacePose_3.speed = 0.1
+FacePose_3.moverp.x = 0.0
+FacePose_3.moverp.y = 0.0
+FacePose_3.moverp.z = 0.0
+FacePose_3.moverp.yaw = 0.0
+FacePose_3.moverp.pitch = 0.0
+FacePose_3.moverp.roll = 0.0
+# Check TOP FACE:
+FacePose_4 = Pose()
+FacePose_4.position.x = 0.0
+FacePose_4.position.x = 0.0
+FacePose_4.position.x = 0.0
+FacePose_4.orientation.x = 0.0
+FacePose_4.orientation.y = 0.0
+FacePose_4.orientation.z = 0.0
+FacePose_4.orientation.w = 0.0
+
+# PLACE OBJECT for DIFFERENT GRASP:
+PlaceMidApp = Pose
+PlaceMidApp.position.x = 0.0
+PlaceMidApp.position.x = 0.0
+PlaceMidApp.position.x = 0.0
+PlaceMidApp.orientation.x = 0.0
+PlaceMidApp.orientation.y = 0.0
+PlaceMidApp.orientation.z = 0.0
+PlaceMidApp.orientation.w = 0.0
+PlaceMid = Pose
+PlaceMid.position.x = 0.0
+PlaceMid.position.x = 0.0
+PlaceMid.position.x = 0.0
+PlaceMid.orientation.x = 0.0
+PlaceMid.orientation.y = 0.0
+PlaceMid.orientation.z = 0.0
+PlaceMid.orientation.w = 0.0
+
+# Pick cube to CHECK SIDE FACES:
+PickSideApp_1 = Action()
+PickSideApp_1.action = "MoveR"
+PickSideApp_1.speed = 1.0
+PickSideApp_1.mover.joint = "Joint6"
+PickSideApp_1.mover.value = 90.0
+PickSideApp_2 = Action()
+PickSideApp_2.action = "MoveL"
+PickSideApp_2.speed = 0.1
+PickSideApp_2.movel.x = 0.0
+PickSideApp_2.movel.y = 0.0
+PickSideApp_2.movel.z = +{}
+PickSide = Action()
+PickSide.action = "MoveL"
+PickSide.speed = 0.1
+PickSide.movel.x = 0.0
+PickSide.movel.y = 0.0
+PickSide.movel.z = -{}
+
+# Pick cube to CHECK TOP FACE:
+PickTopApp = Action()
+PickTopApp.action = "MoveL"
+PickTopApp.speed = 0.1
+PickTopApp.movel.x = 0.0
+PickTopApp.movel.y = 0.0
+PickTopApp.movel.z = +{}
+PickTop = Action()
+PickTop.action = "MoveRP"
+PickTop.speed = 0.1
+PickTop.moverp.x = 0.0
+PickTop.moverp.y = 0.0
+PickTop.moverp.z = 0.0
+PickTop.moverp.yaw = 0.0
+PickTop.moverp.pitch = 0.0
+PickTop.moverp.roll = 0.0
+
+# =============================================================================== #
 # ROS2 ActionClient for RobMove:
 
-class MoveClient(Node):
+class RobMoveClient(Node):
 
     def __init__(self):
 
@@ -98,9 +255,68 @@ class MoveClient(Node):
         RES.SUCCESS = RESULT.success
         
         # 2. Print RESULT:
-        print ("RobMove ACTION CALL finished.") 
-        print ("MESSAGE: " + RES.MESSAGE)
-        print ("SUCCESS: " + str(RES.SUCCESS))
+        #print ("RobMove ACTION CALL finished.") 
+        #print ("MESSAGE: " + RES.MESSAGE)
+        #print ("SUCCESS: " + str(RES.SUCCESS))
+
+# =============================================================================== #
+# ROS2 ActionClient for Move:
+
+class MoveClient(Node):
+
+    def __init__(self):
+
+        super().__init__('irb120pe_Move_Client')
+        self._action_client = ActionClient(self, Move, 'Move')
+
+        print ("Waiting for /Robove ROS2 ActionServer to be available...")
+        self._action_client.wait_for_server()
+        print ("/Move ACTION SERVER detected.")
+
+    def send_goal(self, ACTION):
+        
+        # 1. Assign variables:
+        goal_msg = Move.Goal()
+        goal_msg.action = ACTION.action
+        goal_msg.speed = ACTION.speed
+        goal_msg.movej = ACTION.movej
+        goal_msg.mover = ACTION.mover
+        goal_msg.movel = ACTION.movel
+        goal_msg.movexyzw = ACTION.movexyzw
+        goal_msg.movexyz = ACTION.movexyz
+        goal_msg.moverot = ACTION.moverot
+        goal_msg.moveypr = ACTION.moveypr
+        goal_msg.moverp = ACTION.moverp
+        goal_msg.moveg = ACTION.moveg
+        
+        # 2. ACTION CALL:
+        self._send_goal_future = self._action_client.send_goal_async(goal_msg)
+        self._send_goal_future.add_done_callback(self.goal_response_callback)
+
+    def goal_response_callback(self, future):
+        
+        goal_handle = future.result()
+
+        if not goal_handle.accepted:
+            self.get_logger().info('Move ACTION CALL -> GOAL has been REJECTED.')
+            return
+        self.get_logger().info('Move ACTION CALL -> GOAL has been ACCEPTED.')
+        self._get_result_future = goal_handle.get_result_async()
+        self._get_result_future.add_done_callback(self.get_result_callback)
+
+    def get_result_callback(self, future):
+        
+        global RES
+        
+        # 1. Assign RESULT variable:
+        RESULT = future.result().result
+        RES.MESSAGE = RESULT.result
+        RES.SUCCESS = True
+        
+        # 2. Print RESULT:
+        #print ("Move ACTION CALL finished.") 
+        #print ("MESSAGE: " + RES.MESSAGE)
+        #print ("SUCCESS: " + str(RES.SUCCESS))
 
 # =============================================================================== #
 # ABB Robot I/O - ROS2 Service Client:
@@ -145,14 +361,17 @@ def main(args=None):
     # 1. INITIALISE ROS NODE:
     rclpy.init(args=args)
 
-    # 2. INITIALISE RobMove ACTION CLIENT:
-    RobMove_CLIENT = MoveClient()
+    # 2. INITIALISE RobMove+Move ACTION CLIENTs:
+    RobMove_CLIENT = RobMoveClient()
+    Move_CLIENT = MoveClient()
 
     # 3. INITIALISE ABB I/O Client:
     abbIO_CLIENT = abbRWS_IO()
 
-    # MOVE TO HOME POSITION + OpenGripper:
+    # ===================================================================================== #
+    # HOME -> Gripper Open + HomePos:
 
+    # OPEN GRIPPER:
     signal = "CloseGripper"
     value = "0"
     abbIO_CLIENT.send_request(signal,value)
@@ -162,31 +381,84 @@ def main(args=None):
     print ("Result -> Gripper Opened.")
     RES_ABB = "null"
 
-    TYPE = "PTP"
-    SPEED = 0.5
-    TARGET_POSE = Pose()
-    TARGET_POSE.position.x = 0.275
-    TARGET_POSE.position.y = 0.876
-    TARGET_POSE.position.z = 1.438
-    TARGET_POSE.orientation.x = 0.658
-    TARGET_POSE.orientation.y = -0.658
-    TARGET_POSE.orientation.z = -0.259
-    TARGET_POSE.orientation.w = -0.259
+    time.sleep(0.5)
 
-    RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+    # SMALL CALIBRATION (MoveIt!2) ROUTINE:
     
+    CALIB = Action()
+    CALIB.action = "MoveR"
+    CALIB.speed = 0.1
+    CALIB.mover.joint = "Joint1"
+    CALIB.mover.value = 15.0
+    Move_CLIENT.send_goal(CALIB)
     while rclpy.ok():
-        rclpy.spin_once(RobMove_CLIENT)
+        rclpy.spin_once(Move_CLIENT)
         if (RES.MESSAGE != "null"):
             break
-    
-    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
-    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
     print("")
     RES.MESSAGE = "null"
     RES.SUCCESS = False
 
-    # ============================ CALIBRATION + POSE ESTIMATION ============================ #
+    CALIB.mover.value = -15.0
+    Move_CLIENT.send_goal(CALIB)
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    CALIB.speed = 1.0
+    CALIB.mover.joint = "Joint6"
+    CALIB.mover.value = 45.0
+    Move_CLIENT.send_goal(CALIB)
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    CALIB.mover.value = -45.0
+    Move_CLIENT.send_goal(CALIB)
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # MOVE TO HOMEPOSE:
+    ACTION = Action()
+    ACTION.action = "MoveJ"
+    ACTION.speed = 0.5
+    ACTION.movej.joint1 = 90.0
+    ACTION.movej.joint1 = 0.0
+    ACTION.movej.joint1 = 0.0
+    ACTION.movej.joint1 = 0.0
+    ACTION.movej.joint1 = 90.0
+    ACTION.movej.joint1 = 0.0
+    Move_CLIENT.send_goal(ACTION)
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ===================================================================================== #
+
+    # ===================================================================================== #
+    # Yolo: CALIBRATION + POSE ESTIMATION:
 
     camera = cv2.VideoCapture(0) # Define the camera and its port.
 
@@ -366,14 +638,18 @@ def main(args=None):
     cv2.destroyAllWindows()
     time.sleep(1)
 
-    # ============================ CALIBRATION + POSE ESTIMATION ============================ #
+    # ===================================================================================== #
 
-    # === Call RobMove ACTION === #
+    # ===================================================================================== #
+    # ROBOT MOVEMENT:
+
+    # ========================== #
+    # 1. Move to -> PickApproach:
 
     TYPE = "PTP"
     SPEED = 0.5
     TARGET_POSE = Pose()
-    TARGET_POSE.position.x = yo/1000 +0.35
+    TARGET_POSE.position.x = yo/1000 + 0.35
     TARGET_POSE.position.y = xo/1000 + 0.2
     TARGET_POSE.position.z = 1.10
     TARGET_POSE.orientation.x = ROTx
@@ -393,6 +669,9 @@ def main(args=None):
     print("")
     RES.MESSAGE = "null"
     RES.SUCCESS = False
+
+    # ========================== #
+    # 2. Move to -> Pick:
 
     TYPE = "LIN"
     SPEED = 0.1
@@ -418,11 +697,10 @@ def main(args=None):
     RES.MESSAGE = "null"
     RES.SUCCESS = False
 
-    # === Call RobMove ACTION === #
+    time.sleep(0.5)
 
-    # === Close GRIPPER === #
-
-    time.sleep(0.01)
+    # ========================== #
+    # 3. Close GRIPPER:
 
     signal = "OpenGripper"
     value = "0"
@@ -433,14 +711,15 @@ def main(args=None):
     print ("Result -> Gripper Closed.")
     RES_ABB = "null"
 
-    # === Close GRIPPER === #
-
     time.sleep(0.5)
+
+    # ========================== #
+    # 4. Back to PickApproach:
 
     TYPE = "LIN"
     SPEED = 0.1
     TARGET_POSE = Pose()
-    TARGET_POSE.position.x = yo/1000 +0.35
+    TARGET_POSE.position.x = yo/1000 + 0.35
     TARGET_POSE.position.y = xo/1000 + 0.2
     TARGET_POSE.position.z = 1.15
     TARGET_POSE.orientation.x = ROTx
@@ -461,7 +740,14 @@ def main(args=None):
     RES.MESSAGE = "null"
     RES.SUCCESS = False
 
+    # ========================== #
+    # 5.1. IF: 
+
     rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
+
+
+# FOR MoveRP:
+# ros2 action send_goal -f /Move ros2srrc_data/action/Move "{action: 'MoveRP', moverp: {x: 0.00, y: 0.00, z: 0.19, yaw: 0.00, pitch: {}, roll: 0.00}, speed: 1.0}"

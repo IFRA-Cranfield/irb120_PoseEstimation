@@ -114,7 +114,6 @@ private:
         moveit::planning_interface::MoveGroupInterface::Plan MyPlan;
         
         auto CURRENT_POSE = move_group_interface_ROB.getCurrentPose();
-        move_group_interface_ROB.setPlannerId(GOAL->type);
 
         geometry_msgs::msg::Pose TARGET_POSE;
         TARGET_POSE.position.x = GOAL->x;
@@ -126,6 +125,8 @@ private:
         TARGET_POSE.orientation.w = GOAL->qw;
 
         move_group_interface_ROB.setPoseTarget(TARGET_POSE);
+
+        move_group_interface_ROB.setPlannerId(GOAL->type);
         move_group_interface_ROB.setMaxVelocityScalingFactor(GOAL->speed);
 
         MyPlan = plan_ROB();

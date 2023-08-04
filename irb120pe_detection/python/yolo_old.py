@@ -46,74 +46,79 @@ RES_ABB = "null"
 # =============================================================================== #
 # PRE-DEFINED ROBOT POSES:
 
-PlacePose_1 = Pose()
-PlacePose_1.position.x = 0.0
-PlacePose_1.position.y = 0.0
-PlacePose_1.position.z = 0.0
-PlacePose_1.orientation.x = 0.0
-PlacePose_1.orientation.y = 0.0
-PlacePose_1.orientation.z = 0.0
-PlacePose_1.orientation.w = 0.0
-PlacePose_1_TYPE = "PTP"
-PlacePose_1_SPEED = 0.5
-PlaceAppPose_1 = Pose()
-PlaceAppPose_1.position.x = 0.0
-PlaceAppPose_1.position.y = 0.0
-PlaceAppPose_1.position.z = 0.0
-PlaceAppPose_1.orientation.x = 0.0
-PlaceAppPose_1.orientation.y = 0.0
-PlaceAppPose_1.orientation.z = 0.0
-PlaceAppPose_1.orientation.w = 0.0
-PlaceAppPose_1_TYPE = "PTP"
-PlaceAppPose_1_SPEED = 0.5
+PlaceBLUE_app = Pose()
+PlaceBLUE_app.position.x = 0.15
+PlaceBLUE_app.position.y = 0.145
+PlaceBLUE_app.position.z = 1.111
+PlaceBLUE_app.orientation.x = 0.707
+PlaceBLUE_app.orientation.y = 0.707
+PlaceBLUE_app.orientation.z = 0.0
+PlaceBLUE_app.orientation.w = 0.0
+PlaceBLUE = Pose()
+PlaceBLUE.position.x = 0.15
+PlaceBLUE.position.y = 0.145
+PlaceBLUE.position.z = 1.08
+PlaceBLUE.orientation.x = 0.707
+PlaceBLUE.orientation.y = 0.707
+PlaceBLUE.orientation.z = 0.0
+PlaceBLUE.orientation.w = 0.0
 
-PlacePose_2 = Pose()
-PlacePose_2.position.x = 0.0
-PlacePose_2.position.y = 0.0
-PlacePose_2.position.z = 0.0
-PlacePose_2.orientation.x = 0.0
-PlacePose_2.orientation.y = 0.0
-PlacePose_2.orientation.z = 0.0
-PlacePose_2.orientation.w = 0.0
-PlacePose_2_TYPE = "PTP"
-PlacePose_2_SPEED = 0.5
-PlaceAppPose_2 = Pose()
-PlaceAppPose_2.position.x = 0.0
-PlaceAppPose_2.position.y = 0.0
-PlaceAppPose_2.position.z = 0.0
-PlaceAppPose_2.orientation.x = 0.0
-PlaceAppPose_2.orientation.y = 0.0
-PlaceAppPose_2.orientation.z = 0.0
-PlaceAppPose_2.orientation.w = 0.0
-PlaceAppPose_2_TYPE = "PTP"
-PlaceAppPose_2_SPEED = 0.5
+PlaceBLACK_app = Pose()
+PlaceBLACK_app.position.x = 0.105
+PlaceBLACK_app.position.y = 0.145
+PlaceBLACK_app.position.z = 1.111
+PlaceBLACK_app.orientation.x = 0.707
+PlaceBLACK_app.orientation.y = 0.707
+PlaceBLACK_app.orientation.z = 0.0
+PlaceBLACK_app.orientation.w = 0.0
+PlaceBLACK = Pose()
+PlaceBLACK.position.x = 0.105
+PlaceBLACK.position.y = 0.145
+PlaceBLACK.position.z = 1.08
+PlaceBLACK.orientation.x = 0.707
+PlaceBLACK.orientation.y = 0.707
+PlaceBLACK.orientation.z = 0.0
+PlaceBLACK.orientation.w = 0.0
 
-PlacePose_3 = Pose()
-PlacePose_3.position.x = 0.0
-PlacePose_3.position.y = 0.0
-PlacePose_3.position.z = 0.0
-PlacePose_3.orientation.x = 0.0
-PlacePose_3.orientation.y = 0.0
-PlacePose_3.orientation.z = 0.0
-PlacePose_3.orientation.w = 0.0
-PlacePose_3_TYPE = "PTP"
-PlacePose_3_SPEED = 0.5
-PlaceAppPose_3 = Pose()
-PlaceAppPose_3.position.x = 0.0
-PlaceAppPose_3.position.y = 0.0
-PlaceAppPose_3.position.z = 0.0
-PlaceAppPose_3.orientation.x = 0.0
-PlaceAppPose_3.orientation.y = 0.0
-PlaceAppPose_3.orientation.z = 0.0
-PlaceAppPose_3.orientation.w = 0.0
-PlaceAppPose_3_TYPE = "PTP"
-PlaceAppPose_3_SPEED = 0.5
+PlaceWHITE_app = Pose()
+PlaceWHITE_app.position.x = 0.105
+PlaceWHITE_app.position.y = 0.100
+PlaceWHITE_app.position.z = 1.111
+PlaceWHITE_app.orientation.x = 0.707
+PlaceWHITE_app.orientation.y = 0.707
+PlaceWHITE_app.orientation.z = 0.0
+PlaceWHITE_app.orientation.w = 0.0
+PlaceWHITE = Pose()
+PlaceWHITE.position.x = 0.105
+PlaceWHITE.position.y = 0.100
+PlaceWHITE.position.z = 1.08
+PlaceWHITE.orientation.x = 0.707
+PlaceWHITE.orientation.y = 0.707
+PlaceWHITE.orientation.z = 0.0
+PlaceWHITE.orientation.w = 0.0
+
+PlaceCUBE_app = Pose()
+PlaceCUBE_app.position.x = 0.15
+PlaceCUBE_app.position.y = 0.100
+PlaceCUBE_app.position.z = 1.111
+PlaceCUBE_app.orientation.x = 0.707
+PlaceCUBE_app.orientation.y = 0.707
+PlaceCUBE_app.orientation.z = 0.0
+PlaceCUBE_app.orientation.w = 0.0
+PlaceCUBE = Pose()
+PlaceCUBE.position.x = 0.15
+PlaceCUBE.position.y = 0.100
+PlaceCUBE.position.z = 1.08
+PlaceCUBE.orientation.x = 0.707
+PlaceCUBE.orientation.y = 0.707
+PlaceCUBE.orientation.z = 0.0
+PlaceCUBE.orientation.w = 0.0
 
 # Check FRONTAL FACE:
 FacePose_1 = Pose()
 FacePose_1.position.x = 0.501
 FacePose_1.position.y = 0.525
-FacePose_1.position.z = 1.435
+FacePose_1.position.z = 1.48
 FacePose_1.orientation.x = 0.0
 FacePose_1.orientation.y = 0.708
 FacePose_1.orientation.z = 0.0
@@ -122,16 +127,16 @@ FacePose_1.orientation.w = 0.707
 FacePose_2 = Action()
 FacePose_2.action = "MoveR"
 FacePose_2.speed = 1.0
-FacePose_2.mover.joint = "Joint6"
+FacePose_2.mover.joint = "joint6"
 FacePose_2.mover.value = 180.0
 FacePose_2_other = Action()
 FacePose_2_other.action = "MoveR"
 FacePose_2_other.speed = 1.0
-FacePose_2_other.mover.joint = "Joint6"
+FacePose_2_other.mover.joint = "joint6"
 FacePose_2_other.mover.value = -180.0
 # Check BOTTOM FACE:
 FacePose_3 = Pose()
-FacePose_3.position.x = 0.62
+FacePose_3.position.x = 0.63
 FacePose_3.position.y = 0.525
 FacePose_3.position.z = 1.353
 FacePose_3.orientation.x = 0.001
@@ -170,12 +175,12 @@ PlaceMid.orientation.w = 0.0
 PickSideApp_1 = Action()
 PickSideApp_1.action = "MoveR"
 PickSideApp_1.speed = 1.0
-PickSideApp_1.mover.joint = "Joint6"
+PickSideApp_1.mover.joint = "joint6"
 PickSideApp_1.mover.value = 90.0
 PickSideApp_1_other = Action()
 PickSideApp_1_other.action = "MoveR"
 PickSideApp_1_other.speed = 1.0
-PickSideApp_1_other.mover.joint = "Joint6"
+PickSideApp_1_other.mover.joint = "joint6"
 PickSideApp_1_other.mover.value = -90.0
 PickSideApp_2 = Action()
 PickSideApp_2.action = "MoveL"
@@ -206,6 +211,93 @@ PickTop.moverp.z = 0.19
 PickTop.moverp.yaw = 0.0
 PickTop.moverp.pitch = -20.0
 PickTop.moverp.roll = 0.0
+
+# Pick it back for PLACING:
+RePickTopApp_PREV = Pose()
+RePickTopApp_PREV.position.x = 0.528
+RePickTopApp_PREV.position.y = 0.527
+RePickTopApp_PREV.position.z = 1.057
+RePickTopApp_PREV.orientation.x = 0.0
+RePickTopApp_PREV.orientation.y = 0.938
+RePickTopApp_PREV.orientation.z = 0.0
+RePickTopApp_PREV.orientation.w = 0.346
+RePickTop_PREV = Action()
+RePickTop_PREV.action = "MoveL"
+RePickTop_PREV.speed = 0.1
+RePickTop_PREV.movel.x = 0.0
+RePickTop_PREV.movel.y = 0.0
+RePickTop_PREV.movel.z = -0.03
+RePickTop = Action()
+RePickTop.action = "MoveRP"
+RePickTop.speed = 0.1
+RePickTop.moverp.x = 0.0
+RePickTop.moverp.y = 0.0
+RePickTop.moverp.z = 0.19
+RePickTop.moverp.yaw = 0.0
+RePickTop.moverp.pitch = 20.0
+RePickTop.moverp.roll = 0.0
+RePickTopApp = Action()
+RePickTopApp.action = "MoveL"
+RePickTopApp.speed = 0.1
+RePickTopApp.movel.x = 0.0
+RePickTopApp.movel.y = 0.0
+RePickTopApp.movel.z = 0.05
+
+# ROTATION:
+RotApp = Pose()
+RotApp.position.x = 0.50
+RotApp.position.y = 0.53
+RotApp.position.z = 1.1
+RotApp.orientation.x = 0.0
+RotApp.orientation.y = 1.0
+RotApp.orientation.z = 0.0
+RotApp.orientation.w = 0.0
+RotBack = Action()
+RotBack.action = "MoveR"
+RotBack.speed = 1.0
+RotBack.mover.joint = "joint6"
+RotBack.mover.value = 180.0
+RotBack_other = Action()
+RotBack_other.action = "MoveR"
+RotBack_other.speed = 1.0
+RotBack_other.mover.joint = "joint6"
+RotBack_other.mover.value = -180.0
+RotPlace = Action()
+RotPlace.action = "MoveL"
+RotPlace.speed = 0.1
+RotPlace.movel.x = 0.0
+RotPlace.movel.y = 0.0
+RotPlace.movel.z = -0.03
+RotationPick = Action()
+RotationPick.action = "MoveRP"
+RotationPick.speed = 0.1
+RotationPick.moverp.x = 0.0
+RotationPick.moverp.y = 0.0
+RotationPick.moverp.z = 0.19
+RotationPick.moverp.yaw = 0.0
+RotationPick.moverp.pitch = 30.0
+RotationPick.moverp.roll = 0.0
+RotationPlace = Action()
+RotationPlace.action = "MoveRP"
+RotationPlace.speed = 0.1
+RotationPlace.moverp.x = 0.0
+RotationPlace.moverp.y = 0.0
+RotationPlace.moverp.z = 0.19
+RotationPlace.moverp.yaw = 0.0
+RotationPlace.moverp.pitch = -30.0
+RotationPlace.moverp.roll = 0.0
+RotZ = Action()
+RotZ.action = "MoveL"
+RotZ.speed = 0.1
+RotZ.movel.x = 0.0
+RotZ.movel.y = 0.0
+RotZ.movel.z = 0.03
+RotX = Action()
+RotX.action = "MoveL"
+RotX.speed = 0.3
+RotX.movel.x = 0.15
+RotX.movel.y = 0.0
+RotX.movel.z = 0.0
 
 # =============================================================================== #
 # ROS2 ActionClient for RobMove:
@@ -410,7 +502,7 @@ def calibMoveIt2():
     CALIB.action = "MoveR"
     CALIB.speed = 0.1
     CALIB.mover.joint = "joint1"
-    CALIB.mover.value = 5.0
+    CALIB.mover.value = 1.0
     Move_CLIENT.send_goal(CALIB)
     while rclpy.ok():
         rclpy.spin_once(Move_CLIENT)
@@ -421,7 +513,7 @@ def calibMoveIt2():
     RES.MESSAGE = "null"
     RES.SUCCESS = False
 
-    CALIB.mover.value = -5.0
+    CALIB.mover.value = -1.0
     Move_CLIENT.send_goal(CALIB)
     while rclpy.ok():
         rclpy.spin_once(Move_CLIENT)
@@ -757,6 +849,437 @@ def CHECK_TOP():
     RES.SUCCESS = True
     return(RES)  
 
+def RePick_TOP():
+
+    global RobMove_CLIENT
+    global Move_CLIENT
+    global abbIO_CLIENT
+    global RES
+
+    # ========================== #
+    # 1. Move to RePick Approach position:
+    TYPE = "PTP"
+    SPEED = 0.3
+    TARGET_POSE = RePickTopApp_PREV
+
+    RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+    
+    while rclpy.ok():
+        rclpy.spin_once(RobMove_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 2. Move down a bit:
+    ACTION = RePickTop_PREV
+    Move_CLIENT.send_goal(ACTION)
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    if (RES.SUCCESS == False):
+        return(RES)
+    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    time.sleep(0.2)
+
+    # ========================== #
+    # 3. Open GRIPPER:
+
+    signal = "CloseGripper"
+    value = "0"
+    abbIO_CLIENT.send_request(signal,value)
+    signal = "OpenGripper"
+    value = "1"
+    abbIO_CLIENT.send_request(signal,value)
+    print ("Result -> Gripper Opened.")
+    RES_ABB = "null"
+
+    time.sleep(0.5)
+
+    # ========================== #
+    # 4.1 Rotate around the cube -> MoveRP:
+    ACTION = RePickTop
+    Move_CLIENT.send_goal(ACTION)
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    if (RES.SUCCESS == False):
+        return(RES)
+    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 4.2 Rotate around the cube -> MoveRP:
+    ACTION = RePickTop
+    Move_CLIENT.send_goal(ACTION)
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    if (RES.SUCCESS == False):
+        return(RES)
+    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    time.sleep(0.2)
+
+    # ========================== #
+    # 5. Close GRIPPER:
+
+    signal = "OpenGripper"
+    value = "0"
+    abbIO_CLIENT.send_request(signal,value)
+    signal = "CloseGripper"
+    value = "1"
+    abbIO_CLIENT.send_request(signal,value)
+    print ("Result -> Gripper Closed.")
+    RES_ABB = "null"
+
+    time.sleep(0.5)
+
+    # ========================== #
+    # 6. Lift cube a bit:
+    ACTION = RePickTopApp
+    Move_CLIENT.send_goal(ACTION)
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    if (RES.SUCCESS == False):
+        return(RES)
+    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
+    print("")
+    
+    # CheckTop -> Successful:
+    RES.MESSAGE = "RePickTop successfully finished."
+    RES.SUCCESS = True
+    return(RES)
+    
+
+def CHECK_SIDES(camera):
+
+    global RobMove_CLIENT
+    global Move_CLIENT
+    global abbIO_CLIENT
+    global RES
+
+    RESULT = dict()
+
+    # ========================== #
+    # 1. Move to CHECK-FRONT:
+    TYPE = "PTP"
+    SPEED = 0.3
+    TARGET_POSE = FacePose_1
+
+    RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+    
+    while rclpy.ok():
+        rclpy.spin_once(RobMove_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        RESULT["RES"] = RES
+        RESULT["COLOUR"] = "None"
+        RESULT["FACE"] = "None"
+        return(RESULT)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 2. DetectColour:
+    COLOUR = detectColour(camera)
+    if (COLOUR != "CUBE"):
+        RES.SUCCESS = True
+        RES.MESSAGE = "CHECK_SIDES successfully finished."
+        RESULT["RES"] = RES
+        RESULT["COLOUR"] = COLOUR
+        RESULT["FACE"] = "FRONT"
+        return(RESULT)
+
+    calibMoveIt2()
+
+    # ========================== #
+    # 3 Rotate to BACK side:
+    ACTION = FacePose_2
+    Move_CLIENT.send_goal(ACTION)
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    
+    if (RES.SUCCESS == False):
+
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+        
+        ACTION = FacePose_2_other
+        Move_CLIENT.send_goal(ACTION)
+        while rclpy.ok():
+            rclpy.spin_once(Move_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+        
+        if (RES.SUCCESS == False):
+            RESULT["RES"] = RES
+            RESULT["COLOUR"] = "None"
+            RESULT["FACE"] = "None"
+            return(RESULT)
+
+    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 4. DetectColour:
+    COLOUR = detectColour(camera)
+    if (COLOUR != "CUBE"):
+        RES.SUCCESS = True
+        RES.MESSAGE = "CHECK_SIDES successfully finished."
+        RESULT["RES"] = RES
+        RESULT["COLOUR"] = COLOUR
+        RESULT["FACE"] = "BACK"
+        return(RESULT)
+
+    calibMoveIt2()
+
+    # ========================== #
+    # 5. Move to CHECK-BOTTOM:
+    TYPE = "PTP"
+    SPEED = 0.3
+    TARGET_POSE = FacePose_3
+
+    RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+    
+    while rclpy.ok():
+        rclpy.spin_once(RobMove_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+
+        MoveMidSAFE()
+
+        RESULT["RES"] = RES
+        RESULT["COLOUR"] = "None"
+        RESULT["FACE"] = "None"
+        return(RESULT)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 6. DetectColour:
+    COLOUR = detectColour(camera)
+    if (COLOUR != "CUBE"):
+        
+        calibMoveIt2()
+        MoveMidSAFE()
+
+        RES.SUCCESS = True
+        RES.MESSAGE = "CHECK_SIDES successfully finished."
+        RESULT["RES"] = RES
+        RESULT["COLOUR"] = COLOUR
+        RESULT["FACE"] = "BOTTOM"
+        return(RESULT)
+
+    elif (COLOUR == "CUBE"):
+
+        calibMoveIt2()
+        MoveMidSAFE()
+
+        RES.SUCCESS = True
+        RES.MESSAGE = "CHECK_SIDES successfully finished."
+        RESULT["RES"] = RES
+        RESULT["COLOUR"] = COLOUR
+        RESULT["FACE"] = "NONE"
+        return(RESULT)
+
+
+def MoveMidSAFE():
+
+    global RobMove_CLIENT
+    global RES
+
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    TYPE = "PTP"
+    SPEED = 0.3
+    TARGET_POSE = FacePose_1
+
+    RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+    
+    while rclpy.ok():
+        rclpy.spin_once(RobMove_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+def Check_LR(camera):
+
+    global RobMove_CLIENT
+    global Move_CLIENT
+    global abbIO_CLIENT
+    global RES
+
+    RESULT = dict()
+
+    CUBE_MID()
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 1. Move UP a bit:
+    TYPE = "LIN"
+    SPEED = 0.3
+    TARGET_POSE = PlaceMidApp
+
+    RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+    
+    while rclpy.ok():
+        rclpy.spin_once(RobMove_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        RESULT["RES"] = RES
+        RESULT["COLOUR"] = "None"
+        RESULT["FACE"] = "None"
+        return(RESULT)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 2. ROTATE:
+    ACTION = PickSideApp_1
+    Move_CLIENT.send_goal(ACTION)
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+    
+    if (RES.SUCCESS == False):
+
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+        
+        ACTION = PickSideApp_1_other
+        Move_CLIENT.send_goal(ACTION)
+        while rclpy.ok():
+            rclpy.spin_once(Move_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+        
+        if (RES.SUCCESS == False):
+            RESULT["RES"] = RES
+            RESULT["COLOUR"] = "None"
+            RESULT["FACE"] = "None"
+            return(RESULT)
+
+    print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 3. Move DOWN a bit:
+    ACTION = PickSide
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        RESULT["RES"] = RES
+        RESULT["COLOUR"] = "None"
+        RESULT["FACE"] = "None"
+        return(RESULT)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    time.sleep(0.2)
+
+    # ========================== #
+    # 4. Close GRIPPER:
+
+    signal = "OpenGripper"
+    value = "0"
+    abbIO_CLIENT.send_request(signal,value)
+    signal = "CloseGripper"
+    value = "1"
+    abbIO_CLIENT.send_request(signal,value)
+    print ("Result -> Gripper Closed.")
+    RES_ABB = "null"
+
+    time.sleep(0.5)
+
+    # ========================== #
+    # 5. LIFT cube:
+    ACTION = PickSideApp_2
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        RESULT["RES"] = RES
+        RESULT["COLOUR"] = "None"
+        RESULT["FACE"] = "None"
+        return(RESULT)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
 
 def detectColour(camera):
 
@@ -766,7 +1289,7 @@ def detectColour(camera):
     names = model.names 
 
     # 2. Detect colour
-    T = time.time() + 3.0
+    T = time.time() + 1.5
 
     StickerCount = 0
     WhiteCount = 0
@@ -796,8 +1319,8 @@ def detectColour(camera):
             elif (ID == "blue"):
                 BlueCount = BlueCount + 1
 
-    if (WhiteCount == BlueCount == BlackCount == 0 and StickerCount > 300):
-        COLOUR = "STICKER"
+    if (WhiteCount == BlueCount == BlackCount == 0 and StickerCount > 150):
+        COLOUR = "CUBE"
     elif (WhiteCount > BlueCount and WhiteCount > BlackCount):
         COLOUR = "WHITE"
     elif (WhiteCount < BlueCount and BlueCount > BlackCount):
@@ -808,6 +1331,555 @@ def detectColour(camera):
         COLOUR = "CUBE"
 
     return(COLOUR)
+
+def RotateCube(FACE):
+
+    global RobMove_CLIENT
+    global Move_CLIENT
+    global abbIO_CLIENT
+    global RES
+
+    # ========================== #
+    # 1. Move to MidApproach:
+
+    TYPE = "PTP"
+    SPEED = 0.3
+    TARGET_POSE = RotApp
+
+    RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+    
+    while rclpy.ok():
+        rclpy.spin_once(RobMove_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 2. If sticker at back, rotate 180:
+    if (FACE == "BACK"):
+
+        ACTION = RotBack
+        Move_CLIENT.send_goal(ACTION)
+        while rclpy.ok():
+            rclpy.spin_once(Move_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+        
+        if (RES.SUCCESS == False):
+
+            RES.MESSAGE = "null"
+            RES.SUCCESS = False
+            
+            ACTION = RotBack_other
+            Move_CLIENT.send_goal(ACTION)
+            while rclpy.ok():
+                rclpy.spin_once(Move_CLIENT)
+                if (RES.MESSAGE != "null"):
+                    break
+            
+            if (RES.SUCCESS == False):
+                return(RES)
+
+        print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+    # ========================== #
+    # 3. Move to MidPlace:
+
+    ACTION = RotPlace
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    time.sleep(0.2)
+
+    # ========================== #
+    # 4. Open GRIPPER:
+
+    signal = "CloseGripper"
+    value = "0"
+    abbIO_CLIENT.send_request(signal,value)
+    signal = "OpenGripper"
+    value = "1"
+    abbIO_CLIENT.send_request(signal,value)
+    print ("Result -> Gripper Opened.")
+    RES_ABB = "null"
+
+    time.sleep(0.5)
+
+    # ========================== #
+    # 5. 180 degrees back:
+    if (FACE == "BACK"):
+
+        # 5.1. Move up:
+        ACTION = RotZ
+        Move_CLIENT.send_goal(ACTION)
+        
+        while rclpy.ok():
+            rclpy.spin_once(Move_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            return(RES)
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+        # 5.2. 180 deg rotate:
+        ACTION = RotBack_other
+        Move_CLIENT.send_goal(ACTION)
+        while rclpy.ok():
+            rclpy.spin_once(Move_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+        
+        if (RES.SUCCESS == False):
+
+            RES.MESSAGE = "null"
+            RES.SUCCESS = False
+            
+            ACTION = RotBack
+            Move_CLIENT.send_goal(ACTION)
+            while rclpy.ok():
+                rclpy.spin_once(Move_CLIENT)
+                if (RES.MESSAGE != "null"):
+                    break
+            
+            if (RES.SUCCESS == False):
+                return(RES)
+
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+        # ========================== #
+        # 5.3. Down:
+        ACTION = RotPlace
+        Move_CLIENT.send_goal(ACTION)
+        
+        while rclpy.ok():
+            rclpy.spin_once(Move_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            return(RES)
+
+        print("RESULT of Move ACTION CALL: " + RES.MESSAGE)
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+    # ========================== #
+    # 6.1. ROTATE CUBE once:
+    if (FACE != "BOTTOM"):
+        
+        RES = ROTCube()
+        if (RES.SUCCESS == True):
+            RES.MESSAGE = "RotateCube successfully finished."
+            return(RES)
+        else:
+            RES.MESSAGE = "RotateCube -> ERROR."
+            return(RES)
+    
+    # ========================== #
+    # 6.2. ROTATE CUBE twice:
+    if (FACE == "BOTTOM"):
+
+        RES = ROTCube()
+        if (RES.SUCCESS == True):
+
+            RES.MESSAGE = "null"
+            RES.SUCCESS = False
+            
+            # ========================== #
+            # 6.2.1. Move to MidPlace:
+
+            TYPE = "PTP"
+            SPEED = 0.3
+            TARGET_POSE = RotApp
+
+            RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+            
+            while rclpy.ok():
+                rclpy.spin_once(RobMove_CLIENT)
+                if (RES.MESSAGE != "null"):
+                    break
+
+            if (RES.SUCCESS == False):
+                return(RES)
+            
+            print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+            print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+            print("")
+            RES.MESSAGE = "null"
+            RES.SUCCESS = False
+
+            # ========================== #
+            # 6.2.2. Move to MidPlace (down a bit):
+
+            ACTION = RotPlace
+            Move_CLIENT.send_goal(ACTION)
+            
+            while rclpy.ok():
+                rclpy.spin_once(Move_CLIENT)
+                if (RES.MESSAGE != "null"):
+                    break
+
+            if (RES.SUCCESS == False):
+                return(RES)
+            
+            print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+            print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+            print("")
+            RES.MESSAGE = "null"
+            RES.SUCCESS = False
+
+            time.sleep(0.2)
+
+            # ========================== #
+            # 6.2.3. Open GRIPPER:
+
+            signal = "CloseGripper"
+            value = "0"
+            abbIO_CLIENT.send_request(signal,value)
+            signal = "OpenGripper"
+            value = "1"
+            abbIO_CLIENT.send_request(signal,value)
+            print ("Result -> Gripper Opened.")
+            RES_ABB = "null"
+
+            time.sleep(0.5)
+
+            # ========================== #
+            # 6.2.4. ROTATE AGAIN:
+            RES = ROTCube()
+
+            if (RES.SUCCESS == True):
+                RES.MESSAGE = "RotateCube successfully finished."
+                return(RES)
+            else:
+                RES.MESSAGE = "RotateCube -> ERROR."
+                return(RES)
+
+        else:
+            RES.MESSAGE = "RotateCube -> ERROR."
+            return(RES)
+
+
+def ROTCube():
+
+    global RobMove_CLIENT
+    global Move_CLIENT
+    global abbIO_CLIENT
+    global RES
+
+    # ========================== #
+    # 1. ROT 2x30deg (RP):
+
+    ACTION = RotationPick
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    ACTION = RotationPick
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    time.sleep(0.2)
+
+    # ========================== #
+    # 2. Close GRIPPER:
+
+    signal = "OpenGripper"
+    value = "0"
+    abbIO_CLIENT.send_request(signal,value)
+    signal = "CloseGripper"
+    value = "1"
+    abbIO_CLIENT.send_request(signal,value)
+    print ("Result -> Gripper Closed.")
+    RES_ABB = "null"
+
+    time.sleep(0.5)
+
+    # ========================== #
+    # 3. Move up:
+    ACTION = RotZ
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 4. ROT 2x30deg (RP):
+
+    ACTION = RotationPlace
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    ACTION = RotationPlace
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 5. Move X:
+    ACTION = RotX
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 6. ROT 1x30deg (RP):
+
+    ACTION = RotationPlace
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 7. Move down:
+    ACTION = RotPlace
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    time.sleep(0.2)
+
+    # ========================== #
+    # 8. Open GRIPPER:
+
+    signal = "CloseGripper"
+    value = "0"
+    abbIO_CLIENT.send_request(signal,value)
+    signal = "OpenGripper"
+    value = "1"
+    abbIO_CLIENT.send_request(signal,value)
+    print ("Result -> Gripper Opened.")
+    RES_ABB = "null"
+
+    time.sleep(0.5)
+
+    # ========================== #
+    # 9. Move up:
+    ACTION = RotZ
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ========================== #
+    # 10. ROT 2x30deg (RP):
+
+    ACTION = RotationPick
+    Move_CLIENT.send_goal(ACTION)
+    9
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ======null==================== #
+    # 11. Move down:
+    ACTION = RotPlace
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    time.sleep(0.2)
+
+    # ========================== #
+    # 12. Close GRIPPER:
+
+    signal = "OpenGripper"
+    value = "0"
+    abbIO_CLIENT.send_request(signal,value)
+    signal = "CloseGripper"
+    value = "1"
+    abbIO_CLIENT.send_request(signal,value)
+    print ("Result -> Gripper Closed.")
+    RES_ABB = "null"
+
+    time.sleep(0.5)
+
+    # ========================== #
+    # 13. Move up:
+    ACTION = RotZ
+    Move_CLIENT.send_goal(ACTION)
+    
+    while rclpy.ok():
+        rclpy.spin_once(Move_CLIENT)
+        if (RES.MESSAGE != "null"):
+            break
+
+    if (RES.SUCCESS == False):
+        return(RES)
+    
+    print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+    print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+    print("")
+
+    RES.MESSAGE = "RotCube successfully finished."
+    RES.SUCCESS = True
+    return(RES)
+
 
 # ===================================================================================== #
 # ======================================= MAIN ======================================== #
@@ -1043,28 +2115,493 @@ def main(args=None):
         RES.SUCCESS = False
     
 
+    # ============================= #
+    # LOOP --> Find STICKER in CUBE #
+    # ============================= #
 
-    # IF -> STICKER on TOP:
+    COUNT = 0
 
-    for ID in ids:
+    BREAK = False
+    while BREAK == False:
 
-        if ((ID == "sticker") or (ID == "white") or (ID == "black") or (ID == "blue")):
+        # CHECK (TOP FACE, detected at the beginning) -> STICKER/CUBE:
+        for ID in ids:
 
-            CHECK_TOP()
-            if (RES.SUCCESS == False):
-                rclpy.shutdown()
-                print(RES.MESSAGE)
-                print("CLOSING PROGRAM...")
-                exit()
+            # If STICKER on TOP -> Detect colour and PLACE:
+            if ((ID == "sticker") or (ID == "white") or (ID == "black") or (ID == "blue")):
+
+                CHECK_TOP()
+
+                if (RES.SUCCESS == False):
+                    rclpy.shutdown()
+                    print(RES.MESSAGE)
+                    print("CLOSING PROGRAM...")
+                    exit()
+                else:
+                    print(RES.MESSAGE)
+                    RES.MESSAGE = "null"
+                    RES.SUCCESS = False
+
+                    COLOUR = detectColour(camera)
+
+                    RePick_TOP()
+
+                    if (RES.SUCCESS == False):
+                        rclpy.shutdown()
+                        print(RES.MESSAGE)
+                        print("CLOSING PROGRAM...")
+                        exit()
+                    else:
+                        print(RES.MESSAGE)
+                        RES.MESSAGE = "null"
+                        RES.SUCCESS = False
+
+                        BREAK = True
+                        NEEDROT = False
+                
+                break
+
+            # If STICKER is NOT on TOP -> Find where the sticker is -> CHECK other 5 sides:
             else:
-                print(RES.MESSAGE)
-                RES.MESSAGE = "null"
-                RES.SUCCESS = False
-            
-            break
 
-    COLOUR = detectColour(camera)
-    print(COLOUR)
+                SIDES_RES = CHECK_SIDES(camera)
+                
+                if (SIDES_RES["RES"].SUCCESS == False):
+                    rclpy.shutdown()
+                    print(RES.MESSAGE)
+                    print("CLOSING PROGRAM...")
+                    exit()
+                
+                elif(SIDES_RES["COLOUR"] != "CUBE"):
+                    
+                    print(SIDES_RES)
+                    RES.MESSAGE = "null"
+                    RES.SUCCESS = False
+                    HomePos()
+                    
+                    COLOUR = SIDES_RES["COLOUR"]
+
+                    BREAK = True
+                    NEEDROT = True
+
+                
+                elif(SIDES_RES["COLOUR"] == "CUBE"):
+
+                    if (COUNT == 2):
+                        BREAK = True
+                        NEEDROT = False
+                    
+                    RES.MESSAGE = "null"
+                    RES.SUCCESS = False
+                    Check_LR(camera)
+
+                    COUNT = COUNT + 1
+                
+                break
+    
+    RES.MESSAGE = "null"
+    RES.SUCCESS = False
+
+    # ROTATE if necessary, in order to put sticker on top:
+    if NEEDROT:
+
+        RES = RotateCube(SIDES_RES["FACE"])
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+    
+    # PLACE:
+    if (COLOUR == "BLACK"):
+
+        # ========================== #
+        # Move to BlackApproach:
+
+        TYPE = "PTP"
+        SPEED = 0.3
+        TARGET_POSE = PlaceBLACK_app
+
+        RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+        
+        while rclpy.ok():
+            rclpy.spin_once(RobMove_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+        # ========================== #
+        # Move to BlackPlace:
+
+        TYPE = "LIN"
+        SPEED = 0.1
+        TARGET_POSE = PlaceBLACK
+
+        RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+        
+        while rclpy.ok():
+            rclpy.spin_once(RobMove_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+        time.sleep(0.2)
+
+        # ========================== #
+        # Open GRIPPER:
+
+        signal = "CloseGripper"
+        value = "0"
+        abbIO_CLIENT.send_request(signal,value)
+        signal = "OpenGripper"
+        value = "1"
+        abbIO_CLIENT.send_request(signal,value)
+        print ("Result -> Gripper Opened.")
+        RES_ABB = "null"
+
+        time.sleep(0.5)
+
+        # ========================== #
+        # Move to BlackApproach:
+
+        TYPE = "LIN"
+        SPEED = 0.1
+        TARGET_POSE = PlaceBLACK_app
+
+        RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+        
+        while rclpy.ok():
+            rclpy.spin_once(RobMove_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+    
+    elif (COLOUR == "BLUE"):
+
+        # ========================== #
+        # Move to BlueApproach:
+
+        TYPE = "PTP"
+        SPEED = 0.3
+        TARGET_POSE = PlaceBLUE_app
+
+        RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+        
+        while rclpy.ok():
+            rclpy.spin_once(RobMove_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+        # ========================== #
+        # Move to BLUEPlace:
+
+        TYPE = "LIN"
+        SPEED = 0.1
+        TARGET_POSE = PlaceBLUE
+
+        RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+        
+        while rclpy.ok():
+            rclpy.spin_once(RobMove_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+        time.sleep(0.2)
+
+        # ========================== #
+        # Open GRIPPER:
+
+        signal = "CloseGripper"
+        value = "0"
+        abbIO_CLIENT.send_request(signal,value)
+        signal = "OpenGripper"
+        value = "1"
+        abbIO_CLIENT.send_request(signal,value)
+        print ("Result -> Gripper Opened.")
+        RES_ABB = "null"
+
+        time.sleep(0.5)
+
+        # ========================== #
+        # Move to BLUEApproach:
+
+        TYPE = "LIN"
+        SPEED = 0.1
+        TARGET_POSE = PlaceBLUE_app
+
+        RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+        
+        while rclpy.ok():
+            rclpy.spin_once(RobMove_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+    elif (COLOUR == "WHITE"):
+
+        # ========================== #
+        # Move to WHITEApproach:
+
+        TYPE = "PTP"
+        SPEED = 0.3
+        TARGET_POSE = PlaceWHITE_app
+
+        RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+        
+        while rclpy.ok():
+            rclpy.spin_once(RobMove_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+        # ========================== #
+        # Move to WHITEPlace:
+
+        TYPE = "LIN"
+        SPEED = 0.1
+        TARGET_POSE = PlaceWHITE
+
+        RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+        
+        while rclpy.ok():
+            rclpy.spin_once(RobMove_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+        time.sleep(0.2)
+
+        # ========================== #
+        # Open GRIPPER:
+
+        signal = "CloseGripper"
+        value = "0"
+        abbIO_CLIENT.send_request(signal,value)
+        signal = "OpenGripper"
+        value = "1"
+        abbIO_CLIENT.send_request(signal,value)
+        print ("Result -> Gripper Opened.")
+        RES_ABB = "null"
+
+        time.sleep(0.5)
+
+        # ========================== #
+        # Move to WHITEApproach:
+
+        TYPE = "LIN"
+        SPEED = 0.1
+        TARGET_POSE = PlaceWHITE_app
+
+        RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+        
+        while rclpy.ok():
+            rclpy.spin_once(RobMove_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+    elif (COLOUR == "CUBE"):
+
+        # ========================== #
+        # Move to CUBEApproach:
+
+        TYPE = "PTP"
+        SPEED = 0.3
+        TARGET_POSE = PlaceCUBE_app
+
+        RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+        
+        while rclpy.ok():
+            rclpy.spin_once(RobMove_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+        # ========================== #
+        # Move to CUBEPlace:
+
+        TYPE = "LIN"
+        SPEED = 0.1
+        TARGET_POSE = PlaceCUBE
+
+        RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+        
+        while rclpy.ok():
+            rclpy.spin_once(RobMove_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+        time.sleep(0.2)
+
+        # ========================== #
+        # Open GRIPPER:
+
+        signal = "CloseGripper"
+        value = "0"
+        abbIO_CLIENT.send_request(signal,value)
+        signal = "OpenGripper"
+        value = "1"
+        abbIO_CLIENT.send_request(signal,value)
+        print ("Result -> Gripper Opened.")
+        RES_ABB = "null"
+
+        time.sleep(0.5)
+
+        # ========================== #
+        # Move to CUBEApproach:
+
+        TYPE = "LIN"
+        SPEED = 0.1
+        TARGET_POSE = PlaceCUBE_app
+
+        RobMove_CLIENT.send_goal(TYPE, SPEED, TARGET_POSE)
+        
+        while rclpy.ok():
+            rclpy.spin_once(RobMove_CLIENT)
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == False):
+            rclpy.shutdown()
+            print(RES.MESSAGE)
+            print("CLOSING PROGRAM...")
+            exit()
+        
+        print("RESULT of RobMove ACTION CALL: " + RES.MESSAGE)
+        print("ACTION CALL successful? -> " + str(RES.SUCCESS))
+        print("")
+        RES.MESSAGE = "null"
+        RES.SUCCESS = False
+
+    HomePos()
 
     rclpy.shutdown()
 

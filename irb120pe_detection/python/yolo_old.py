@@ -268,6 +268,18 @@ RotPlace.speed = 0.1
 RotPlace.movel.x = 0.0
 RotPlace.movel.y = 0.0
 RotPlace.movel.z = -0.03
+RotPlace2 = Action()
+RotPlace2.action = "MoveL"
+RotPlace2.speed = 0.1
+RotPlace2.movel.x = 0.0
+RotPlace2.movel.y = 0.0
+RotPlace2.movel.z = -0.035
+RotPlace3 = Action()
+RotPlace3.action = "MoveL"
+RotPlace3.speed = 0.1
+RotPlace3.movel.x = 0.005
+RotPlace3.movel.y = 0.0
+RotPlace3.movel.z = -0.03
 RotationPick = Action()
 RotationPick.action = "MoveRP"
 RotationPick.speed = 0.1
@@ -1752,7 +1764,7 @@ def ROTCube():
 
     # ========================== #
     # 7. Move down:
-    ACTION = RotPlace
+    ACTION = RotPlace2
     Move_CLIENT.send_goal(ACTION)
     
     while rclpy.ok():
@@ -1826,7 +1838,7 @@ def ROTCube():
 
     # ======null==================== #
     # 11. Move down:
-    ACTION = RotPlace
+    ACTION = RotPlace3
     Move_CLIENT.send_goal(ACTION)
     
     while rclpy.ok():
@@ -1931,7 +1943,7 @@ def main(args=None):
     # ===================================================================================== #
 
     # ===================================================================================== #
-    # Yolo: CALIBRATION + POSE ESTIMATION:
+    # Yolo: CALIBRATION + DETECTION:
 
     camera = cv2.VideoCapture(0) # Define the camera and its port.
 
@@ -2025,16 +2037,21 @@ def main(args=None):
     print("The ids detected: ", ids)
     x1, y1, x2, y2 = boxes[0].xyxy[0]
 
-    x = int(x1)-5
-    y = int(y1)-5
-    w = int(x2)+5
-    h = int(y2)+5
+    x = int(x1)-3
+    y = int(y1)-3
+    w = int(x2)+3
+    h = int(y2)+3
 
     classif = boxes[0].cls
 
     ROI = perspectiveImg[y:h, x:w]
 
-    # Pose estimation:
+    # ===================================================================================== #
+
+    # ===================================================================================== #
+    # POSE ESTIMATION:
+
+
     ROI = cv2.GaussianBlur(ROI,(3,3),0)
     imgHSV = cv2.cvtColor(ROI, cv2.COLOR_BGR2HSV)
     lowLimit = (0, 10, 10)
@@ -2046,7 +2063,7 @@ def main(args=None):
     poly_contour = []
     for contour in contours:
         area = cv2.contourArea(contour)
-        if area > 700:
+        if area > 500:
             poly_contour.append(contour)
     # Get the polygonal approximation of the contour.
 
@@ -2069,6 +2086,7 @@ def main(args=None):
     
     print(xo)
     print(yo)
+    cv2.imshow("Contours", ROI)
 
     rotation = False
 
@@ -2201,6 +2219,7 @@ def main(args=None):
     
     RES.MESSAGE = "null"
     RES.SUCCESS = False
+    print(COLOUR)
 
     # ROTATE if necessary, in order to put sticker on top:
     if NEEDROT:

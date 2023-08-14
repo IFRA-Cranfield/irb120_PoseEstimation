@@ -321,7 +321,7 @@ class RobMoveClient(Node):
         super().__init__('irb120pe_RobMove_Client')
         self._action_client = ActionClient(self, Robmove, 'Robmove')
 
-        print ("Waiting for /Robove ROS2 ActionServer to be available...")
+        print ("Waiting for /Robmove ROS2 ActionServer to be available...")
         self._action_client.wait_for_server()
         print ("/Robmove ACTION SERVER detected.")
 
@@ -378,7 +378,7 @@ class MoveClient(Node):
         super().__init__('irb120pe_Move_Client')
         self._action_client = ActionClient(self, Move, 'Move')
 
-        print ("Waiting for /Robove ROS2 ActionServer to be available...")
+        print ("Waiting for /Robmove ROS2 ActionServer to be available...")
         self._action_client.wait_for_server()
         print ("/Move ACTION SERVER detected.")
 

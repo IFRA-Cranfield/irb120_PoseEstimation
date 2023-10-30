@@ -24,49 +24,6 @@ if(BUILD_TESTING)
 endif()
 
 # =========================================================== #
-# REQUIRED TO EXECUTE .cpp scripts:
-
-install(
-  DIRECTORY 
-    src
-  DESTINATION 
-    share/${PROJECT_NAME}
-)
-
-# REQUIRED to -> Communicate with ROS2:
-find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)
-
-# REQUIRED -> irb120pe_data:
-find_package(irb120pe_data REQUIRED)
-
-# REQUIRED -> RobMove ACTION:
-find_package(rclcpp_action REQUIRED)
-find_package(moveit_ros_planning_interface REQUIRED)
-
-# Add executable:
-add_executable(
-  robmove
-  src/RobMove.cpp
-)
-
-# Install executable:
-install(TARGETS
-  robmove
-  DESTINATION lib/${PROJECT_NAME}
-)
-
-# Add ament dependencies:
-ament_target_dependencies(
-  robmove
-  irb120pe_data
-  rclcpp
-  std_msgs
-  rclcpp_action
-  moveit_ros_planning_interface
-)
-
-# =========================================================== #
 # REQUIRED TO EXECUTE .py scripts:
 install(
   DIRECTORY 
@@ -77,6 +34,13 @@ install(
 install(PROGRAMS
   python/yolo.py
   python/yolo_old.py
+  
+  python/main.py
+
+  python/gripper.py
+  python/robot.py
+  python/waypoints.py
+
   DESTINATION lib/${PROJECT_NAME} 
 )
 

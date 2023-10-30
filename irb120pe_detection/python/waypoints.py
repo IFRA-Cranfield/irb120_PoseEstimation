@@ -11,15 +11,6 @@
 # Import ROS2 messages:
 from geometry_msgs.msg import Pose
 from ros2srrc_data.msg import Action
-from std_msgs.msg import String
-
-# RetRobPose variable type:
-from dataclasses import dataclass
-@dataclass
-class RetRobPose:
-    TYPE: String
-    POSE: Pose
-    ACTION: Action
 
 # =============================================================================== #
 # CLASS -> waypoints:
@@ -301,18 +292,6 @@ class waypoints():
 
     def RobotPose(self, PoseName):
 
-        pose = RetRobPose()
-
-        if (PoseName == "PlaceBLUE_app" or "PlaceBLUE" or "PlaceBLACK_app" or "PlaceBLACK" or "PlaceWHITE_app" or "PlaceWHITE" or "PlaceCUBE_app" or "PlaceCUBE" 
-            or "FacePose_1" or "FacePose_3" or "FacePose_4" or "PlaceMidApp" or "PlaceMid" or "RePickTopApp_PREV" or "RotApp"):
-            
-            pose.TYPE = "POSE" 
-            pose.POSE = self.RobotPoseDict[PoseName]
-
-        else:
-
-            pose.TYPE = "ACTION"
-            pose.ACTION = self.RobotPoseDict[PoseName]
-
-        return(pose)          
+        result = self.RobotPoseDict[PoseName]
+        return(result)          
             

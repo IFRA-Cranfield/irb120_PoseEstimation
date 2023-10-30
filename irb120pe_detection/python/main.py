@@ -14,8 +14,8 @@ import rclpy
 import time
 
 # ===== IMPORT FUNCTIONS ===== #
-from waypoints import waypoints
 from gripper import abbRWS_IO
+from robot import RBT
 
 # ===================================================================================== #
 # ======================================= MAIN ======================================== #
@@ -36,14 +36,23 @@ def main(args=None):
     rclpy.init(args=None)
 
     # Initialise CLASSES:
-    GRIPPER = abbRWS_IO()
+    #GRIPPER = abbRWS_IO()
+    ROBOT = RBT()
+    print("")
 
     # ========== (0) ========== #
     # HOME -> Open Gripper + Robot to HomePos:
-    GRIPPER.OPEN()
-    time.sleep(0.5)
+    #GRIPPER.OPEN()
+    #time.sleep(0.5)
     # Calib MoveIt!2
     # Move Robot to HomePos
+
+    # TEST:
+    print("(Robot Movement -> /RobMove): Moving to PlaceBLACK_app...")
+    ROBOT.RobMove_EXECUTE("PlaceBLACK_app", "PTP", 1.0)
+
+    print("(Robot Movement -> /RobMove): Moving to PlaceBLACK_app...")
+    ROBOT.RobMove_EXECUTE("PlaceBLACK", "LIN", 0.1)
 
     rclpy.shutdown() 
 

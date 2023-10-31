@@ -32,7 +32,7 @@ install(
     share/${PROJECT_NAME}
 )
 install(PROGRAMS
-  python/yolo.py
+
   python/yolo_old.py
   
   python/main.py
@@ -40,6 +40,7 @@ install(PROGRAMS
   python/gripper.py
   python/robot.py
   python/waypoints.py
+  python/detection.py
 
   DESTINATION lib/${PROJECT_NAME} 
 )

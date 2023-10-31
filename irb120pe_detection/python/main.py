@@ -16,6 +16,7 @@ import time
 # ===== IMPORT FUNCTIONS ===== #
 from gripper import abbRWS_IO
 from robot import RBT
+from detection import CubeDetection
 
 # ===================================================================================== #
 # ======================================= MAIN ======================================== #
@@ -38,6 +39,7 @@ def main(args=None):
     # Initialise CLASSES:
     #GRIPPER = abbRWS_IO()
     ROBOT = RBT()
+    DETECT = CubeDetection()
     print("")
 
     # ========== (0) ========== #
@@ -51,7 +53,7 @@ def main(args=None):
     print("(Robot Movement -> /RobMove): Moving to PlaceBLACK_app...")
     ROBOT.RobMove_EXECUTE("PlaceBLACK_app", "PTP", 1.0)
 
-    print("(Robot Movement -> /RobMove): Moving to PlaceBLACK_app...")
+    print("(Robot Movement -> /RobMove): Moving to PlaceBLACK...")
     ROBOT.RobMove_EXECUTE("PlaceBLACK", "LIN", 0.1)
 
     rclpy.shutdown() 

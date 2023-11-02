@@ -36,8 +36,11 @@ install(PROGRAMS
   python/yolo_old.py
   
   python/main.py
+  python/main_GzSimplified.py
 
   python/gripper.py
+  python/gripper_Gz.py
+
   python/robot.py
   python/waypoints.py
   python/detection.py

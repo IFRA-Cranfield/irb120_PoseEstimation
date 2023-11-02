@@ -45,10 +45,10 @@ class RobMoveCLIENT(Node):
         super().__init__('irb120pe_RobMove_Client')
         self._action_client = ActionClient(self, Robmove, 'Robmove')
 
-        self.get_logger().info("(/RobMove): Initialising ROS2 Action Client!")
-        self.get_logger().info("(/RobMove): Waiting for /Robmove ROS2 ActionServer to be available...")
+        print("(/RobMove): Initialising ROS2 Action Client!")
+        print("(/RobMove): Waiting for /Robmove ROS2 ActionServer to be available...")
         self._action_client.wait_for_server()
-        self.get_logger().info("(/RobMove): /Robmove ACTION SERVER detected.")
+        print("(/RobMove): /Robmove ACTION SERVER detected.")
 
     def send_goal(self, TYPE, SPEED, TARGET_POSE):
         
@@ -71,10 +71,10 @@ class RobMoveCLIENT(Node):
         goal_handle = future.result()
 
         if not goal_handle.accepted:
-            self.get_logger().info('(/RobMove): RobMove ACTION CALL -> GOAL has been REJECTED.')
+            print('(/RobMove): RobMove ACTION CALL -> GOAL has been REJECTED.')
             return
         
-        # self.get_logger().info('(/RobMove): RobMove ACTION CALL -> GOAL has been ACCEPTED.')
+        # print('(/RobMove): RobMove ACTION CALL -> GOAL has been ACCEPTED.')
 
         self._get_result_future = goal_handle.get_result_async()
         self._get_result_future.add_done_callback(self.get_result_callback)
@@ -97,10 +97,10 @@ class MoveCLIENT(Node):
         super().__init__('irb120pe_Move_Client')
         self._action_client = ActionClient(self, Move, 'Move')
 
-        self.get_logger().info("(/Move): Initialising ROS2 Action Client!")
-        self.get_logger().info("(/Move): Waiting for /Move ROS2 ActionServer to be available...")
+        print("(/Move): Initialising ROS2 Action Client!")
+        print("(/Move): Waiting for /Move ROS2 ActionServer to be available...")
         self._action_client.wait_for_server()
-        self.get_logger().info("(/Move): /Move ACTION SERVER detected.")
+        print("(/Move): /Move ACTION SERVER detected.")
 
     def send_goal(self, ACTION):
 
@@ -125,10 +125,10 @@ class MoveCLIENT(Node):
         goal_handle = future.result()
 
         if not goal_handle.accepted:
-            self.get_logger().info('(/Move): Move ACTION CALL -> GOAL has been REJECTED.')
+            print('(/Move): Move ACTION CALL -> GOAL has been REJECTED.')
             return
         
-        # self.get_logger().info('(/Move): Move ACTION CALL -> GOAL has been ACCEPTED.')
+        # print('(/Move): Move ACTION CALL -> GOAL has been ACCEPTED.')
 
         self._get_result_future = goal_handle.get_result_async()
         self._get_result_future.add_done_callback(self.get_result_callback)

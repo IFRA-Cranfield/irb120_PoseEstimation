@@ -348,9 +348,9 @@ class RobMoveClient(Node):
         goal_handle = future.result()
 
         if not goal_handle.accepted:
-            self.get_logger().info('RobMove ACTION CALL -> GOAL has been REJECTED.')
+            print('RobMove ACTION CALL -> GOAL has been REJECTED.')
             return
-        self.get_logger().info('RobMove ACTION CALL -> GOAL has been ACCEPTED.')
+        print('RobMove ACTION CALL -> GOAL has been ACCEPTED.')
         self._get_result_future = goal_handle.get_result_async()
         self._get_result_future.add_done_callback(self.get_result_callback)
 
@@ -407,9 +407,9 @@ class MoveClient(Node):
         goal_handle = future.result()
 
         if not goal_handle.accepted:
-            self.get_logger().info('Move ACTION CALL -> GOAL has been REJECTED.')
+            print('Move ACTION CALL -> GOAL has been REJECTED.')
             return
-        self.get_logger().info('Move ACTION CALL -> GOAL has been ACCEPTED.')
+        print('Move ACTION CALL -> GOAL has been ACCEPTED.')
         self._get_result_future = goal_handle.get_result_async()
         self._get_result_future.add_done_callback(self.get_result_callback)
 

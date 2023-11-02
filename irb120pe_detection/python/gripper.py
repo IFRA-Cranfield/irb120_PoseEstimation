@@ -23,12 +23,12 @@ class abbRWS_IO(Node):
 
         super().__init__('abbRWS_IO_client')
 
-        self.get_logger().info("(abbRWS_IO): Initialising ROS2 Service Client!")
+        print("(abbRWS_IO): Initialising ROS2 Service Client!")
         self.cli = self.create_client(SetIOSignal, '/rws_client/set_io_signal')
         while not self.cli.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('(abbRWS_IO): Waiting for ABB-RWS I/O Service Server to be available...')
+            print('(abbRWS_IO): Waiting for ABB-RWS I/O Service Server to be available...')
 
-        self.get_logger().info('(abbRWS_IO): ABB-RWS I/O Service Server detected.')
+        print('(abbRWS_IO): ABB-RWS I/O Service Server detected.')
         self.req = SetIOSignal.Request()
 
     def send_request(self, signal, value):

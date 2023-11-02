@@ -12,6 +12,7 @@
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
+import time
 # Import /Move and /RobMove ROS2 Actions:
 from ros2srrc_data.action import Move
 # Import LinkAttacher (ROS2 SRV):
@@ -121,12 +122,12 @@ class CubePose(Node):
             if (OBJ.objectname == Cube):
 
                 Pose["x"] = OBJ.x
-                Pose["y"] = OBJ.x
-                Pose["z"] = OBJ.x
-                Pose["qx"] = OBJ.x
-                Pose["qy"] = OBJ.x
-                Pose["qz"] = OBJ.x
-                Pose["qw"] = OBJ.x
+                Pose["y"] = OBJ.y
+                Pose["z"] = OBJ.z
+                Pose["qx"] = OBJ.qx
+                Pose["qy"] = OBJ.qy
+                Pose["qz"] = OBJ.qz
+                Pose["qw"] = OBJ.qw
 
 # =============================================================================== #
 # EEPose SUBSCRIBER:
@@ -261,8 +262,11 @@ class GzGripper():
         global CUBES
         global EE_POSE
 
-        rclpy.spin_once(self.CubeLocation)
-        rclpy.spin_once(self.EEPose)
+        # Loop for 0.1 seconds in order to get EE and CUBE poses:
+        t_end = time.time() + 0.1
+        while time.time() < t_end:
+            rclpy.spin_once(self.CubeLocation)
+            rclpy.spin_once(self.EEPose)
 
         # 1. Check which CUBE is in workspace, and get its POSE:
         OBJ = ObjectPose()

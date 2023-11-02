@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<robot name="WhiteCube" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <link name="WhiteCube">
+
+    <collision>
+      <origin xyz= "0.0 0.0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find irb120pe_gazebo)/meshes/cube/irb120pe_WhiteCube.dae"/>
+      </geometry>
+      <surface>
+        <contact>
+          <collide_without_contact>false</collide_without_contact>
+        </contact>
+      </surface>
+    </collision>
+
+    <visual>
+      <origin xyz= "0.0 0.0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find irb120pe_gazebo)/meshes/cube/irb120pe_WhiteCube.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <origin xyz= "0.0 0.0 0.0" rpy="0 0 0"/>
+      <mass value= "0.1" />
+      <inertia
+        ixx="0.000015" ixy="0.0"  ixz="0.0"
+        iyy="0.000015" iyz="0.0"
+        izz="0.000015" />
+    </inertial>
+
+  </link>
+
+  <!-- LOAD ObjectPose Gazebo (ROS2) PLUGIN: -->
+
+  <!-- Input parameter: -->
+  <xacro:arg name="name" default="WhiteCube"/>
+  <xacro:property name="name" value="$(arg name)"/>
+
+  <!-- Plugin: -->
+  <gazebo>
+    <plugin name="ros2_objectpose_plugin" filename="libros2_objectpose_plugin.so" >
+      <ros>
+        <namespace>${name}</namespace>
+      </ros>
+    </plugin>
+  </gazebo>
+
+</robot>

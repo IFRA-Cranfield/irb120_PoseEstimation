@@ -17,6 +17,7 @@ import time
 # ===== IMPORT FUNCTIONS ===== #
 from gripper_Gz import GzGripper
 from robot import RBT
+from spawn import SpawnCube
 
 # ===================================================================================== #
 # ======================================= MAIN ======================================== #
@@ -37,10 +38,21 @@ def main(args=None):
     rclpy.init(args=None)
 
     # Initialise CLASSES:
-    #GRIPPER = abbRWS_IO()
     ROBOT = RBT()
     GRIPPER = GzGripper()
+    SPAWN = SpawnCube()
     print("")
+
+    print("Spawning white cube...")
+    SPAWN.SPAWN("WhiteCube", "TOP")
+
+    print("(Robot Movement -> /RobMove): Moving to RotApp...")
+    ROBOT.RobMove_EXECUTE("RotApp", "PTP", 1.0)
+    print("(Robot Movement -> /RobMove): Moving to RotPlace...")
+    ROBOT.Move_EXECUTE("RotPlace")
+
+    print("Closing Gripper...")
+    GRIPPER.CLOSE()
 
     rclpy.shutdown() 
 

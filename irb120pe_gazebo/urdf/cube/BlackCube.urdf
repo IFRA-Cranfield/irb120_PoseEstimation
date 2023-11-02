@@ -1,11 +1,13 @@
 <?xml version="1.0"?>
-<robot name="box">
 
-  <link name="box">
+<robot name="BlackCube">
+
+  <link name="BlackCube">
+
     <collision>
       <origin xyz= "0.0 0.0 0.0" rpy="0 0 0"/>
       <geometry>
-        <box size= "0.03 0.03 0.03" />
+        <mesh filename="file://$(find irb120pe_gazebo)/meshes/cube/irb120pe_BlackCube.dae"/>
       </geometry>
       <surface>
         <contact>
@@ -17,7 +19,7 @@
     <visual>
       <origin xyz= "0.0 0.0 0.0" rpy="0 0 0"/>
       <geometry>
-        <box size= "0.03 0.03 0.03" />
+        <mesh filename="file://$(find irb120pe_gazebo)/meshes/cube/irb120pe_BlackCube.dae"/>
       </geometry>
     </visual>
 
@@ -29,13 +31,22 @@
         iyy="0.000015" iyz="0.0"
         izz="0.000015" />
     </inertial>
+
   </link>
 
-  <gazebo reference="box">
-    <material>Gazebo/Orange</material>
-    <!-- <mu1>0.5</mu1> 
-    <mu2>0.5</mu2>
-    <selfCollide>false</selfCollide> -->
+  <!-- LOAD ObjectPose Gazebo (ROS2) PLUGIN: -->
+
+  <!-- Input parameter: -->
+  <xacro:arg name="name" default="BlackCube"/>
+  <xacro:property name="name" value="$(arg name)"/>
+
+  <!-- Plugin: -->
+  <gazebo>
+    <plugin name="ros2_objectpose_plugin" filename="libros2_objectpose_plugin.so" >
+      <ros>
+        <namespace>${name}</namespace>
+      </ros>
+    </plugin>
   </gazebo>
 
 </robot>

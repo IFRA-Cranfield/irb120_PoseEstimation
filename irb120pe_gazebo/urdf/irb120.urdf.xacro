@@ -100,29 +100,106 @@
     <origin xyz="-0.6506 0.6489 0.8605" rpy="0.0 0.0 0.0" />
   </joint>
 
-  <link name="ergobox">
-    <visual>
-      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="file://$(find irb120pe_gazebo)/meshes/IALab/ergobox.dae" scale="1 1 1" />
-      </geometry>
-    </visual>
-    <collision>
-      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="file://$(find irb120pe_gazebo)/meshes/IALab/ergobox.dae" scale="1 1 1" />
-      </geometry>
-    </collision>
-    <inertial>
-      <mass value="10.0"/>
-      <inertia ixx="0.0002" ixy="0.0002" ixz="0.0002" iyy="0.0" iyz="0.0" izz="0.0" />
-    </inertial>
-  </link>
-  <joint name="cell-ergobox-fixed" type="fixed">
-    <parent link="cell"/>
-    <child link="ergobox"/>
-    <origin xyz="-0.3 0.32 0.8605" rpy="0.0 0.0 0.0" />
-  </joint>
+  <!-- ARUCO TAGS -->
+  <xacro:unless value="${bringup}">
+
+    <link name="aruco100">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find irb120pe_gazebo)/meshes/aruco/aruco100.dae" scale="1 1 1" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find irb120pe_gazebo)/meshes/aruco/aruco100.dae" scale="1 1 1" />
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="10.0"/>
+        <inertia ixx="0.0002" ixy="0.0002" ixz="0.0002" iyy="0.0" iyz="0.0" izz="0.0" />
+      </inertial>
+    </link>
+    <joint name="cell-aruco100-fixed" type="fixed">
+      <parent link="cell"/>
+      <child link="aruco100"/>
+      <origin xyz="-0.525 0.375 0.86" rpy="0.0 0.0 -1.5708" />
+    </joint>
+
+    <link name="aruco101">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find irb120pe_gazebo)/meshes/aruco/aruco101.dae" scale="1 1 1" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find irb120pe_gazebo)/meshes/aruco/aruco101.dae" scale="1 1 1" />
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="10.0"/>
+        <inertia ixx="0.0002" ixy="0.0002" ixz="0.0002" iyy="0.0" iyz="0.0" izz="0.0" />
+      </inertial>
+    </link>
+    <joint name="cell-aruco101-fixed" type="fixed">
+      <parent link="cell"/>
+      <child link="aruco101"/>
+      <origin xyz="-0.525 0.975 0.86" rpy="0.0 0.0 3.1416" />
+    </joint>
+
+    <link name="aruco102">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find irb120pe_gazebo)/meshes/aruco/aruco102.dae" scale="1 1 1" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find irb120pe_gazebo)/meshes/aruco/aruco102.dae" scale="1 1 1" />
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="10.0"/>
+        <inertia ixx="0.0002" ixy="0.0002" ixz="0.0002" iyy="0.0" iyz="0.0" izz="0.0" />
+      </inertial>
+    </link>
+    <joint name="cell-aruco102-fixed" type="fixed">
+      <parent link="cell"/>
+      <child link="aruco102"/>
+      <origin xyz="-0.225 0.375 0.86" rpy="0.0 0.0 0.0" />
+    </joint>
+
+    <link name="aruco103">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find irb120pe_gazebo)/meshes/aruco/aruco103.dae" scale="1 1 1" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find irb120pe_gazebo)/meshes/aruco/aruco103.dae" scale="1 1 1" />
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="10.0"/>
+        <inertia ixx="0.0002" ixy="0.0002" ixz="0.0002" iyy="0.0" iyz="0.0" izz="0.0" />
+      </inertial>
+    </link>
+    <joint name="cell-aruco103-fixed" type="fixed">
+      <parent link="cell"/>
+      <child link="aruco103"/>
+      <origin xyz="-0.225 0.975 0.86" rpy="0.0 0.0 1.5708" />
+    </joint>
+
+  </xacro:unless>
 
   <!-- CAMERA -->
   <xacro:unless value="${bringup}">
@@ -186,6 +263,5 @@
     </gazebo>
   
   </xacro:unless>
-
 
 </robot>

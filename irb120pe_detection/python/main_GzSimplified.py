@@ -54,6 +54,18 @@ def main(args=None):
     print("Closing Gripper...")
     GRIPPER.CLOSE()
 
+    print("(Robot Movement -> /RobMove): Moving to RotApp...")
+    ROBOT.RobMove_EXECUTE("RotApp", "PTP", 1.0)
+
+    print("Opening Gripper...")
+    GRIPPER.OPEN()
+
+    print("Closing Gripper...")
+    GRIPPER.CLOSE()
+
+    print("Opening Gripper...")
+    GRIPPER.OPEN()
+
     rclpy.shutdown() 
 
 if __name__ == '__main__':

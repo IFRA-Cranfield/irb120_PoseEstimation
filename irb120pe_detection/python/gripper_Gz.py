@@ -175,6 +175,15 @@ class LinkAttacher_Client(Node):
 
         self.AttachFuture = self.AttachClient.call_async(self.AttachRequest)
 
+    def DETACHService(self, MODEL, LINK):
+
+        self.DetachRequest.model1_name = "irb120"
+        self.DetachRequest.link1_name = "EE_egp64"
+        self.DetachRequest.model2_name = MODEL
+        self.DetachRequest.link2_name = LINK
+
+        self.DetachFuture = self.DetachClient.call_async(self.DetachRequest)
+
 class LinkAttacher():
 
     def __init__(self):
@@ -206,7 +215,29 @@ class LinkAttacher():
                         return(False)
                     
     def DETACH(self, MODEL, LINK):
-        None
+
+        global AttachCheck
+
+        self.CLIENT.DETACHService(MODEL,LINK)
+
+        while rclpy.ok():
+            rclpy.spin_once(self.CLIENT)
+            if self.CLIENT.DetachFuture.done():
+                try:
+                    DetachRES = self.CLIENT.DetachFuture.result()
+                except Exception as exc:
+                    print("(LinkAttacher): /DETACHLINK Service call failed -> " + str(exc))
+                    return(False)
+                else:
+                    if (DetachRES.success):
+                        print("(LinkAttacher): /DETACHLINK successful -> " + str(DetachRES.message))
+                        AttachCheck.ATTACHED = False
+                        AttachCheck.MODEL = ""
+                        AttachCheck.LINK = ""
+                        return(True)
+                    else:
+                        print("(LinkAttacher): /DETACHLINK unuccessful -> " + str(DetachRES.message))
+                        return(False)
 
 # =============================================================================== #
 # GzGripper class, to OPEN/CLOSE the Gripper in Gazebo:
@@ -227,6 +258,8 @@ class GzGripper():
 
     def CLOSE(self):
 
+        # Close GRIPPER -> /Move:
+        
         WP = Action()
         WP.action = "MoveG"
         WP.speed = 1.0
@@ -244,7 +277,6 @@ class GzGripper():
         if (RES.SUCCESS == True):
             
             print("Result -> " + RES.MESSAGE)
-            print("")
             
             RES.MESSAGE = "null"
             RES.SUCCESS = False
@@ -292,26 +324,83 @@ class GzGripper():
 
         if not Found:
             print("(GzGripper): Gripper closed without grasping any object.")
+            print("")
             return()
         
         # 2. Check if CubePose and EEPose match:
-        AttachCheck = True
+        CheckATT = True
         if (EE_POSE.x - 0.01 > OBJ.x) or (EE_POSE.x + 0.01 < OBJ.x):
-            AttachCheck = False
+            CheckATT = False
         if (EE_POSE.y - 0.01 > OBJ.y) or (EE_POSE.y + 0.01 < OBJ.y):
-            AttachCheck = False
+            CheckATT = False
         if (EE_POSE.z - 0.01 > OBJ.z) or (EE_POSE.z + 0.01 < OBJ.z):
-            AttachCheck = False
+            CheckATT = False
 
         # 3. ATTACH if Check=True:
-        if AttachCheck:
+        if CheckATT:
             
             # LinkAttacher:
             AttRES = self.LinkAttacher.ATTACH(OBJ.objectname, OBJ.objectname)
             if AttRES:
                 print("(GzGripper): Gripper closed, object->" + str(OBJ.objectname) + " attached.")
+                print("")
             else: 
                 print("(GzGripper): Gripper closed, object->" + str(OBJ.objectname) + " not attached, LinkAttacher did not work properly.")
+                print("")
 
         else:
             print("(GzGripper): Gripper closed, object->" + str(OBJ.objectname) + " not attached, gripper and object poses don't match.")
+            print("")
+
+    def OPEN(self):
+
+        # Open GRIPPER -> /Move:
+        
+        WP = Action()
+        WP.action = "MoveG"
+        WP.speed = 1.0
+        WP.moveg = 0.0
+
+        self.MoveClient.send_goal(WP)
+
+        while rclpy.ok():
+
+            rclpy.spin_once(self.MoveClient)
+
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == True):
+            
+            print("Result -> " + RES.MESSAGE)
+            
+            RES.MESSAGE = "null"
+            RES.SUCCESS = False
+
+        elif (RES.SUCCESS == False):
+    
+            print("Result -> " + RES.MESSAGE)
+
+            rclpy.shutdown()
+            print("CLOSING PROGRAM...")
+            exit()
+
+        # CHECK if --> There is any object currently grasped:
+        global AttachCheck 
+        MODELname = AttachCheck.MODEL
+
+        if AttachCheck.ATTACHED:
+
+            DetRES = self.LinkAttacher.DETACH(AttachCheck.MODEL, AttachCheck.LINK)
+
+            if DetRES:
+                print("(GzGripper): Gripper opened, object->" + str(MODELname) + " detached.")
+                print("")
+            else: 
+                print("(GzGripper): Gripper opened, object->" + str(MODELname) + " not detached, LinkAttacher did not work properly.")
+                print("")
+
+        else:
+
+            print("(GzGripper): Gripper opened without dropping any object.")
+            print("")

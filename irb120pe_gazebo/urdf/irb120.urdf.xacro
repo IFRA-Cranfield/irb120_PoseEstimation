@@ -100,6 +100,31 @@
     <origin xyz="-0.6506 0.6489 0.8605" rpy="0.0 0.0 0.0" />
   </joint>
 
+  <!-- CubeTray -->
+  <link name="CubeTray">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find irb120pe_gazebo)/meshes/IALab/irb120pe_CubeTray.dae" scale="1 1 1" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="file://$(find irb120pe_gazebo)/meshes/IALab/irb120pe_CubeTray.dae" scale="1 1 1" />
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="100.0"/>
+        <inertia ixx="0.0002" ixy="0.0002" ixz="0.0002" iyy="0.0" iyz="0.0" izz="0.0" />
+      </inertial>
+    </link>
+    <joint name="cell-CubeTray-fixed" type="fixed">
+      <parent link="cell"/>
+      <child link="CubeTray"/>
+      <origin xyz="-0.846 0.195 0.86" rpy="0.0 0.0 0.0" />
+    </joint>
+
   <!-- ARUCO TAGS -->
   <xacro:unless value="${bringup}">
 
@@ -124,7 +149,7 @@
     <joint name="cell-aruco100-fixed" type="fixed">
       <parent link="cell"/>
       <child link="aruco100"/>
-      <origin xyz="-0.525 0.375 0.86" rpy="0.0 0.0 -1.5708" />
+      <origin xyz="-0.525 0.325 0.86" rpy="0.0 0.0 -1.5708" />
     </joint>
 
     <link name="aruco101">
@@ -172,7 +197,7 @@
     <joint name="cell-aruco102-fixed" type="fixed">
       <parent link="cell"/>
       <child link="aruco102"/>
-      <origin xyz="-0.225 0.375 0.86" rpy="0.0 0.0 0.0" />
+      <origin xyz="-0.225 0.325 0.86" rpy="0.0 0.0 0.0" />
     </joint>
 
     <link name="aruco103">

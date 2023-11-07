@@ -39,6 +39,7 @@ install(PROGRAMS
   python/main_GzSimplified.py
 
   python/spawn.py
+  python/routines.py
 
   python/gripper.py
   python/gripper_Gz.py

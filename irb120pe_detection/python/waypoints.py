@@ -21,6 +21,17 @@ class waypoints():
 
         self.RobotPoseDict = {}
 
+        # ========== HOME ========== #
+        self.RobotPoseDict["HomePos"] = Action()
+        self.RobotPoseDict["HomePos"].action = "MoveJ"
+        self.RobotPoseDict["HomePos"].speed = 1.0
+        self.RobotPoseDict["HomePos"].movej.joint1 = 0.0
+        self.RobotPoseDict["HomePos"].movej.joint2 = -30.0
+        self.RobotPoseDict["HomePos"].movej.joint3 = 30.0
+        self.RobotPoseDict["HomePos"].movej.joint4 = 0.0
+        self.RobotPoseDict["HomePos"].movej.joint5 = 90.0
+        self.RobotPoseDict["HomePos"].movej.joint6 = 0.0
+
         # ========== PLACE CUBE ========== #
         # Blue Cube:
         self.RobotPoseDict["PlaceBLUE_app"] = Pose()

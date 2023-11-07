@@ -218,5 +218,32 @@ class RBT():
             rclpy.shutdown()
             print("CLOSING PROGRAM...")
             exit()  
+
+    def RobMove_EXECUTE_cstm(self, Type, Speed, Pose):
+
+        self.RobMoveClient.send_goal(Type, Speed, Pose)
+
+        while rclpy.ok():
+
+            rclpy.spin_once(self.RobMoveClient)
+
+            if (RES.MESSAGE != "null"):
+                break
+
+        if (RES.SUCCESS == True):
+            
+            print("Result -> " + RES.MESSAGE)
+            print("")
+            
+            RES.MESSAGE = "null"
+            RES.SUCCESS = False
+
+        elif (RES.SUCCESS == False):
+    
+            print("Result -> " + RES.MESSAGE)
+
+            rclpy.shutdown()
+            print("CLOSING PROGRAM...")
+            exit()  
         
 

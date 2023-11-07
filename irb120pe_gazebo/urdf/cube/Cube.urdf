@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<robot name="Cube">
+<robot name="Cube" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <link name="Cube">
 

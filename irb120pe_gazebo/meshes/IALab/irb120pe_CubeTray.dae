@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 3.0.1</authoring_tool>
+    </contributor>
+    <created>2023-11-07T16:22:56</created>
+    <modified>2023-11-07T16:22:56</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="Base_Colour-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0.09850398 0.09850398 0.09850398 1</color>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">0.5</float>
+            </reflectivity>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Black-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0 0 0 1</color>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">0.5</float>
+            </reflectivity>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Blue-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0 0.001550693 0.7967952 1</color>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">0.5</float>
+            </reflectivity>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="White-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">1 1 1 1</color>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">0.5</float>
+            </reflectivity>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Orange-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0.7962034 0.1259869 7.00413e-4 1</color>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">0.5</float>
+            </reflectivity>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images/>
+  <library_materials>
+    <material id="Base_Colour-material" name="Base Colour">
+      <instance_effect url="#Base_Colour-effect"/>
+    </material>
+    <material id="Black-material" name="Black">
+      <instance_effect url="#Black-effect"/>
+    </material>
+    <material id="Blue-material" name="Blue">
+      <instance_effect url="#Blue-effect"/>
+    </material>
+    <material id="White-material" name="White">
+      <instance_effect url="#White-effect"/>
+    </material>
+    <material id="Orange-material" name="Orange">
+      <instance_effect url="#Orange-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="shape0-mesh" name="shape0">
+      <mesh>
+        <source id="shape0-mesh-positions">
+          <float_array id="shape0-mesh-positions-array" count="126">0 100 0 100 100 0 0 0 0 100 0 0 0 0 15 100 0 15 45 10 15 10 10 15 10 45 15 0 100 15 55 90 15 45 90 15 45 55 15 90 45 15 90 10 15 55 10 15 55 45 15 45 45 15 100 100 15 90 90 15 90 55 15 55 55 15 10 55 15 10 90 15 0 0 0 0 0 15 55 90 3 55 55 3 90 90 3 10 55 3 45 55 3 10 90 3 90 45 3 55 45 3 90 10 3 45 45 3 10 45 3 45 10 3 10 10 3 55 10 3 45 90 3 90 55 3</float_array>
+          <technique_common>
+            <accessor source="#shape0-mesh-positions-array" count="42" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="shape0-mesh-normals">
+          <float_array id="shape0-mesh-normals-array" count="21">0 0 -1 0 0 1 0 -1 0 1 0 0 0 1 0 -1 0 0 -1 0 0</float_array>
+          <technique_common>
+            <accessor source="#shape0-mesh-normals-array" count="7" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="shape0-mesh-vertices">
+          <input semantic="POSITION" source="#shape0-mesh-positions"/>
+        </vertices>
+        <triangles material="Base_Colour-material" count="36">
+          <input semantic="VERTEX" source="#shape0-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#shape0-mesh-normals" offset="1"/>
+          <p>0 0 1 0 2 0 2 0 1 0 3 0 4 1 5 1 6 1 6 1 7 1 4 1 4 1 7 1 8 1 4 1 8 1 9 1 10 1 11 1 12 1 13 1 14 1 5 1 5 1 14 1 15 1 5 1 15 1 6 1 6 1 15 1 16 1 6 1 16 1 17 1 18 1 19 1 20 1 5 1 18 1 13 1 13 1 18 1 20 1 13 1 20 1 16 1 16 1 20 1 21 1 16 1 21 1 17 1 21 1 10 1 17 1 17 1 10 1 12 1 17 1 12 1 8 1 8 1 12 1 22 1 8 1 22 1 9 1 22 1 23 1 9 1 9 1 23 1 11 1 9 1 11 1 18 1 18 1 11 1 10 1 18 1 10 1 19 1 5 2 4 2 3 2 3 2 4 2 24 2 18 3 5 3 1 3 1 3 5 3 3 3 9 4 18 4 0 4 0 4 18 4 1 4 25 5 9 5 24 5 24 5 9 5 0 5</p>
+        </triangles>
+        <triangles material="Black-material" count="10">
+          <input semantic="VERTEX" source="#shape0-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#shape0-mesh-normals" offset="1"/>
+          <p>22 4 12 4 29 4 29 4 12 4 30 4 23 3 22 3 31 3 31 3 22 3 29 3 12 6 11 6 30 6 30 6 11 6 40 6 11 2 23 2 40 2 40 2 23 2 31 2 40 1 31 1 30 1 30 1 31 1 29 1</p>
+        </triangles>
+        <triangles material="Blue-material" count="10">
+          <input semantic="VERTEX" source="#shape0-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#shape0-mesh-normals" offset="1"/>
+          <p>10 3 21 3 26 3 26 3 21 3 27 3 19 2 10 2 28 2 28 2 10 2 26 2 21 4 20 4 27 4 27 4 20 4 41 4 20 6 19 6 41 6 41 6 19 6 28 6 41 1 28 1 27 1 27 1 28 1 26 1</p>
+        </triangles>
+        <triangles material="White-material" count="10">
+          <input semantic="VERTEX" source="#shape0-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#shape0-mesh-normals" offset="1"/>
+          <p>17 2 8 2 35 2 35 2 8 2 36 2 6 6 17 6 37 6 37 6 17 6 35 6 8 3 7 3 36 3 36 3 7 3 38 3 7 4 6 4 38 4 38 4 6 4 37 4 38 1 37 1 36 1 36 1 37 1 35 1</p>
+        </triangles>
+        <triangles material="Orange-material" count="10">
+          <input semantic="VERTEX" source="#shape0-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#shape0-mesh-normals" offset="1"/>
+          <p>13 2 16 2 32 2 32 2 16 2 33 2 14 6 13 6 34 6 34 6 13 6 32 6 16 3 15 3 33 3 33 3 15 3 39 3 15 4 14 4 39 4 39 4 14 4 34 4 39 1 34 1 33 1 33 1 34 1 32 1</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="node" name="node" type="NODE">
+        <matrix sid="transform">0.001 0 0 0 0 0.001 0 0 0 0 0.001 0 0 0 0 1</matrix>
+        <instance_geometry url="#shape0-mesh" name="node">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Base_Colour-material" target="#Base_Colour-material"/>
+              <instance_material symbol="Black-material" target="#Black-material"/>
+              <instance_material symbol="Blue-material" target="#Blue-material"/>
+              <instance_material symbol="White-material" target="#White-material"/>
+              <instance_material symbol="Orange-material" target="#Orange-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

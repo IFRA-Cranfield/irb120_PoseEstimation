@@ -13,11 +13,12 @@
 import rclpy
 # Extra required libraries:
 import time
+import random
 
 # ===== IMPORT FUNCTIONS ===== #
-from gripper_Gz import GzGripper
-from robot import RBT
 from spawn import SpawnCube
+from spawn import DeleteCube
+from routines import RoutineList
 
 # ===================================================================================== #
 # ======================================= MAIN ======================================== #
@@ -38,33 +39,52 @@ def main(args=None):
     rclpy.init(args=None)
 
     # Initialise CLASSES:
-    ROBOT = RBT()
-    GRIPPER = GzGripper()
     SPAWN = SpawnCube()
+    DELETE = DeleteCube()
+    ROUTINE = RoutineList()
     print("")
 
-    print("Spawning white cube...")
-    SPAWN.SPAWN("WhiteCube", "TOP")
+    # Move ROBOT to HomePos:
+    ROUTINE.HomePos()
 
-    print("(Robot Movement -> /RobMove): Moving to RotApp...")
-    ROBOT.RobMove_EXECUTE("RotApp", "PTP", 1.0)
-    print("(Robot Movement -> /RobMove): Moving to RotPlace...")
-    ROBOT.Move_EXECUTE("RotPlace")
+    # SPAWN random cube:
+    OPT_cube = ["WhiteCube","BlackCube","BlueCube","Cube"]
+    VAR_cube = random.choice(OPT_cube)
+    OPT_or = ["TOP","BOTTOM","FRONT"]
+    VAR_or = random.choice(OPT_or)
+    print("Spawning random CUBE at a randome POSE to the Gazebo Environment...")
+    SpawnRES = SPAWN.SPAWN(VAR_cube,VAR_or)
 
-    print("Closing Gripper...")
-    GRIPPER.CLOSE()
+    if (SpawnRES["success"] == False):
+        rclpy.shutdown()
+        print("CLOSING PROGRAM...")
+        exit()  
 
-    print("(Robot Movement -> /RobMove): Moving to RotApp...")
-    ROBOT.RobMove_EXECUTE("RotApp", "PTP", 1.0)
+    # PICK cube:
+    ROUTINE.PickCube(SpawnRES["x"],SpawnRES["y"],SpawnRES["yaw"])
 
-    print("Opening Gripper...")
-    GRIPPER.OPEN()
+    # ROTATE if -> FRONT/BOTTOM:
+    if (VAR_cube != "Cube"):
 
-    print("Closing Gripper...")
-    GRIPPER.CLOSE()
+        if (VAR_or == "FRONT"):
+            ROUTINE.RotateCube()
+        elif (VAR_or == "BOTTOM"):
+            ROUTINE.RotateCube()
+            ROUTINE.RotateCube()
 
-    print("Opening Gripper...")
-    GRIPPER.OPEN()
+    # PLACE CUBE:
+    ROUTINE.PlaceCube(VAR_cube)
+
+    # Finish -> Back to HomePos:
+    ROUTINE.HomePos()
+
+    time.sleep(3.0)
+
+    # Remove CUBE from workspace, to enable another execution after this (there can only be one cube at a time on top of the workspace for the program to work):
+    DELETE.DELETE(VAR_cube)
+
+    print("Program execution successfully finished!")
+    print("Closing .py script... Bye!")
 
     rclpy.shutdown() 
 

@@ -40,14 +40,17 @@ install(PROGRAMS
   python/main_GzSimplified.py
 
   python/spawn.py
-  python/routines.py
 
   python/gripper.py
   python/gripper_Gz.py
 
   python/robot.py
   python/waypoints.py
+   python/routines.py
+
   python/detection.py
+
+  python/samples.py
 
   DESTINATION lib/${PROJECT_NAME} 
 )

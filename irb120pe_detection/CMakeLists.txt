@@ -36,6 +36,7 @@ install(PROGRAMS
   python/yolo_old.py
   
   python/main.py
+  python/main_Gz.py
   python/main_GzSimplified.py
 
   python/spawn.py

@@ -80,6 +80,10 @@ class SpawnCube():
         POSE.position.z = 0.88
 
         # Orientation -> Will depend on the case:
+        if (ORIENTATION == "RANDOM"):
+            roll = random.uniform(-1.5708,1.5708)
+            pitch = random.uniform(-1.5708,1.5708)
+            yaw = random.uniform(-1.5708,1.5708)
         if (ORIENTATION == "FRONT"):
             roll = 0.0
             pitch = 1.5708

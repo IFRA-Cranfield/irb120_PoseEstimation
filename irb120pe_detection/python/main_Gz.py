@@ -82,13 +82,29 @@ def main(args=None):
     # PICK cube:
     ROUTINE.PickCube(DetectRES["x"],DetectRES["y"],DetectRES["yaw"])
 
-    # Finish -> Back to HomePos:
-    # ROUTINE.HomePos()
+    # INIT -> CubeSide and CubeColour variables:
+    CubeSide = ""
+    CubeColour = ""
+    
+    # Check colour -> TOP FACE:
+    if (DetectRES["detection"] == "sticker"):
 
-    # time.sleep(3.0)
+        CubeColour = ROUTINE.CheckTop(DETECTION)
+        print(CubeColour)
+
+    # Check colour + face (BOTTOM/FRONT/BACK/SIDE):
+    None
+
+    # PLACE CUBE:
+    ROUTINE.PlaceCube(CubeColour)
+
+    # Finish -> Back to HomePos:
+    ROUTINE.HomePos()
+
+    time.sleep(3.0)
 
     # Remove CUBE from workspace, to enable another execution after this (there can only be one cube at a time on top of the workspace for the program to work):
-    #DELETE.DELETE(VAR_cube)
+    DELETE.DELETE(VAR_cube)
 
     print("Program execution successfully finished!")
     print("Closing .py script... Bye!")

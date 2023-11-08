@@ -205,3 +205,71 @@ class RoutineList():
 
             print("(Robot Movement -> /RobMove): PlaceCUBE_app")
             self.ROBOT.RobMove_EXECUTE("PlaceCUBE_app", "LIN", 0.1)
+
+    def CubeMid(self):
+
+        print("(Robot Movement -> /RobMove): PlaceMidApp")
+        self.ROBOT.RobMove_EXECUTE("PlaceMidApp", "PTP", 0.3)
+
+        print("(Robot Movement -> /RobMove): PlaceMid")
+        self.ROBOT.RobMove_EXECUTE("PlaceMid", "LIN", 0.1)
+
+        # OPEN GRIPPER:
+        time.sleep(0.2)
+        self.GRIPPER.OPEN()
+        time.sleep(0.2)
+    
+    def CheckTop(self, DETECTION):
+
+        print("===== ROUTINE EXECUTION =====")
+        print(" - Checking colour of cube's TOP face...")
+        print("")
+
+        self.CubeMid()
+
+        print("(Robot Movement -> /Move): PickTop")
+        self.ROBOT.Move_EXECUTE("PickTop")
+
+        print("(Robot Movement -> /Move): PickTop")
+        self.ROBOT.Move_EXECUTE("PickTop")
+
+        # CLOSE GRIPPER:
+        time.sleep(0.2)
+        self.GRIPPER.CLOSE()
+        time.sleep(0.2)
+
+        print("(Robot Movement -> /Move): PickTopApp")
+        self.ROBOT.Move_EXECUTE("PickTopApp")
+
+        print("(Robot Movement -> /RobMove): FacePose_4")
+        self.ROBOT.RobMove_EXECUTE("FacePose_4", "PTP", 0.3)
+
+        #COLOUR = DETECTION.DetectColour()
+        DETECTION.TestDetection()
+
+        print("(Robot Movement -> /RobMove): RePickTopApp_PREV")
+        self.ROBOT.RobMove_EXECUTE("RePickTopApp_PREV", "PTP", 0.3)
+
+        print("(Robot Movement -> /Move): RePickTop_PREV")
+        self.ROBOT.Move_EXECUTE("RePickTop_PREV")
+
+        # OPEN GRIPPER:
+        time.sleep(0.2)
+        self.GRIPPER.OPEN()
+        time.sleep(0.2)
+
+        print("(Robot Movement -> /Move): RePickTop")
+        self.ROBOT.Move_EXECUTE("RePickTop")
+
+        print("(Robot Movement -> /Move): RePickTop")
+        self.ROBOT.Move_EXECUTE("RePickTop")
+
+        # CLOSE GRIPPER:
+        time.sleep(0.2)
+        self.GRIPPER.CLOSE()
+        time.sleep(0.2)
+
+        print("(Robot Movement -> /Move): RePickTopApp")
+        self.ROBOT.Move_EXECUTE("RePickTopApp")
+
+        return(COLOUR)

@@ -213,6 +213,12 @@ class CubeDetection():
                 annotated_frame = results[0].plot()
                 cv2.imshow("IRB-120 PoseEstimation: YOLO Output", annotated_frame)
 
+            # If wanted to obtain directly from inputImg:
+            #if self.inputImg is not None:
+            #    results = self.YOLOmodel(self.inputImg)
+            #    annotated_frame = results[0].plot()
+            #    cv2.imshow("IRB-120 PoseEstimation: YOLO Output", annotated_frame)
+
             key = cv2.waitKey(1)
             if key == ord('q'):
                 cv2.destroyWindow("IRB-120 PoseEstimation: YOLO Output")
@@ -302,3 +308,72 @@ class CubeDetection():
                 break
 
         return(RESULT)
+    
+    def DetectColour(self):
+
+        global Gz_CAM
+
+        print("=== DETECTION: DetectColour ===")
+        print("Detecting colour of the cube face...")
+        print("")
+
+        T = time.time() + 2.0
+        StickerCount = 0
+        WhiteCount = 0
+        BlackCount = 0
+        BlueCount = 0
+        
+        while (time.time() <= T):
+
+            # 1. SPIN /Image topic subscriber!
+            rclpy.spin_once(self.GzCAM_SUB)
+
+            # 2. ASSIGN + Show IMG:
+            self.inputImg = Gz_CAM
+
+            if self.inputImg is not None:
+
+                results = self.YOLOmodel(self.inputImg)
+                names = self.YOLOmodel.names
+                annotated_frame = results[0].plot()
+                
+                boxes = results[0].boxes
+                ids = []
+                for box in boxes:
+                    box = boxes.xyxy
+                    for c in boxes.cls:
+                        ids.append(names[int(c)])
+
+                for ID in ids:
+                    if (ID == "sticker"):
+                        StickerCount = StickerCount + 1
+                    elif (ID == "white"):
+                        WhiteCount = WhiteCount + 1
+                    elif (ID == "black"):
+                        BlackCount = BlackCount + 1
+                    elif (ID == "blue"):
+                        BlueCount = BlueCount + 1
+
+                cv2.imshow("YOLOv8 Model: Colour Detection", annotated_frame)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
+        cv2.destroyWindow("YOLOv8 Model: Colour Detection")
+        
+        if (WhiteCount == BlueCount == BlackCount == 0 and StickerCount > 150):
+            COLOUR = "Cube"
+        elif (WhiteCount > BlueCount and WhiteCount > BlackCount):
+            COLOUR = "WhiteCube"
+        elif (WhiteCount < BlueCount and BlueCount > BlackCount):
+            COLOUR = "BlueCube"
+        elif (BlackCount > BlueCount and WhiteCount < BlackCount):
+            COLOUR = "BlackCube"
+        else:
+            COLOUR = "Cube"
+
+        print("")
+        print("(ColourDetection): RESULT -> " + COLOUR)
+        print("")
+
+        return(COLOUR)
+            

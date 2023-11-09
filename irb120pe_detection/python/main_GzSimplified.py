@@ -67,10 +67,10 @@ def main(args=None):
     if (VAR_cube != "Cube"):
 
         if (VAR_or == "FRONT"):
-            ROUTINE.RotateCube()
+            ROUTINE.RotateCube(RotBack = False)
         elif (VAR_or == "BOTTOM"):
-            ROUTINE.RotateCube()
-            ROUTINE.RotateCube()
+            ROUTINE.RotateCube(RotBack = False)
+            ROUTINE.RotateCube(RotBack = False)
 
     # PLACE CUBE:
     ROUTINE.PlaceCube(VAR_cube)

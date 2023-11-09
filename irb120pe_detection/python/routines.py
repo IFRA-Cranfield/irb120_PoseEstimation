@@ -244,8 +244,8 @@ class RoutineList():
         print("(Robot Movement -> /RobMove): FacePose_4")
         self.ROBOT.RobMove_EXECUTE("FacePose_4", "PTP", 0.3)
 
-        #COLOUR = DETECTION.DetectColour()
-        DETECTION.TestDetection()
+        COLOUR = DETECTION.DetectColour()
+        #DETECTION.TestDetection()
 
         print("(Robot Movement -> /RobMove): RePickTopApp_PREV")
         self.ROBOT.RobMove_EXECUTE("RePickTopApp_PREV", "PTP", 0.3)

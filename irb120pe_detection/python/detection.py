@@ -70,7 +70,7 @@ class CubeDetection():
 
         # YOLO MODEL:
         modelPATH = os.path.join(os.path.expanduser('~'), 'dev_ws', 'src', 'irb120_PoseEstimation', 'irb120pe_detection', 'yolov8')
-        self.YOLOmodel = YOLO(modelPATH + '/cubeDETECTION.pt') # Pre-trained YOLOv8n model.
+        self.YOLOmodel = YOLO(modelPATH + '/cubeDETECTION_Gz.pt') # Pre-trained YOLOv8n model.
 
     def InitCam(self):
         

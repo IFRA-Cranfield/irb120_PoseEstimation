@@ -114,15 +114,12 @@ class waypoints():
         self.RobotPoseDict["FacePose_1"].orientation.w = 0.707
         # Back face:
         self.RobotPoseDict["FacePose_2"] = Action()
-        self.RobotPoseDict["FacePose_2"].action = "MoveR"
+        self.RobotPoseDict["FacePose_2"].action = "MoveROT"
         self.RobotPoseDict["FacePose_2"].speed = 1.0
-        self.RobotPoseDict["FacePose_2"].mover.joint = "joint6"
-        self.RobotPoseDict["FacePose_2"].mover.value = 180.0
-        self.RobotPoseDict["FacePose_2_other"] = Action()
-        self.RobotPoseDict["FacePose_2_other"].action = "MoveR"
-        self.RobotPoseDict["FacePose_2_other"].speed = 1.0
-        self.RobotPoseDict["FacePose_2_other"].mover.joint = "joint6"
-        self.RobotPoseDict["FacePose_2_other"].mover.value = -180.0
+        self.RobotPoseDict["FacePose_2"].moverot.yaw = 180.0
+        self.RobotPoseDict["FacePose_2"].moverot.pitch = 0.0
+        self.RobotPoseDict["FacePose_2"].moverot.roll = 0.0
+
         # Bottom face:
         self.RobotPoseDict["FacePose_3"] = Pose()
         self.RobotPoseDict["FacePose_3"].position.x = 0.63
@@ -211,15 +208,11 @@ class waypoints():
         self.RobotPoseDict["PlaceMid"].orientation.w = 0.0
         # Pick cube before checking the side faces (2):
         self.RobotPoseDict["PickSideApp_1"] = Action()
-        self.RobotPoseDict["PickSideApp_1"].action = "MoveR"
+        self.RobotPoseDict["PickSideApp_1"].action = "MoveROT"
         self.RobotPoseDict["PickSideApp_1"].speed = 1.0
-        self.RobotPoseDict["PickSideApp_1"].mover.joint = "joint6"
-        self.RobotPoseDict["PickSideApp_1"].mover.value = 90.0
-        self.RobotPoseDict["PickSideApp_1_other"] = Action()
-        self.RobotPoseDict["PickSideApp_1_other"].action = "MoveR"
-        self.RobotPoseDict["PickSideApp_1_other"].speed = 1.0
-        self.RobotPoseDict["PickSideApp_1_other"].mover.joint = "joint6"
-        self.RobotPoseDict["PickSideApp_1_other"].mover.value = -90.0
+        self.RobotPoseDict["PickSideApp_1"].moverot.yaw = 90.0
+        self.RobotPoseDict["PickSideApp_1"].moverot.pitch = 0.0
+        self.RobotPoseDict["PickSideApp_1"].moverot.roll = 0.0
         self.RobotPoseDict["PickSideApp_2"] = Action()
         self.RobotPoseDict["PickSideApp_2"].action = "MoveL"
         self.RobotPoseDict["PickSideApp_2"].speed = 0.1
@@ -243,15 +236,17 @@ class waypoints():
         self.RobotPoseDict["RotApp"].orientation.z = 0.0
         self.RobotPoseDict["RotApp"].orientation.w = 0.0
         self.RobotPoseDict["RotBack"] = Action()
-        self.RobotPoseDict["RotBack"].action = "MoveR"
+        self.RobotPoseDict["RotBack"].action = "MoveROT"
         self.RobotPoseDict["RotBack"].speed = 1.0
-        self.RobotPoseDict["RotBack"].mover.joint = "joint6"
-        self.RobotPoseDict["RotBack"].mover.value = 180.0
-        self.RobotPoseDict["RotBack_other"] = Action()
-        self.RobotPoseDict["RotBack_other"].action = "MoveR"
-        self.RobotPoseDict["RotBack_other"].speed = 1.0
-        self.RobotPoseDict["RotBack_other"].mover.joint = "joint6"
-        self.RobotPoseDict["RotBack_other"].mover.value = -180.0
+        self.RobotPoseDict["RotBack"].moverot.yaw = 180.0
+        self.RobotPoseDict["RotBack"].moverot.pitch = 0.0
+        self.RobotPoseDict["RotBack"].moverot.roll = 0.0
+        self.RobotPoseDict["RotBack_2"] = Action()
+        self.RobotPoseDict["RotBack_2"].action = "MoveROT"
+        self.RobotPoseDict["RotBack_2"].speed = 1.0
+        self.RobotPoseDict["RotBack_2"].moverot.yaw = -180.0
+        self.RobotPoseDict["RotBack_2"].moverot.pitch = 0.0
+        self.RobotPoseDict["RotBack_2"].moverot.roll = 0.0
         self.RobotPoseDict["RotPlace"] = Action()
         self.RobotPoseDict["RotPlace"].action = "MoveL"
         self.RobotPoseDict["RotPlace"].speed = 0.1

@@ -73,7 +73,7 @@ class RoutineList():
         TARGET_POSE.orientation = EEPose.orientation
         self.ROBOT.RobMove_EXECUTE_cstm("LIN",0.1,TARGET_POSE)
 
-    def RotateCube(self):
+    def RotateCube(self, RotBack):
 
         print("===== ROUTINE EXECUTION =====")
         print(" - Rotating cube 90 degrees...")
@@ -82,6 +82,12 @@ class RoutineList():
         print("(Robot Movement -> /RobMove): RotApp")
         self.ROBOT.RobMove_EXECUTE("RotApp", "PTP", 0.3)
 
+        if (RotBack == True):
+
+            print("(Robot Movement -> /Move): RotBack")
+            self.ROBOT.Move_EXECUTE("RotBack")
+
+
         print("(Robot Movement -> /Move): RotPlace")
         self.ROBOT.Move_EXECUTE("RotPlace")
 
@@ -89,6 +95,17 @@ class RoutineList():
         time.sleep(0.2)
         self.GRIPPER.OPEN()
         time.sleep(0.2)
+
+        if (RotBack == True):
+
+            print("(Robot Movement -> /Move): RotZ")
+            self.ROBOT.Move_EXECUTE("RotZ")
+
+            print("(Robot Movement -> /Move): RotBack_2")
+            self.ROBOT.Move_EXECUTE("RotBack_2")
+
+            print("(Robot Movement -> /Move): RotPlace")
+            self.ROBOT.Move_EXECUTE("RotPlace")
 
         print("(Robot Movement -> /Move): RotationPick")
         self.ROBOT.Move_EXECUTE("RotationPick")
@@ -273,3 +290,73 @@ class RoutineList():
         self.ROBOT.Move_EXECUTE("RePickTopApp")
 
         return(COLOUR)
+    
+    def CheckCube(self, DETECTION):
+
+        # Define RESULT variable:
+        RESULT = {"COLOUR": "Cube", "SIDE": "None"}
+
+        print("===== ROUTINE EXECUTION =====")
+        print(" - Checking sticker location and feature colour...")
+        print("")
+
+        print("(Robot Movement -> /RobMove): FacePose_1")
+        self.ROBOT.RobMove_EXECUTE("FacePose_1", "PTP", 0.3)
+
+        COLOUR = DETECTION.DetectColour()
+
+        if COLOUR != "Cube":
+            RESULT["COLOUR"] = COLOUR
+            RESULT["SIDE"] = "FRONT"
+            return(RESULT)
+        
+        print("(Robot Movement -> /Move): FacePose_2")
+        self.ROBOT.Move_EXECUTE("FacePose_2")
+
+        COLOUR = DETECTION.DetectColour()
+
+        if COLOUR != "Cube":
+            RESULT["COLOUR"] = COLOUR
+            RESULT["SIDE"] = "BACK"
+            return(RESULT)
+        
+        print("(Robot Movement -> /RobMove): FacePose_3")
+        self.ROBOT.RobMove_EXECUTE("FacePose_3", "PTP", 0.3)
+
+        COLOUR = DETECTION.DetectColour()
+
+        print("(Robot Movement -> /RobMove): FacePose_1")
+        self.ROBOT.RobMove_EXECUTE("FacePose_1", "PTP", 0.3)
+
+        if COLOUR != "Cube":
+            RESULT["COLOUR"] = COLOUR
+            RESULT["SIDE"] = "BOTTOM"
+            return(RESULT)
+
+        return(RESULT)
+    
+    def CheckCubeSides(self, DETECTION):
+
+        self.CubeMid()
+
+        print("(Robot Movement -> /RobMove): PlaceMidApp")
+        self.ROBOT.RobMove_EXECUTE("PlaceMidApp", "LIN", 0.3)
+
+        print("(Robot Movement -> /Move): PickSideApp_1")
+        self.ROBOT.Move_EXECUTE("PickSideApp_1")
+
+        print("(Robot Movement -> /Move): PickSide")
+        self.ROBOT.Move_EXECUTE("PickSide")
+
+        # CLOSE GRIPPER:
+        time.sleep(0.2)
+        self.GRIPPER.CLOSE()
+        time.sleep(0.2)
+
+        print("(Robot Movement -> /Move): PickSideApp_2")
+        self.ROBOT.Move_EXECUTE("PickSideApp_2")
+
+        CheckRES = self.CheckCube(DETECTION)
+
+        return(CheckRES)
+

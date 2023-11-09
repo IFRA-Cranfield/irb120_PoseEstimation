@@ -263,7 +263,12 @@ class CubeDetection():
             return(RESULT)
 
         # AFTER DETECTION -> Get ROI (Region-of-Interest):
-        x1, y1, x2, y2 = boxes[0].xyxy[0]
+        for box in boxes:
+            name = names[int(box.cls[0])]
+            if (name == "sticker" or name == "cube"): # The ROI must take the whole cube's BOUNDING BOX, not sticker's BOUNDING BOX!
+                x1, y1, x2, y2 = box.xyxy[0] 
+                break
+
         x = int(x1)-3
         y = int(y1)-3
         w = int(x2)+3
@@ -276,6 +281,14 @@ class CubeDetection():
         lowLimit = (0, 10, 10)
         upLimit = (70, 255, 255)
         mask = cv2.inRange(imgHSV, lowLimit, upLimit)
+
+        # Visualize ROI:
+        #while True:
+        #    cv2.imshow("IRB-120 PoseEstimation: Cube-ROI", ROI)
+        #    key = cv2.waitKey(1)
+        #    if key == ord('q'):
+        #        cv2.destroyWindow("IRB-120 PoseEstimation: Cube-ROI")
+        #        break 
 
         # Find CONTOURS:
         contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -298,14 +311,25 @@ class CubeDetection():
         RESULT["yaw"] = -(angle * 3.1416/180.0)
         RESULT["x"] = yo/1000 + 0.35
         RESULT["y"] = xo/1000 + 0.15
-        RESULT["detection"] = "cube"
+        RESULT["detection"] = "Cube"
         RESULT["success"] = True
 
         for id in ids:
 
-            if id == "sticker":
-                RESULT["detection"] = "sticker"
+            if id == "white":
+                RESULT["detection"] = "WhiteCube"
                 break
+
+            if id == "black":
+                RESULT["detection"] = "BlackCube"
+                break
+
+            if id == "blue":
+                RESULT["detection"] = "BlueCube"
+                break
+
+            if id == "sticker":
+                RESULT["detection"] = "Sticker"
 
         return(RESULT)
     
@@ -317,7 +341,7 @@ class CubeDetection():
         print("Detecting colour of the cube face...")
         print("")
 
-        T = time.time() + 2.0
+        T = time.time() + 1.0
         StickerCount = 0
         WhiteCount = 0
         BlackCount = 0

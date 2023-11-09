@@ -84,16 +84,39 @@ def main(args=None):
 
     # INIT -> CubeSide and CubeColour variables:
     CubeSide = ""
-    CubeColour = ""
+    CubeColour = DetectRES["detection"]
     
     # Check colour -> TOP FACE:
-    if (DetectRES["detection"] == "sticker"):
+    if (CubeColour == "Sticker"):
 
         CubeColour = ROUTINE.CheckTop(DETECTION)
         print(CubeColour)
 
     # Check colour + face (BOTTOM/FRONT/BACK/SIDE):
-    None
+    if (CubeColour == "Cube"):
+
+        CheckRES = ROUTINE.CheckCube(DETECTION)
+        CubeColour = CheckRES["COLOUR"]
+        CubeSide = CheckRES["SIDE"]
+
+        if (CubeColour == "Cube"):
+
+            CheckRES = ROUTINE.CheckCubeSides(DETECTION)
+            CubeColour = CheckRES["COLOUR"]
+            CubeSide = CheckRES["SIDE"] 
+
+    # ROTATE if REQUIRED:
+    if (CubeColour != "Cube"):
+
+        if (CubeSide == "FRONT"):
+            ROUTINE.RotateCube(RotBack = False)
+
+        if (CubeSide == "BOTTOM"):
+            ROUTINE.RotateCube(RotBack = False)
+            ROUTINE.RotateCube(RotBack = False)
+
+        if (CubeSide == "BACK"):
+            ROUTINE.RotateCube(RotBack = True)
 
     # PLACE CUBE:
     ROUTINE.PlaceCube(CubeColour)

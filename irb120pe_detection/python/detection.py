@@ -78,12 +78,10 @@ class CubeDetection():
         self.camera = cv2.VideoCapture(0)
         
         # Initialise RET(OpenCV variable) and inputImg(OpenCV MAT) values:
-        while True:
+        T = time.time() + 1.0
+
+        while time.time() < T:
             self.ret, self.inputImg = self.camera.read()
-            cv2.imshow("IRB-120 PoseEstimation: Input Image", self.inputImg)
-            key = cv2.waitKey(1)
-            if key == ord('q') or self.inputImg is None:
-                break 
 
         if self.inputImg is None:
             print("Error! Input image is empty. Please check the camera and the VideoCapture(i) index.")
@@ -106,22 +104,13 @@ class CubeDetection():
         print("")
 
         # Initialise RET(OpenCV variable) and inputImg(OpenCV MAT) values:
-        while True:
+        T = time.time() + 1.0
 
+        while time.time() < T:
             # 1. SPIN /Image topic subscriber!
             rclpy.spin_once(self.GzCAM_SUB)
-
             # 2. ASSIGN + Show IMG:
             self.inputImg = Gz_CAM
-            
-            if self.inputImg is not None:
-                self.inputImgSHOW = cv2.resize(self.inputImg, (900, 500))
-                cv2.imshow("IRB-120 PoseEstimation: Input Image", self.inputImgSHOW)
-
-            key = cv2.waitKey(1)
-            if key == ord('q'):
-                cv2.destroyWindow("IRB-120 PoseEstimation: Input Image")
-                break 
         
         if self.inputImg is None:
             print("Error! Input image is empty. Please check that the Gz WEBCAM is publishing the IMG correctly.")
@@ -378,11 +367,12 @@ class CubeDetection():
                     elif (ID == "blue"):
                         BlueCount = BlueCount + 1
 
-                cv2.imshow("YOLOv8 Model: Colour Detection", annotated_frame)
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
+                # If willing to visualize detection:
+                #cv2.imshow("YOLOv8 Model: Colour Detection", annotated_frame)
+                #if cv2.waitKey(1) & 0xFF == ord('q'):
+                #    break
 
-        cv2.destroyWindow("YOLOv8 Model: Colour Detection")
+        # cv2.destroyWindow("YOLOv8 Model: Colour Detection")
         
         if (WhiteCount == BlueCount == BlackCount == 0 and StickerCount > 150):
             COLOUR = "Cube"
@@ -400,4 +390,25 @@ class CubeDetection():
         print("")
 
         return(COLOUR)
+    
+    def ConstantVisualization(self):
+
+        while True:
+
+            # 1. SPIN /Image topic subscriber!
+            rclpy.spin_once(self.GzCAM_SUB)
+
+            # 2. ASSIGN + Show IMG:
+            self.inputImg = Gz_CAM
+
+            # 3. Get -> YOLOv8 MODEL RESULT:
+            if self.inputImg is not None:
+                results = self.YOLOmodel(self.inputImg)
+                annotated_frame = results[0].plot()
+                cv2.imshow("IRB-120 PoseEstimation: YOLO Output", annotated_frame)
+
+            key = cv2.waitKey(1)
+            if key == ord('e'):
+                cv2.destroyWindow("IRB-120 PoseEstimation: YOLO Output")
+                break 
             

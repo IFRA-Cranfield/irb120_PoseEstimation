@@ -32,8 +32,6 @@ install(
     share/${PROJECT_NAME}
 )
 install(PROGRAMS
-
-  python/yolo_old.py
   
   python/main.py
   python/main_Gz.py
@@ -46,9 +44,10 @@ install(PROGRAMS
 
   python/robot.py
   python/waypoints.py
-   python/routines.py
+  python/routines.py
 
   python/detection.py
+  python/visualize_YOLO.py
 
   python/samples.py
 

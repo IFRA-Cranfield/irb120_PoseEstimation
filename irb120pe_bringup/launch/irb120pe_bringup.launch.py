@@ -272,14 +272,21 @@ def generate_launch_description():
         package="ros2srrc_execution",
         executable="move",
         output="screen",
-        parameters=[robot_description, robot_description_semantic, kinematics_yaml, {"ROB_PARAM": "irb120"}, {"EE_PARAM": "egp64"}, {"ENV_PARAM": "bringup"}],
+        parameters=[robot_description, robot_description_semantic, kinematics_yaml, {"use_sim_time": False}, {"ROB_PARAM": "irb120"}, {"EE_PARAM": "egp64"}, {"ENV_PARAM": "bringup"}],
     )
-    DetectionMove = Node(
-        name="DETECTION_MOVE",
-        package="irb120pe_detection",
+    RobMoveInterface = Node(
+        name="robmove",
+        package="ros2srrc_execution",
         executable="robmove",
         output="screen",
-        parameters=[robot_description, robot_description_semantic, kinematics_yaml],
+        parameters=[robot_description, robot_description_semantic, kinematics_yaml, {"use_sim_time": False}, {"ROB_PARAM": "irb120"}, {"EE_PARAM": "egp64"}, {"ENV_PARAM": "bringup"}],
+    )
+    SequenceInterface = Node(
+        name="sequence",
+        package="ros2srrc_execution",
+        executable="sequence",
+        output="screen",
+        parameters=[robot_description, robot_description_semantic, kinematics_yaml, {"use_sim_time": False}, {"ROB_PARAM": "irb120"}, {"EE_PARAM": "egp64"}, {"ENV_PARAM": "bringup"}],
     )
 
     # ========== ABB RWS CLIENT ========== #
@@ -323,7 +330,9 @@ def generate_launch_description():
                     ),
 
                     MoveInterface,
-                    DetectionMove,
+                    SequenceInterface,
+                    RobMoveInterface,
+                    
                 ]
             )
         ),

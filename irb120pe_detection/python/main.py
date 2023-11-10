@@ -14,8 +14,7 @@ import rclpy
 import time
 
 # ===== IMPORT FUNCTIONS ===== #
-from gripper import abbRWS_IO
-from robot import RBT
+from routines import RoutineList
 from detection import CubeDetection
 
 # ===================================================================================== #
@@ -30,33 +29,85 @@ def main(args=None):
     print("")
 
     print("ABB IRB120: Pose Estimation for CUBE Pick&Place")
-    print("Python script -> yolo.py")
+    print("Python script -> main.py")
     print("")
 
     # Initialise ROS2:
     rclpy.init(args=None)
 
     # Initialise CLASSES:
-    #GRIPPER = abbRWS_IO()
-    ROBOT = RBT()
-    DETECT = CubeDetection()
+    ROUTINE = RoutineList("ROBOT")
     print("")
 
-    # ========== (0) ========== #
-    # HOME -> Open Gripper + Robot to HomePos:
-    #GRIPPER.OPEN()
-    #time.sleep(0.5)
-    # Calib MoveIt!2
-    # Move Robot to HomePos
+    # Move ROBOT to HomePos:
+    ROUTINE.HomePos()
 
-    # TEST:
-    print("(Robot Movement -> /RobMove): Moving to PlaceBLACK_app...")
-    ROBOT.RobMove_EXECUTE("PlaceBLACK_app", "PTP", 1.0)
+    # Initalise DETECTION class (+ CAMERA INPUT):
+    DETECTION = CubeDetection("ROBOT")
 
-    print("(Robot Movement -> /RobMove): Moving to PlaceBLACK...")
-    ROBOT.RobMove_EXECUTE("PlaceBLACK", "LIN", 0.1)
+    # CALIBRATION w/ ARUCOS -> Get PERSPECTIVE IMG:
+    DETECTION.GetPerspectiveImg(ShowPerspective=True)
 
-    rclpy.shutdown() 
+    # Obtain CUBE LOCATION:
+    DetectRES = DETECTION.CubeLocation()
+
+    if not DetectRES["success"]:
+        
+        rclpy.shutdown()
+        print("CLOSING PROGRAM...")
+        exit()
+
+    # PICK cube:
+    ROUTINE.PickCube(DetectRES["x"],DetectRES["y"],DetectRES["yaw"])
+
+    # INIT -> CubeSide and CubeColour variables:
+    CubeSide = ""
+    CubeColour = DetectRES["detection"]
+    
+    # Check colour -> TOP FACE:
+    if (CubeColour == "Sticker"):
+
+        CubeColour = ROUTINE.CheckTop(DETECTION)
+        print(CubeColour)
+
+    # Check colour + face (BOTTOM/FRONT/BACK/SIDE):
+    if (CubeColour == "Cube"):
+
+        CheckRES = ROUTINE.CheckCube(DETECTION)
+        CubeColour = CheckRES["COLOUR"]
+        CubeSide = CheckRES["SIDE"]
+
+        if (CubeColour == "Cube"):
+
+            CheckRES = ROUTINE.CheckCubeSides(DETECTION)
+            CubeColour = CheckRES["COLOUR"]
+            CubeSide = CheckRES["SIDE"] 
+
+    # ROTATE if REQUIRED:
+    if (CubeColour != "Cube"):
+
+        if (CubeSide == "FRONT"):
+            ROUTINE.RotateCube(RotBack = False)
+
+        if (CubeSide == "BOTTOM"):
+            ROUTINE.RotateCube(RotBack = False)
+            ROUTINE.RotateCube(RotBack = False)
+
+        if (CubeSide == "BACK"):
+            ROUTINE.RotateCube(RotBack = True)
+
+    # PLACE CUBE:
+    ROUTINE.PlaceCube(CubeColour)
+
+    # Finish -> Back to HomePos:
+    ROUTINE.HomePos()
+
+    time.sleep(3.0)
+
+    print("Program execution successfully finished!")
+    print("Closing .py script... Bye!")
+
+    rclpy.shutdown()
 
 if __name__ == '__main__':
     main()

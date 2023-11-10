@@ -15,6 +15,7 @@ from geometry_msgs.msg import Pose
 
 # ===== IMPORT FUNCTIONS ===== #
 from gripper_Gz import GzGripper
+from gripper import abbRWS_IO
 from robot import RBT
 from spawn import EEQuaternion
 
@@ -24,9 +25,12 @@ from spawn import EEQuaternion
 
 class RoutineList():
 
-    def __init__(self):
+    def __init__(self, ENVIRONMENT):
         self.ROBOT = RBT()
-        self.GRIPPER = GzGripper()
+        if (ENVIRONMENT == "GAZEBO"):
+            self.GRIPPER = GzGripper()
+        else: 
+            self.GRIPPER = abbRWS_IO()    
 
     def HomePos(self):
         print("(Robot Movement -> /Move): HomePos")

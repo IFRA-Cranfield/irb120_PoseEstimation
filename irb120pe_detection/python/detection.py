@@ -25,8 +25,9 @@ from ultralytics import YOLO
 import os
 import time
 
-# GLOBAL VARIABLE:
+# GLOBAL VARIABLES:
 Gz_CAM = None
+ENVIRONMENT = ""
 
 # =============================================================================== #
 # CLASS -> ImgSUB:
@@ -56,23 +57,38 @@ class ImgSUB(Node):
 class CubeDetection():
 
     def __init__(self, ENV):
+
+        global ENVIRONMENT
+
+        modelPATH = os.path.join(os.path.expanduser('~'), 'dev_ws', 'src', 'irb120_PoseEstimation', 'irb120pe_detection', 'yolov8')
         
         # Initialise CAMERA:
         if (ENV == "GAZEBO"):
+
             self.GzCAM_SUB = ImgSUB()
             self.InitCamGz()
+            ENVIRONMENT = "GAZEBO"
+            
+            # YOLO MODEL:
+            self.YOLOmodel = YOLO(modelPATH + '/cubeDETECTION_Gz.pt') # Pre-trained YOLOv8n model.
+
         else:
+
             self.InitCam()
+            ENVIRONMENT = "ROBOT"
+
+            # YOLO MODEL:
+            self.YOLOmodel = YOLO(modelPATH + '/cubeDETECTION.pt') # Pre-trained YOLOv8n model.
 
         # Values of the CALIBRATION in x and y (mm):
         self.w = 750
         self.h = 400
 
-        # YOLO MODEL:
-        modelPATH = os.path.join(os.path.expanduser('~'), 'dev_ws', 'src', 'irb120_PoseEstimation', 'irb120pe_detection', 'yolov8')
-        self.YOLOmodel = YOLO(modelPATH + '/cubeDETECTION_Gz.pt') # Pre-trained YOLOv8n model.
-
     def InitCam(self):
+        
+        print("=== WEBCAM: Initialization ===")
+        print("Loading WEB-CAMERA...")
+        print("")
         
         # Initialise CAMERA:
         self.camera = cv2.VideoCapture(0)
@@ -181,17 +197,23 @@ class CubeDetection():
     
     def TestDetection(self):
 
+        global Gz_CAM
+        global ENVIRONMENT
+
         print("=== DETECTION: YOLOv8 MODEL ===")
         print("Showing the execution of the YOLOv8 model detection...")
         print("")
 
         while True:
 
-            # 1. SPIN /Image topic subscriber!
-            rclpy.spin_once(self.GzCAM_SUB)
-
-            # 2. ASSIGN + Show IMG:
-            self.inputImg = Gz_CAM
+            if (ENVIRONMENT == "GAZEBO"):
+                # 1. SPIN /Image topic subscriber!
+                rclpy.spin_once(self.GzCAM_SUB)
+                # 2. ASSIGN IMG:
+                self.inputImg = Gz_CAM
+            else:
+                # ASSIGN IMG:
+                self.ret, self.inputImg = self.camera.read()
 
             # 3. Get -> perspectiveImg:
             self.GetPerspectiveImg(ShowPerspective=False)
@@ -325,6 +347,7 @@ class CubeDetection():
     def DetectColour(self):
 
         global Gz_CAM
+        global ENVIRONMENT
 
         print("=== DETECTION: DetectColour ===")
         print("Detecting colour of the cube face...")
@@ -338,11 +361,13 @@ class CubeDetection():
         
         while (time.time() <= T):
 
-            # 1. SPIN /Image topic subscriber!
-            rclpy.spin_once(self.GzCAM_SUB)
-
-            # 2. ASSIGN + Show IMG:
-            self.inputImg = Gz_CAM
+            if (ENVIRONMENT == "GAZEBO"):
+                # 1. SPIN /Image topic subscriber!
+                rclpy.spin_once(self.GzCAM_SUB)
+                # 2. ASSIGN + IMG:
+                self.inputImg = Gz_CAM
+            else:
+                self.ret, self.inputImg = self.camera.read()
 
             if self.inputImg is not None:
 
@@ -393,13 +418,21 @@ class CubeDetection():
     
     def ConstantVisualization(self):
 
+        global Gz_CAM
+        global ENVIRONMENT
+
         while True:
 
-            # 1. SPIN /Image topic subscriber!
-            rclpy.spin_once(self.GzCAM_SUB)
+            if (ENVIRONMENT == "GAZEBO"):
+                # 1. SPIN /Image topic subscriber!
+                rclpy.spin_once(self.GzCAM_SUB)
+                # 2. ASSIGN IMG:
+                self.inputImg = Gz_CAM
 
-            # 2. ASSIGN + Show IMG:
-            self.inputImg = Gz_CAM
+            else:
+                # ASSIGN IMG:
+                self.ret, self.inputImg = self.camera.read()
+
 
             # 3. Get -> YOLOv8 MODEL RESULT:
             if self.inputImg is not None:

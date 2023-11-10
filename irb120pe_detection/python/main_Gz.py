@@ -42,7 +42,7 @@ def main(args=None):
     # Initialise CLASSES:
     SPAWN = SpawnCube()
     DELETE = DeleteCube()
-    ROUTINE = RoutineList()
+    ROUTINE = RoutineList("GAZEBO")
     print("")
 
     # Move ROBOT to HomePos:

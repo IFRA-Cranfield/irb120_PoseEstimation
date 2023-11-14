@@ -28,7 +28,10 @@
 # You can cite our work with the following statement:
 # IFRA-Cranfield (2023) ROS 2 Sim-to-Real Robot Control. URL: https://github.com/IFRA-Cranfield/ros2_SimRealRobotControl.
 
-# irb120_simulation.launch.py:
+# COPYRIGHT:
+# The irb120pe_simulation.launch.py script is based on the irb120_simulation.launch.py file in IFRA-Cranfield/ros2_SimRealRobotControl.
+
+# irb120pe_simulation.launch.py:
 # Launch file for the ABB-IRB120 Robot GAZEBO SIMULATION in ROS2 Humble:
 
 # Import libraries:
@@ -82,7 +85,7 @@ def generate_launch_description():
 
     # ========== COMMAND LINE ARGUMENTS ========== #
     print("")
-    print("===== ABB IRB-120: Robot Simulation (irb120pe_gazebo) =====")
+    print("===== ABB IRB-120 Pose Estimation: Robot Simulation (irb120pe_gazebo) =====")
     print("Robot configuration:")
     print("")
     # Cell Layout:

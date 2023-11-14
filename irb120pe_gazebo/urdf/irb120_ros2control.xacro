@@ -50,6 +50,9 @@
 # You can cite our work with the following statement:
 # IFRA-Cranfield (2023) ROS 2 Sim-to-Real Robot Control. URL: https://github.com/IFRA-Cranfield/ros2_SimRealRobotControl.
 
+# COPYRIGHT:
+# URDF file based on the .urdf of the ABB IRB120 Robot in the IFRA-Cranfield/ros2_SimRealRobotControl repository.
+
 -->
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">

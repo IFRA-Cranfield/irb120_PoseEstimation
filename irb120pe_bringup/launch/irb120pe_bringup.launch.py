@@ -28,7 +28,10 @@
 # You can cite our work with the following statement:
 # IFRA-Cranfield (2023) ROS 2 Sim-to-Real Robot Control. URL: https://github.com/IFRA-Cranfield/ros2_SimRealRobotControl.
 
-# irb120_bringup.launch.py:
+# COPYRIGHT:
+# The irb120pe_bringup.launch.py script is based on the irb120_bringup.launch.py file in IFRA-Cranfield/ros2_SimRealRobotControl.
+
+# irb120pe_bringup.launch.py:
 # Launch file for the ABB-IRB120 Robot CONTROL BRINGUP in ROS2 Humble:
 
 # Import libraries:
@@ -70,7 +73,7 @@ def generate_launch_description():
 
     # ========== COMMAND LINE ARGUMENTS ========== #
     print("")
-    print("===== ABB IRB-120: Robot Bringup (irb120pe_bringup) =====")
+    print("===== ABB IRB-120 Pose Estimation: Robot Bringup (irb120pe_bringup) =====")
     print("Robot configuration:")
     print("")
     # robot_ip:

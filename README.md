@@ -137,19 +137,37 @@ TBD.
 <!-- INSTALLATION -->
 ## Installation
 
-TBD.
+The installation and execution of the irb120_PoseEstimation ROS2 packages requires the previous installation and set-up of the following components:
+- Ubuntu 22.04 machine with ROS2 Humble.
+- ROS2 Packages for the Simulation and Control of Robots using Gazebo and MoveIt!2.
+- YOLOv8 for the object detection feature.
+- OpenCV for the Image Processing feature.
 
 ### ROS2 Humble Setup
 
-TBD.
+The packages used to run the Simulation and Control of the ABB IRB-120 Robot in irb120_PoseEstimation are based on the [IFRA-Cranfield/ros2_SimRealRobotControl](https://github.com/IFRA-Cranfield/ros2_SimRealRobotControl) repository. Therefore, it is recommended to follow the installation steps defined in that repository in order to properly set-up a ROS2 Humble machine for Robot Simulation and Control. To facilitate your work, those steps have been summarized and outlined in the INSTALLATION.md document [here](https://github.com/IFRA-Cranfield/irb120_PoseEstimation/blob/main/INSTALLATION.md).
 
 ### YOLOv8 and OpenCV
 
-TBD.
+The latest version (v8) of [YOLO (You-Only-Look-Once)](https://github.com/ultralytics/ultralytics) can be installed using the following pip command, which installs YOLOv8 along with the requirements for a Python>=3.8 environment with PyTorch>=1.8:
+```sh
+pip install ultralytics
+```
+
+[OpenCV-Python](https://docs.opencv.org/3.4/d2/de6/tutorial_py_setup_in_ubuntu.html) is needed for this repo, and it can be installed with the following command:
+```sh
+sudo apt-get install python3-opencv
+```
 
 ### irb120_PoseEstimation Repository
 
-TBD.
+Once the ROS2 Humble environment has been properly set up, and all the required packages have been installed, the ROS2 Packages of the irb120_PoseEstimation repository can be installed by executing the following commands in the terminal:
+```sh
+cd ~/dev_ws/src
+git clone https://github.com/IFRA-Cranfield/irb120_PoseEstimation.git
+cd ~/dev_ws
+colcon build
+```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

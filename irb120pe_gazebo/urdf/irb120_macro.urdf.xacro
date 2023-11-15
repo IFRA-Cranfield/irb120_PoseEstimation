@@ -479,14 +479,24 @@
       </collision>
     </link>
     
-    <joint name="egp64_finger_left_joint" type="prismatic" >
-      <parent link="egp64_gripper_base_link" />
-      <child link="egp64_finger_left_link" />
-      <limit effort="1000" lower="-0.001" upper="0.04" velocity="0.2"/>
-      <origin xyz="0.01483 -0.00782 0" rpy="0 0 0" />
-      <axis xyz="-1 0 0" />
-      <dynamics damping="1.0" friction="1.0"/>
-    </joint>
+    <xacro:unless value="${bringup}">
+      <joint name="egp64_finger_left_joint" type="prismatic" >
+        <parent link="egp64_gripper_base_link" />
+        <child link="egp64_finger_left_link" />
+        <limit effort="1000" lower="-0.001" upper="0.04" velocity="0.2"/>
+        <origin xyz="0.01483 -0.00782 0" rpy="0 0 0" />
+        <axis xyz="-1 0 0" />
+        <dynamics damping="1.0" friction="1.0"/>
+      </joint>
+    </xacro:unless>
+
+    <xacro:if value="${bringup}">
+      <joint name="egp64_finger_left_joint" type="fixed" >
+        <parent link="egp64_gripper_base_link" />
+        <child link="egp64_finger_left_link" />
+        <origin xyz="0.01483 -0.00782 0" rpy="0 0 0" />
+      </joint>
+    </xacro:if>
     
     <!-- LEFT FINGERTIP -->
     
@@ -518,7 +528,6 @@
       <origin xyz="0.03869 -0.0005 0.00093" rpy="0 0 0"/>
     </joint>
 
-    
     <!-- RIGHT FINGER BASE -->
 
     <link name="egp64_finger_right_link">
@@ -541,14 +550,24 @@
       </collision>
     </link>
     
-    <joint name="egp64_finger_right_joint" type="prismatic" >
-      <parent link="egp64_gripper_base_link" />
-      <child link="egp64_finger_right_link" />
-      <limit effort="1000" lower="-0.001" upper="0.04" velocity="0.2"/>
-      <origin xyz="-0.0153 -0.00602 0" rpy="0 0 0" />
-      <axis xyz="1 0 0" />
-      <dynamics damping="1.0" friction="1.0"/>
-    </joint>
+    <xacro:unless value="${bringup}"> 
+      <joint name="egp64_finger_right_joint" type="prismatic" >
+        <parent link="egp64_gripper_base_link" />
+        <child link="egp64_finger_right_link" />
+        <limit effort="1000" lower="-0.001" upper="0.04" velocity="0.2"/>
+        <origin xyz="-0.0153 -0.00602 0" rpy="0 0 0" />
+        <axis xyz="1 0 0" />
+        <dynamics damping="1.0" friction="1.0"/>
+      </joint>
+    </xacro:unless>
+
+    <xacro:if value="${bringup}">
+      <joint name="egp64_finger_right_joint" type="fixed" >
+        <parent link="egp64_gripper_base_link" />
+        <child link="egp64_finger_right_link" />
+        <origin xyz="-0.0153 -0.00602 0" rpy="0 0 0" />
+      </joint>
+    </xacro:if>
     
     <!-- RIGHT FINGERTIP -->
 

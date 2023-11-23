@@ -463,7 +463,8 @@ class CubeDetection():
             if self.inputImg is not None:
                 results = self.YOLOmodel(self.inputImg)
                 annotated_frame = results[0].plot()
-                cv2.imshow("IRB-120 PoseEstimation: YOLO Output", annotated_frame)
+                VISUALIZE = cv2.resize(annotated_frame, (1280, 720))
+                cv2.imshow("IRB-120 PoseEstimation: YOLO Output", VISUALIZE)
 
             key = cv2.waitKey(1)
             if key == ord('e'):

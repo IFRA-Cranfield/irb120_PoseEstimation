@@ -35,6 +35,7 @@
 # Launch file for the ABB-IRB120 Robot CONTROL BRINGUP in ROS2 Humble:
 
 # Import libraries:
+import sys
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
@@ -68,22 +69,35 @@ def load_yaml(package_name, file_path):
         # parent of IOError, OSError *and* WindowsError where available.
         return None
 
+# ========== **INPUT ARGUMENTS** ========== #
+
+# EVALUATE INPUT ARGUMENTS:
+def AssignArgument(ARGUMENT):
+    
+    ARGUMENTS = sys.argv
+    for y in ARGUMENTS:
+        if (ARGUMENT + ":=") in y:
+            ARG = y.replace((ARGUMENT + ":="),"")
+            return(ARG)
+
 # ========== **GENERATE LAUNCH DESCRIPTION** ========== #
 def generate_launch_description():
+
+    # ========== INPUT ARGUMENTS ========== #
+    # Robot IP:
+    robot_ip = AssignArgument("ip_address")
 
     # ========== COMMAND LINE ARGUMENTS ========== #
     print("")
     print("===== ABB IRB-120 Pose Estimation: Robot Bringup (irb120pe_bringup) =====")
     print("Robot configuration:")
     print("")
-    # robot_ip:
-    print("- IP Address:")
-    robot_ip = input("  Please input the IP Address of the Robot: ")
-    print("")
     # Cell Layout:
     print("- Cell layout: Cranfield University - IA Lab enclosure.")
     # End-Effector:
     print("- End-effector: Schunk EGP-64 parallel gripper.")
+    # Robot IP:
+    print("- Robot IP Address: " + robot_ip)
     print("")
 
     # ***** ROBOT DESCRIPTION ***** #

@@ -70,6 +70,7 @@ def load_yaml(package_name, file_path):
         return None
 
 # ========== **INPUT ARGUMENTS** ========== #
+#  robot_ip -> TCP-IP address of the robot cell.
 
 # EVALUATE INPUT ARGUMENTS:
 def AssignArgument(ARGUMENT):
@@ -86,6 +87,13 @@ def generate_launch_description():
     # ========== INPUT ARGUMENTS ========== #
     # Robot IP:
     robot_ip = AssignArgument("ip_address")
+    if robot_ip != None:
+        None
+    else:
+        print("")
+        print("ERROR: robot_ip INPUT ARGUMENT has not been defined. Please try again.")
+        print("Closing... BYE!")
+        exit()
 
     # ========== COMMAND LINE ARGUMENTS ========== #
     print("")

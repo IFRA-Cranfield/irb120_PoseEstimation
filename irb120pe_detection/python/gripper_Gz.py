@@ -75,6 +75,9 @@ RES = RobotRES("null", False)
 # GLOBAL VARIABLE -> EE_POSE:
 EE_POSE = LinkPose()
 
+# Dictionary for TESTING/RESULTS:
+TESTING = {"EEMoveOK": 0, "EEMoveNoOK": 0}
+
 # =============================================================================== #
 # /Move ACTION CLIENT:
 
@@ -303,12 +306,20 @@ class GzGripper():
             
             print("Result -> " + RES.MESSAGE)
             
+            TESTING["EEMoveOK"] = TESTING["EEMoveOK"] + 1
+            print(TESTING)
+            print()
+            
             RES.MESSAGE = "null"
             RES.SUCCESS = False
 
         elif (RES.SUCCESS == False):
     
             print("Result -> " + RES.MESSAGE)
+            
+            TESTING["EEMoveNoOK"] = TESTING["EEMoveNoOK"] + 1
+            print(TESTING)
+            print("")
 
             rclpy.shutdown()
             print("CLOSING PROGRAM...")
@@ -399,12 +410,20 @@ class GzGripper():
             
             print("Result -> " + RES.MESSAGE)
             
+            TESTING["EEMoveOK"] = TESTING["EEMoveOK"] + 1
+            print(TESTING)
+            print()
+            
             RES.MESSAGE = "null"
             RES.SUCCESS = False
 
         elif (RES.SUCCESS == False):
     
             print("Result -> " + RES.MESSAGE)
+            
+            TESTING["EEMoveNoOK"] = TESTING["EEMoveNoOK"] + 1
+            print(TESTING)
+            print("")
 
             rclpy.shutdown()
             print("CLOSING PROGRAM...")

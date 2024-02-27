@@ -60,6 +60,9 @@ RES = RobotRES("null", False)
 # Import WAYPOINTS class:
 from waypoints import waypoints
 
+# Dictionary for TESTING/RESULTS:
+TESTING = {"MoveOK": 0, "MoveNoOK": 0, "RobMoveOK": 0, "RobMoveNoOK": 0}
+
 # =============================================================================== #
 # /RobMove ACTION CLIENT:
 
@@ -185,6 +188,8 @@ class RBT():
         self.Waypoints = waypoints()
 
     def Move_EXECUTE(self, PoseName):
+        
+        global TESTING
 
         WP = Action()
         WP = self.Waypoints.RobotPose(PoseName)
@@ -201,7 +206,10 @@ class RBT():
         if (RES.SUCCESS == True):
             
             print("Result -> " + RES.MESSAGE)
-            print("")
+            
+            TESTING["MoveOK"] = TESTING["MoveOK"] + 1
+            print(TESTING)
+            print()
             
             RES.MESSAGE = "null"
             RES.SUCCESS = False
@@ -209,6 +217,10 @@ class RBT():
         elif (RES.SUCCESS == False):
     
             print("Result -> " + RES.MESSAGE)
+            
+            TESTING["MoveNoOK"] = TESTING["MoveNoOK"] + 1
+            print(TESTING)
+            print("")
 
             rclpy.shutdown()
             print("CLOSING PROGRAM...")
@@ -231,7 +243,10 @@ class RBT():
         if (RES.SUCCESS == True):
             
             print("Result -> " + RES.MESSAGE)
-            print("")
+            
+            TESTING["RobMoveOK"] = TESTING["RobMoveOK"] + 1
+            print(TESTING)
+            print()
             
             RES.MESSAGE = "null"
             RES.SUCCESS = False
@@ -239,6 +254,10 @@ class RBT():
         elif (RES.SUCCESS == False):
     
             print("Result -> " + RES.MESSAGE)
+            
+            TESTING["RobMoveNoOK"] = TESTING["RobMoveNoOK"] + 1
+            print(TESTING)
+            print("")
 
             rclpy.shutdown()
             print("CLOSING PROGRAM...")
@@ -260,12 +279,20 @@ class RBT():
             print("Result -> " + RES.MESSAGE)
             print("")
             
+            TESTING["RobMoveOK"] = TESTING["RobMoveOK"] + 1
+            print(TESTING)
+            print()
+            
             RES.MESSAGE = "null"
             RES.SUCCESS = False
 
         elif (RES.SUCCESS == False):
     
             print("Result -> " + RES.MESSAGE)
+            
+            TESTING["RobMoveNoOK"] = TESTING["RobMoveNoOK"] + 1
+            print(TESTING)
+            print("")
 
             rclpy.shutdown()
             print("CLOSING PROGRAM...")

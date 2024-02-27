@@ -426,11 +426,11 @@ class CubeDetection():
         
         if (WhiteCount == BlueCount == BlackCount == 0 and StickerCount > 150):
             COLOUR = "Cube"
-        elif (WhiteCount > BlueCount and WhiteCount > BlackCount):
+        elif (WhiteCount > 3 and WhiteCount > BlueCount and WhiteCount > BlackCount):
             COLOUR = "WhiteCube"
-        elif (WhiteCount < BlueCount and BlueCount > BlackCount):
+        elif (WhiteCount < BlueCount and BlueCount > BlackCount and BlueCount > 3):
             COLOUR = "BlueCube"
-        elif (BlackCount > BlueCount and WhiteCount < BlackCount):
+        elif (BlackCount > BlueCount and WhiteCount < BlackCount and BlackCount > 3):
             COLOUR = "BlackCube"
         else:
             COLOUR = "Cube"

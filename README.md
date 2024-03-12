@@ -130,7 +130,15 @@ Centre for Robotics and Assembly:
 
 ### irb120_PoseEstimation Repository
 
-TBD.
+Welcome to the irb120_PoseEstimation repository! This repository contains a comprehensive solution for executing a cube pick-and-place task with the ABB IRB-120 industrial robot and the Schunk EGP-64 parallel gripper. The ROS 2 packages provided here enable seamless execution in both simulated and real environments. Leveraging ROS 2 Humble on an Ubuntu 22.04 PC, this repository furnishes all necessary source code, ensuring compatibility and ease of deployment. 
+
+To enhance the perception capabilities of the ABB IRB120 robot for the application, a combination of YOLOv8, OpenCV, and ROS 2 has been employed. This integration empowers the system with advanced object detection and recognition capabilities, allowing for efficient and reliable execution of the cube pick-and-place task.
+
+__Cube Pick-and-Place Task:__
+
+The system, equipped with a standard web camera, adeptly detects the randomly spawned cube within the workspace and proceeds to classify it based on its distinct colored feature. The intricate task of manipulating the cube involves precise pose estimation, ensuring its placement within the designated tray and alignment with the corresponding slot, with the identified feature positioned upwards.
+
+Explore the packages and get started with your cube pick-and-place tasks today!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -174,23 +182,31 @@ colcon build
 <!-- ROS 2 Packages: Explanation -->
 ## ROS2 Packages 
 
-TBD.
+Within this repository, you'll find a comprehensive integration of ROS 2 Robot Simulation and Control packages, including Gazebo, MoveIt!2, and Robot Bringup packages, meticulously combined with a custom ROS 2 package housing the YOLOv8 and OpenCV modules, aptly named the detection package. This amalgamation provides a robust foundation for executing the cube pick-and-place task seamlessly across both simulated and real environments. The ROS 2 Robot Simulation and Control packages facilitate simulation and control of the ABB IRB-120 industrial robot, while the custom detection package empowers the system with advanced object detection and recognition capabilities, essential for precise manipulation and pose estimation of the target cube. Explore these packages to delve into the intricacies of robotic perception and control, accelerating the development and deployment of robotic applications.
 
 ### irb120pe_gazebo
 
-TBD.
+The Gazebo package within this repository is a pivotal component, encompassing crucial data related to the robot's representation in the Unified Robot Description Format (.urdf). Beyond merely describing the robot's physical structure, this package also houses essential parameters necessary for fine-tuning ROS 2 controllers, ensuring precise control over the ABB IRB-120 industrial robot's movements. Furthermore, it includes detailed CAD files offering insight into the robot's design, alongside pertinent information concerning the Gazebo environment. This comprehensive package serves as the cornerstone for simulating and accurately replicating the robot's behavior within the simulated environment, facilitating seamless development and testing of robotic applications.
+
+You can access all the Gazebo ROS 2 Package source code [here](https://github.com/IFRA-Cranfield/irb120_PoseEstimation/tree/main/irb120pe_gazebo).
 
 ### irb120pe_moveit2
 
-TBD.
+The MoveIt!2 package within this repository is essential for motion control of the ABB IRB-120 industrial robot. It serves as a foundational element for motion planning and execution, offering comprehensive information required by the MoveIt!2 tool. This package includes crucial data such as robot specifications, obtained from the Gazebo package, ensuring consistency and accuracy in robot representation. Moreover, it encapsulates controller parameters necessary for fine-tuning and optimizing the robot's movements, enhancing its precision and efficiency. Additionally, the package provides a seamless Motion Planning interface, empowering users to effortlessly generate and execute motion plans, thereby streamlining the development and deployment of complex robotic applications.
+
+You can access all the MoveIt!2 ROS 2 Package source code [here](https://github.com/IFRA-Cranfield/irb120_PoseEstimation/tree/main/irb120pe_moveit2).
 
 ### irb120pe_bringup
 
-TBD.
+The Robot Bringup package within this repository acts as the main link between the ROS 2 system and the real robot arm. It facilitates seamless integration of the robot arm control with ROS 2, requiring the presence of a robust ROS 2 driver. This driver operates concurrently within both the robot controller and ROS 2 environment, enabling comprehensive control over the robot's motion and state through various ROS 2 nodes. By establishing this vital connection, the Robot Bringup package enables seamless communication and coordination between the ROS 2 system and the real robot arm, laying the groundwork for efficient and reliable execution of robotic tasks in real-world environments.
+
+You can access all the Robot Bringup ROS 2 Package source code [here](https://github.com/IFRA-Cranfield/irb120_PoseEstimation/tree/main/irb120pe_bringup).
 
 ### irb120pe_detection
 
-TBD.
+The detection package within this repository encompasses essential functionalities crucial for effective cube detection, classification, pose estimation, and pick-and-place tasks. It incorporates the YOLOv8 module for robust cube detection and classification, enabling the system to accurately identify the target object within the workspace. Additionally, the package integrates the OpenCV module for precise 6DoF Pose Estimation of the cube, ensuring accurate placement and alignment during manipulation tasks. Furthermore, the robot and gripper modules housed within this package contain ROS 2 Action Clients responsible for communicating with MoveIt!2, facilitating seamless operation of the robot movements. Lastly, the detection package encompasses the entire program logic for the application, orchestrating the coordination and interaction of various modules for efficient cube detection, pose estimation, and pick-and-place tasks, thereby enhancing the overall functionality and performance of the system.
+
+You can access all the Robot Bringup ROS 2 Package source code [here](https://github.com/IFRA-Cranfield/irb120_PoseEstimation/tree/main/irb120pe_detection).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -240,7 +256,10 @@ Don't forget to give the project a star! Thanks you very much!
   <br />
   IFRA-Cranfield (2023). Object Detection and Pose Estimation within a Robot Cell. URL: https://github.com/IFRA-Cranfield/irb120_PoseEstimation
   <br />
+  <br />
   Reference to CONFERENCE PAPER (if published) to be added here.
+  <br />
+  Submitted to <a href="https://2024.ieeecase.org/">IEEE-CASE2024</a> conference.
 </p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -249,13 +268,6 @@ Don't forget to give the project a star! Thanks you very much!
 ## Contact
 
 <p>
-  Irene Bernardino Sanchez - Robotics MSc Student
-  <br />
-  E-mail: i.bernardinosanchez.854@cranfield.ac.uk 
-  <br />
-  LinkedIn: https://www.linkedin.com/in/irene-bernardino-sanchez-08bbb1195/
-  <br />
-  <br />
   Mikel Bueno Viso - Research Assistant in Intelligent Automation at Cranfield University
   <br />
   E-mail: Mikel.Bueno-Viso@cranfield.ac.uk
@@ -263,6 +275,13 @@ Don't forget to give the project a star! Thanks you very much!
   LinkedIn: https://www.linkedin.com/in/mikel-bueno-viso/
   <br />
   Profile: https://www.cranfield.ac.uk/people/mikel-bueno-viso-32884399
+  <br />
+  <br />
+  Irene Bernardino Sanchez - Robotics MSc Student
+  <br />
+  E-mail: i.bernardinosanchez.854@cranfield.ac.uk 
+  <br />
+  LinkedIn: https://www.linkedin.com/in/irene-bernardino-sanchez-08bbb1195/
   <br />
   <br />
   Dr. Seemal Asif - Lecturer in Artificial Intelligence and Robotics at Cranfield University

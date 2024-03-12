@@ -187,7 +187,7 @@ def main(args=None):
     GET_SAMPLES = GetSamples("GAZEBO")
     SPAWN_CUBE = SpawnCube()
     DELETE_CUBE = DeleteCube()
-    ROUTINE = RoutineList()
+    ROUTINE = RoutineList("GAZEBO")
 
     # START -> HomePos():
     ROUTINE.HomePos()

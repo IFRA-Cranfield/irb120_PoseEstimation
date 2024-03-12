@@ -18,8 +18,8 @@
 #  language governing permissions and limitations under the License.                    #
 #                                                                                       #
 #  IFRA Group - Cranfield University                                                    #
-#  AUTHORS: Irene Bernardino Sanchez - i.bernardinosanchez.854@cranfield.ac.uk          #
-#           Mikel Bueno Viso         - Mikel.Bueno-Viso@cranfield.ac.uk                 #
+#  AUTHORS: Mikel Bueno Viso         - Mikel.Bueno-Viso@cranfield.ac.uk                 #
+#           Irene Bernardino Sanchez - i.bernardinosanchez.854@cranfield.ac.uk          #
 #           Seemal Asif              - s.asif@cranfield.ac.uk                           #
 #           Phil Webb                - p.f.webb@cranfield.ac.uk                         #
 #                                                                                       #

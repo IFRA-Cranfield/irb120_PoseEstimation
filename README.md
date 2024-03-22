@@ -140,6 +140,10 @@ The system, equipped with a standard web camera, adeptly detects the randomly sp
 
 Explore the packages and get started with your cube pick-and-place tasks today!
 
+__Video Demonstration: Program Execution (Simulation + Real Robot)__
+
+[![Alt text](https://img.youtube.com/vi/1TVL727UhDk/0.jpg)](https://www.youtube.com/watch?v=1TVL727UhDk)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- INSTALLATION -->
